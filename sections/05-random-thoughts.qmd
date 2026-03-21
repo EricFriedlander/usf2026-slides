@@ -1,0 +1,207 @@
+## {background-color="#533860"}
+
+::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
+💡 Random Thoughts
+:::
+::: {style="color: #FFE42A; font-size: 1.1em;"}
+Things that don't fit elsewhere (but should)
+:::
+
+---
+
+## Three Ways to Average {#three-means}
+
+- **Arithmetic**: sum / n — the default
+- **Geometric**: (x₁ × x₂ × ... × xₙ)^(1/n) → equivalently: `exp(mean(log(x)))`
+- **Harmonic**: n / (1/x₁ + 1/x₂ + ... + 1/xₙ)
+
+::: {.fragment}
+**AM ≥ GM ≥ HM** — always true for positive numbers
+:::
+
+---
+
+## When to Use Which {#which-mean}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Arithmetic**
+
+- Avg height of students
+- Avg test score
+- Additive quantities
+:::
+
+::: {.column width="50%"}
+**Geometric**
+
+- Avg annual investment return
+- Compounding quantities
+- Growth rates
+
+::: {.fragment}
++50% then −50%:
+
+- Arithmetic avg = **0%**
+- Geometric avg = **−13.4%** ← real answer
+:::
+:::
+
+::::
+
+::: {.fragment}
+**Harmonic**
+
+- Avg speed over equal *distances*
+- Drive 60 mph there, 40 mph back → avg is **NOT** 50 mph
+- 2 / (1/60 + 1/40) = **48 mph**
+- Also: F1-score in ML (balances precision & recall)
+:::
+
+---
+
+## A Surprising Example {#investment-example}
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Invest $1000 over 2 years
+# Year 1: +100% (doubles to $2000)
+# Year 2: -50% (back to $1000)
+arithmetic_avg <- mean(c(100, -50))             # = 25% — MISLEADING
+geometric_avg  <- prod(c(2.0, 0.5))^(1/2) - 1  # = 0%  — correct!
+```
+
+::: {.fragment}
+- Arithmetic mean says **25% average return**
+- You ended up with **exactly what you started with**
+- Geometric mean tells the truth
+:::
+
+---
+
+## Should You Scale Dummy Variables? {#scale-dummies}
+
+**Setup: one-hot encoding**
+
+- Convert categorical → binary dummy variables
+- "Color: Red/Blue/Green" → `is_red`, `is_blue`, `is_green`
+- Each column is 0 or 1
+
+::: {.fragment}
+**The question**: after encoding, should you **center and scale** these binary columns?
+:::
+
+::: {.fragment}
+Short answer: **it depends on the algorithm**
+:::
+
+---
+
+## It Depends on the Algorithm {#scale-by-algo}
+
+| Algorithm | Scale dummies? | Why |
+|-----------|----------------|-----|
+| **KNN** | ❌ No | Distances between 0/1 are already meaningful |
+| **LASSO/Ridge** | ✓ Usually yes | Penalty should be scale-invariant |
+| **Tree methods** | Doesn't matter | Split-based, scale-invariant |
+| **Neural nets** | ✓ Yes | Gradient descent converges faster |
+
+---
+
+## The KNN Problem — Don't Scale {#knn-dummies}
+
+2 features:
+
+- `age` (scaled to 0–1 range)
+- `is_rare_category` (mostly 0, rarely 1) — variance ≈ 0.02
+
+::: {.fragment}
+After standard scaling `(x - mean) / sd`:
+
+- `age`: stays roughly 0–1 range
+- `is_rare_category`: gets blown up to range ≈ **0–7!**
+:::
+
+::: {.fragment}
+```{r}
+#| echo: true
+#| eval: false
+
+set.seed(42)
+n        <- 1000
+age      <- runif(n, 18, 65)
+rare_cat <- rbinom(n, 1, 0.05)   # variance ≈ 0.0475
+
+age_scaled  <- scale(age)         # sd ≈ 1
+rare_scaled <- scale(rare_cat)    # sd = 1, but range ≈ -0.22 to 4.5!
+```
+
+Scaling **inflates** the influence of low-variance dummies in KNN distance calculations
+:::
+
+---
+
+## The LASSO Problem — Maybe Scale {#lasso-dummies}
+
+LASSO penalty: λ × |β_j| for each coefficient
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Without scaling**
+
+- `income` in dollars → small βs
+- `is_employed` in 0/1 → larger βs
+- LASSO penalizes `is_employed` more
+- Even if equally important
+:::
+
+::: {.column width="50%"}
+::: {.fragment}
+**With scaling**
+
+- Penalty is "fair" across features
+- Coefficients live on the same scale
+
+**But:** low-variance dummies → scaling amplifies noise
+:::
+:::
+
+::::
+
+---
+
+## The Low Variance Example {#low-variance-lasso}
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(glmnet)
+set.seed(1)
+n <- 500
+
+# True model: y = 2*x + 5*rare_event + noise
+x    <- rnorm(n)
+rare <- rbinom(n, 1, 0.02)   # only ~1% events
+y    <- 2*x + 5*rare + rnorm(n)
+
+X_unscaled <- cbind(x, rare)
+X_scaled   <- scale(X_unscaled)
+
+fit_u <- glmnet(X_unscaled, y, alpha = 1)
+fit_s <- glmnet(X_scaled,   y, alpha = 1)
+```
+
+::: {.fragment}
+- With only ~10 rare events, even scaling can't save you
+- LASSO may shrink the rare coefficient to **0** — signal just isn't there
+- Need more data, or a different approach
+:::
+
+---
+
+[← Back to Topics](#toc)

@@ -1,0 +1,290 @@
+## {background-color="#533860"}
+
+::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
+🌿 Chemometrics & Metabolomics
+:::
+::: {style="color: #FFE42A; font-size: 1.1em;"}
+Statistics meets plant chemistry
+:::
+
+## What Is Metabolomics? {#metabolomics-intro}
+
+**The chemical fingerprint of a living thing**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- Small molecules = **metabolites**
+- Sugars, lipids, pigments, toxins, ...
+- Reflect organism's current state
+- Snapshot in time
+:::
+
+::: {.column width="50%"}
+**Why sagebrush?**
+
+- 200+ compounds detected
+- Many with unknown function
+- Multiple closely related species
+- Key question: *what differs between species?*
+:::
+
+::::
+
+::: {.fragment}
+> Metabolomics = reading the plant's molecular diary
+:::
+
+## The Instrument: LC-MS {#lcms-intro}
+
+**Liquid Chromatography – Mass Spectrometry**
+
+::: {.fragment}
+**Step 1 — Chromatography (LC)**
+
+- Mixture flows through a column
+- Compounds separate by how sticky they are
+- Each exits at a different **retention time**
+:::
+
+::: {.fragment}
+**Step 2 — Mass Spectrometry (MS)**
+
+- Compounds are broken apart and ionized
+- Detector records each fragment's **mass-to-charge ratio**
+- Intensity = how much of that fragment is present
+:::
+
+::: {.fragment}
+**Output**: a 2D intensity surface over (retention time × mass)
+:::
+
+## LC-MS Data: The Dimensionality Problem {#lcms-data}
+
+**One plant sample → one enormous table**
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**What we measure**
+
+- Thousands of retention time points
+- Thousands of mass values
+- Intensity at every (time, mass) pair
+- Result: **100,000+ features per sample**
+:::
+
+::: {.column width="45%"}
+**The challenges**
+
+- Far more features than samples
+- Signal buried in noise
+- Instruments drift over time
+- Samples processed in batches → **batch effects**
+:::
+
+::::
+
+::: {.fragment}
+> Classic "wide data" problem — statistics must adapt
+:::
+
+## Preprocessing: Making the Data Usable {#preprocessing}
+
+**Raw data is messy — three main fixes**
+
+::: {.fragment}
+**1. Baseline correction**
+
+- Instrument reads a "floor" even with no signal
+- Asymmetric least squares fits and removes this floor
+- Think: subtract a wavy background from a photo
+:::
+
+::: {.fragment}
+**2. Peak alignment (Parametric Time Warping)**
+
+- Same compound exits at slightly different times across runs
+- Warping stretches/compresses the time axis to align peaks
+- Think: syncing two audio tracks that drifted out of time
+:::
+
+::: {.fragment}
+**3. Normalization**
+
+- Samples may have different total amounts loaded
+- Scale each sample so totals are comparable
+- Think: adjusting for different photo exposures
+:::
+
+## Why Preprocessing Choices Matter {#preprocessing-matters}
+
+**Garbage in, garbage out — even with great math**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Before preprocessing**
+
+- Peaks at slightly wrong positions
+- Artificial differences between batches
+- Noise swamps real signal
+- Species look similar
+:::
+
+::: {.column width="50%"}
+**After preprocessing**
+
+- Peaks aligned across samples
+- Batch trends removed
+- Signal-to-noise improved
+- Species structure emerges
+:::
+
+::::
+
+::: {.fragment}
+> Different alignment or normalization choices → different conclusions
+:::
+
+::: {.fragment}
+**Preprocessing is a statistical modeling decision, not just housekeeping**
+:::
+
+## Dimensionality Reduction: PCA {#pca-intro}
+
+**From 100,000+ features → a handful of patterns**
+
+::: {.fragment}
+**Principal Component Analysis (PCA)**
+
+- Finds directions of maximum variation in the data
+- PC1: direction that explains the most spread
+- PC2: next most, perpendicular to PC1
+- ...and so on
+:::
+
+::: {.fragment}
+:::: {.columns}
+
+::: {.column width="50%"}
+**Scores**
+
+- Where does each *sample* land?
+- Low-dimensional map of the samples
+- Clusters = similar chemistry
+:::
+
+::: {.column width="50%"}
+**Loadings**
+
+- Which *features* drive each component?
+- High loading = strong influence on that PC
+- Points back to specific compounds
+:::
+
+::::
+:::
+
+::: {.fragment}
+> PCA is a translator: turns 100,000 numbers into a readable map
+:::
+
+## Reading a PCA Plot {#pca-reading}
+
+**Two key visualizations**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Scores plot**
+
+```
+PC2
+ ▲  ● ●          Species A
+ │    ●
+ │         ■ ■   Species B
+ │       ■
+ └──────────► PC1
+```
+
+- Each point = one plant sample
+- Distance = chemical similarity
+- Clusters = species or condition
+:::
+
+::: {.column width="50%"}
+**Scree plot**
+
+```
+Variance
+explained
+  60% ████
+  20% ██
+  10% █
+   5% ▌
+      PC1 PC2 PC3 PC4
+```
+
+- Shows how much each PC contributes
+- "Elbow" suggests how many PCs matter
+- First few PCs often capture most structure
+:::
+
+::::
+
+## Key Findings {#chemometrics-findings}
+
+**What Aiden's analysis revealed**
+
+::: {.fragment}
+- Clear species separation in PCA scores
+:::
+::: {.fragment}
+- PC1 alone distinguishes major groups
+:::
+::: {.fragment}
+- Loadings identify discriminating metabolites
+:::
+::: {.fragment}
+- Specific mass/retention time features flagged
+:::
+::: {.fragment}
+- Preprocessing choices strongly affect results
+:::
+::: {.fragment}
+- Alignment method: biggest single impact
+:::
+::: {.fragment}
+> Chemistry question answered with linear algebra
+:::
+
+## Collaborators {#chemometrics-collab}
+
+**The sagebrush metabolomics team**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**College of Idaho**
+
+- **Aiden Everard** — Undergraduate researcher
+- **Carolyn Dadabay** — Faculty collaborator
+:::
+
+::: {.column width="50%"}
+**Boise State University**
+
+- **Jenn Forby** — Collaborator
+- **Maddy Skinner** — Collaborator
+:::
+
+::::
+
+::: {.fragment}
+*Undergraduate-driven research: from raw LC-MS data to publishable analysis*
+:::
+
+---
+
+[← Back to Topics](#toc)

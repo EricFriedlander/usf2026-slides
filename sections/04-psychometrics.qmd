@@ -1,0 +1,215 @@
+## {background-color="#533860"}
+
+::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
+📊 Psychometrics
+:::
+::: {style="color: #FFE42A; font-size: 1.1em;"}
+Measuring the unmeasurable
+:::
+
+## What Does Correlation Mean? {#correlation-intuition}
+
+**When X goes up, Y tends to go ___**
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Pearson r**
+
+- Measures linear relationship
+- Ranges from –1 to +1
+- r = 0: no linear pattern
+- r = 1: perfect positive line
+- r = –1: perfect negative line
+:::
+
+::: {.column width="50%"}
+**Real examples**
+
+- Height & weight: r ≈ 0.5
+- Hours studied & grade: r ≈ 0.4
+- Exercise & resting heart rate: r ≈ –0.3
+:::
+
+::::
+
+::: {.fragment}
+> Scatter plots: imagine a cloud of points — tighter cloud = stronger r
+:::
+
+## The Limits of Correlation {#correlation-limits}
+
+**r = ±1 requires a perfectly linear relationship**
+
+::: {.fragment}
+- If one variable is **binary** (0/1), r can *never* reach ±1
+:::
+::: {.fragment}
+- Why? Only two possible X-values → scatter pattern is constrained
+:::
+::: {.fragment}
+- Maximum |r| between binary and continuous depends on base rate p
+:::
+::: {.fragment}
+$$\text{max}|r_{\text{point-biserial}}| \propto \sqrt{p(1-p)}$$
+
+- p = 0.5 → highest possible max |r|
+- p = 0.1 or 0.9 → max |r| shrinks substantially
+:::
+
+::: {.fragment}
+**Survey items are often binary or ordinal — this matters!**
+:::
+
+## Types of Correlation in Psychometrics {#correlation-types}
+
+**Different variable types → different correlation methods**
+
+| Variable Combo | Method |
+|---|---|
+| Continuous × Binary | **Point-biserial** r |
+| Continuous × Ordinal | **Polyserial** |
+| Binary × Binary | **Tetrachoric** |
+| Ordinal × Ordinal | **Polychoric** |
+
+::: {.fragment}
+- Most psych scales use **Likert items** (ordinal)
+- Polychoric is the workhorse of psychometrics
+- Using Pearson r on ordinal data **underestimates** true relationship
+:::
+
+::: {.fragment}
+```r
+library(polycor)
+cor(x, y)         # Pearson — underestimates on ordinal
+polychor(x, y)    # Polychoric — assumes latent normal
+```
+:::
+
+## The Latent Variable Assumption {#latent-variable}
+
+**What polychoric/tetrachoric actually assume**
+
+::: {.fragment}
+- Observed categories = **discretization** of a hidden continuous variable
+- Latent variable assumed to be **normally distributed**
+:::
+
+::: {.fragment}
+**Example: "Rate your pain 1–5"**
+
+- Your actual pain exists on a continuous scale
+- You cross a threshold → you report the next category up
+:::
+
+::: {.fragment}
+:::: {.columns}
+
+::: {.column width="55%"}
+Hidden number line:
+
+`——|——|——|——|——→`
+
+`  1   2   3   4   5`
+
+Thresholds (τ) carve it into bins
+:::
+
+::: {.column width="45%"}
+- We only observe which bin
+- Latent value is inferred
+- Polychoric recovers the **latent correlation**
+:::
+
+::::
+:::
+
+## Factor Analysis vs PCA {#factor-analysis}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**PCA**
+
+- Decomposes *total* variance
+- Finds directions of max variance
+- Components explain a bit of everything
+- No noise/signal separation
+:::
+
+::: {.column width="50%"}
+**Factor Analysis**
+
+- Decomposes *shared* variance
+- Finds latent constructs
+- Factors explain specific clusters
+- Separates signal from noise
+:::
+
+::::
+
+::: {.fragment}
+**FA assumes**: variance = common + unique + error
+
+**Classic example**: Reading, math, verbal all load on latent **"g"** (general intelligence)
+
+FA recovers this structure; PCA just rotates the data
+:::
+
+## Item Response Theory (IRT) {#irt}
+
+**Models probability of a correct/positive response**
+
+::: {.fragment}
+Two key parameters per item:
+
+- **Difficulty (β)**: where on ability scale does P(correct) = 0.5?
+- **Discrimination (α)**: how steeply does the curve rise?
+:::
+
+::: {.fragment}
+**Item Characteristic Curve (ICC)**:
+
+$$P(\text{correct} \mid \theta) = \frac{1}{1 + e^{-\alpha(\theta - \beta)}}$$
+
+S-shaped logistic curve, θ = person's latent ability
+:::
+
+::: {.fragment}
+**Advantages over classical test theory**
+
+- Item parameters don't depend on the sample
+- Person ability doesn't depend on which items used
+- Used by: GRE, SAT, LSAT, AP exams
+:::
+
+## The Big Caveat {#psych-caveat}
+
+**All of this assumes (at least latent) continuity**
+
+::: {.fragment}
+- What if variables are **truly categorical**?
+  - Not discretized — genuinely unordered
+  - Polychoric/IRT assumptions break down
+:::
+
+::: {.fragment}
+- Correlations and factor loadings become **misleading**
+  - Artificially inflated or deflated
+  - Factors may reflect response style, not constructs
+:::
+
+::: {.fragment}
+- **Open questions**:
+  - Are Likert responses truly ordinal?
+  - Is "strongly agree → agree" the same distance as "agree → neutral"?
+  - When does misspecification affect conclusions enough to matter?
+:::
+
+::: {.fragment}
+> Active area of research — no settled answer
+:::
+
+---
+
+[← Back to Topics](#toc)

@@ -1,0 +1,375 @@
+/*-- scss:defaults --*/
+
+// ============================================================
+// College of Idaho — Quarto Reveal.js Theme
+// Derived from CI_Powerpoint_Presentation_Template.potx
+// ============================================================
+
+// --- Brand Colors ---
+$ci-purple:  #533860;   // Coyote Purple  (accent1 / primary)
+$ci-yellow:  #FFE42A;   // Ambitious Yellow (accent2 / highlight)
+$ci-dark:    #494C5A;   // Dark slate (dk2 / body text)
+$ci-light:   #E7E6E6;   // Off-white (lt2 / subtle backgrounds)
+$ci-mauve:   #836088;   // Muted purple (links / accent4)
+$ci-white:   #FFFFFF;
+
+// --- Theme Roles ---
+$body-bg:        $ci-white;
+$body-color:     $ci-dark;
+$link-color:     $ci-mauve;
+$selection-bg:   $ci-yellow;
+$selection-color: $ci-dark;
+
+// --- Typography ---
+// Template: Montserrat (headings), Georgia (body)
+$font-family-sans-serif: "Montserrat", "Segoe UI", Arial, sans-serif;
+$font-family-serif:      Georgia, "Times New Roman", serif;
+$presentation-font-size-root: 40px;
+
+$presentation-heading-font:   "Montserrat", "Segoe UI", Arial, sans-serif;
+$presentation-heading-color:  $ci-purple;
+$presentation-heading-font-weight: 700;
+$presentation-heading-line-height: 1.2;
+$presentation-heading-letter-spacing: -0.01em;
+$presentation-heading-text-transform: none;
+$presentation-heading-text-shadow: none;
+
+// Body uses Georgia per the template's minorFont
+$presentation-font-size-root: 40px;
+
+// Slide sizes (widescreen 16:9, matching PPTX 33.87 cm × 19.05 cm)
+$presentation-slide-width:  1280px;
+$presentation-slide-height: 720px;
+
+// --- Heading Sizes (mapped from PPTX sz values in 1/100 pt) ---
+// PPTX: 4400 → ~59pt title, 2800 → ~37pt h1, 2400 → ~32pt h2
+// Scaled to reveal.js em units:
+$presentation-h1-font-size: 2.0em;   // ~44pt equivalent
+$presentation-h2-font-size: 1.5em;   // ~32pt equivalent
+$presentation-h3-font-size: 1.2em;   // ~26pt equivalent
+$presentation-h4-font-size: 1.0em;
+
+// --- Code ---
+$code-color:      $ci-purple;
+$code-bg:         lighten($ci-light, 3%);
+$code-block-bg:   #f5f3f7;           // very light purple tint
+
+// --- Progress / Controls ---
+$progress-color:  $ci-yellow;
+$link-color-hover: darken($ci-mauve, 10%);
+
+
+/*-- scss:rules --*/
+
+// ============================================================
+// SLIDE BACKGROUNDS
+// ============================================================
+
+// Default slide: white bg, dark text
+.reveal .slides section {
+  font-family: Georgia, "Times New Roman", serif;
+  color: $ci-dark;
+  background-color: $ci-white;
+}
+
+// Title slide: full purple bg, white text, yellow bottom bar
+// Use class="title" on your YAML title-slide-attributes or
+// the auto-generated .title-slide class from Quarto
+.reveal .slides .title-slide,
+.reveal .slides section.title {
+  background-color: $ci-purple;
+  color: $ci-white;
+
+  // Yellow accent bar at bottom (mirrors PPTX title layout)
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    background-color: $ci-yellow;
+  }
+
+  h1, h2, h3 {
+    color: $ci-white;
+    font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  }
+
+  p, .subtitle {
+    color: rgba(255, 255, 255, 0.88);
+    font-family: Georgia, serif;
+  }
+
+  a { color: $ci-yellow; }
+}
+
+// Section divider slide: purple bg (use divider: true or slide class)
+.reveal .slides section.divider,
+.reveal .slides section[data-background-color="#533860"] {
+  color: $ci-white;
+  h1, h2, h3 { color: $ci-yellow; }
+}
+
+
+// ============================================================
+// HEADINGS
+// ============================================================
+
+.reveal h1, .reveal h2, .reveal h3,
+.reveal h4, .reveal h5, .reveal h6 {
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  color: $ci-purple;
+  margin-bottom: 0.4em;
+}
+
+// Slide title strip (top of content slides)
+.reveal .slides section > h2:first-child,
+.reveal .slides section > h1:first-child {
+  padding-bottom: 0.2em;
+  margin-bottom: 0.5em;
+  // Subtle left accent instead of underline
+  border-left: 6px solid $ci-yellow;
+  padding-left: 0.35em;
+}
+
+
+// ============================================================
+// BODY TEXT
+// ============================================================
+
+.reveal p, .reveal li, .reveal td, .reveal th {
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.55;
+}
+
+.reveal strong { color: $ci-purple; }
+.reveal em     { color: darken($ci-dark, 10%); }
+
+
+// ============================================================
+// LINKS
+// ============================================================
+
+.reveal a {
+  color: $ci-mauve;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  &:hover { color: $ci-purple; }
+}
+
+
+// ============================================================
+// LISTS
+// ============================================================
+
+.reveal ul {
+  list-style: none;
+  padding-left: 1.2em;
+
+  li::before {
+    content: "▸";
+    color: $ci-yellow;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+  }
+}
+
+.reveal ol {
+  padding-left: 1.4em;
+  li::marker {
+    color: $ci-purple;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+}
+
+
+// ============================================================
+// CODE BLOCKS
+// ============================================================
+
+.reveal code {
+  font-size: 0.88em;
+  color: $ci-purple;
+  background: $code-bg;
+  border-radius: 3px;
+  padding: 0.05em 0.25em;
+}
+
+.reveal pre {
+  background: $code-block-bg;
+  border: 1px solid lighten($ci-purple, 45%);
+  border-left: 4px solid $ci-yellow;
+  border-radius: 4px;
+  padding: 0.8em 1em;
+  box-shadow: none;
+
+  code {
+    background: transparent;
+    color: $ci-dark;
+    font-size: 0.78em;
+    padding: 0;
+  }
+}
+
+
+// ============================================================
+// TABLES
+// ============================================================
+
+.reveal table {
+  font-family: Georgia, serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.5em 0;
+
+  th {
+    background-color: $ci-purple;
+    color: $ci-white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    padding: 0.5em 0.75em;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.4em 0.75em;
+    border-bottom: 1px solid $ci-light;
+  }
+
+  tr:nth-child(even) td {
+    background-color: lighten($ci-light, 4%);
+  }
+
+  tr:hover td {
+    background-color: lighten($ci-yellow, 25%);
+  }
+}
+
+
+// ============================================================
+// BLOCKQUOTES & CALLOUTS
+// ============================================================
+
+.reveal blockquote {
+  background: lighten($ci-light, 3%);
+  border-left: 5px solid $ci-purple;
+  border-radius: 0 4px 4px 0;
+  padding: 0.6em 1em;
+  font-style: italic;
+  color: $ci-dark;
+  box-shadow: none;
+  width: 90%;
+
+  p { margin: 0; }
+}
+
+// Quarto callout overrides
+.reveal .callout {
+  border-left-color: $ci-purple;
+}
+.reveal .callout-tip    { border-left-color: $ci-yellow; }
+.reveal .callout-warning { border-left-color: #e07b00; }
+
+
+// ============================================================
+// PROGRESS BAR & CONTROLS
+// ============================================================
+
+.reveal .progress {
+  background: rgba(83, 56, 96, 0.2);
+  height: 4px;
+}
+.reveal .progress span {
+  background: $ci-yellow;
+}
+
+.reveal .controls {
+  color: $ci-purple;
+  .controls-arrow:before,
+  .controls-arrow:after {
+    border-color: $ci-purple;
+  }
+  &:hover { color: $ci-yellow; }
+}
+
+
+// ============================================================
+// SLIDE NUMBER
+// ============================================================
+
+.reveal .slide-number {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.55em;
+  color: $ci-mauve;
+  background: transparent;
+}
+
+
+// ============================================================
+// FOOTER (if using Quarto footer option)
+// ============================================================
+
+.reveal .footer {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.55em;
+  color: $ci-mauve;
+}
+
+
+// ============================================================
+// HIGHLIGHT / FRAGMENTS
+// ============================================================
+
+.reveal .highlight {
+  background: $ci-yellow;
+  color: $ci-dark;
+  padding: 0.05em 0.2em;
+  border-radius: 2px;
+}
+
+.reveal .fragment.highlight-current-blue {
+  &.current-fragment { color: $ci-purple; }
+}
+
+
+// ============================================================
+// UTILITY CLASSES (use with ::: {.classname})
+// ============================================================
+
+// Yellow highlighted text box
+.reveal .callout-ci {
+  background: $ci-yellow;
+  color: $ci-dark;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+// White-on-purple badge / stat callout
+.reveal .stat-box {
+  background: $ci-purple;
+  color: $ci-white;
+  border-radius: 6px;
+  padding: 0.6em 1.2em;
+  text-align: center;
+
+  .stat-number {
+    font-family: "Montserrat", sans-serif;
+    font-size: 2.2em;
+    font-weight: 700;
+    color: $ci-yellow;
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7em;
+    opacity: 0.9;
+  }
+}

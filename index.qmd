@@ -1,0 +1,61 @@
+---
+title: "Math, Models & Real-World Problems"
+subtitle: "A Tour of My Research"
+author: "Eric Friedlander"
+institute: "College of Idaho"
+date: today
+format:
+  revealjs:
+    theme: [college-of-idaho.scss, logo.scss]
+    logo: images/coilogo.png
+    slide-number: true
+    progress: true
+    hash: true
+    hash-type: number
+    width: 1280
+    height: 720
+    transition: slide
+    navigation-mode: linear
+    controls: true
+    footer: "Eric Friedlander | USF Math & Data Science Colloquium 2026"
+title-slide-attributes:
+  data-background-color: "#533860"
+---
+
+## About Me {#about}
+
+:::: {.columns}
+::: {.column width="30%"}
+![](images/HeadShot.jpg){width=220px style="border-radius: 50%; border: 4px solid #FFE42A;"}
+:::
+::: {.column width="70%"}
+- Assistant Professor of Mathematics — **College of Idaho**
+- PhD, Industrial Engineering & Operations Research — **UC Berkeley**
+- Postdoc, Population Genetics — **University of Edinburgh**
+- Research: queueing theory, population genetics, chemometrics, psychometrics
+:::
+::::
+
+## Choose Your Adventure {#toc}
+
+::: {style="font-size: 1.1em; line-height: 2.4em;"}
+[🎲 Graduate School: Large Networks](#grad-school)
+
+[🧬 Postdoc: Population Genetics](#pop-genetics)
+
+[🌿 Chemometrics & Metabolomics](#chemometrics)
+
+[📊 Psychometrics](#psychometrics)
+
+[💡 Random Thoughts](#random-thoughts)
+:::
+
+{{< include sections/01-grad-school.qmd >}}
+
+{{< include sections/02-pop-genetics.qmd >}}
+
+{{< include sections/03-chemometrics.qmd >}}
+
+{{< include sections/04-psychometrics.qmd >}}
+
+{{< include sections/05-random-thoughts.qmd >}}

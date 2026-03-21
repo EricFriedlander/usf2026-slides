@@ -1,0 +1,239 @@
+## {background-color="#533860"}
+
+::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
+🧬 Postdoc: Population Genetics
+:::
+::: {style="color: #FFE42A; font-size: 1.1em;"}
+How we use statistics to learn about human history
+:::
+
+## What is genetic data? {#pop-genetics}
+
+:::: {.columns}
+::: {.column width="50%"}
+- DNA packaged into **chromosomes**
+- Humans: 23 pairs
+- Each position in the genome can vary between individuals
+- Variation = signal about history
+
+![](images/chromosomes.png)
+:::
+::: {.column width="50%"}
+![](images/03GENOME3-jumbo.jpg)
+:::
+::::
+
+## Big picture questions {#pop-gen-questions}
+
+:::: {.columns}
+::: {.column width="55%"}
+**Question 1:** What was the past size and structure of populations?
+
+![](images/outofafrica.png)
+:::
+::: {.column width="45%"}
+::: {.fragment}
+**Question 2:** Where in the genome is natural selection occurring?
+
+- Which genes gave us an advantage?
+- Which variants spread — and why?
+:::
+:::
+::::
+
+## The modeling framework {#pop-gen-inference}
+
+**Goal:** turn data into answers about history
+
+::: {.fragment}
+$$\text{Assumptions} + \text{Data} \xrightarrow{\text{model}} \text{Likelihood (Probability)}$$
+:::
+
+::: {.fragment}
+- **Assumptions:** population size history, mutation rate, selection strength
+- **Data:** sequencing data from real individuals
+- **Output:** probability of seeing that data under our assumptions
+:::
+
+::: {.fragment}
+> Vary the assumptions → find the ones that make the data most probable
+:::
+
+## Let's build a model! {#wf-intro}
+
+![](images/builder_mario_and_builder_luigi.png){.r-stretch fig-align="center"}
+
+## Wright-Fisher Model: Setup {#wf-setup}
+
+::: {.incremental}
+- Focus on **one position** in the genome
+- Two versions ("alleles") at that site:
+  - [**Mario**]{style="color:red;"} and [**Luigi**]{style="color:green;"}
+- Population size **N** (fixed each generation)
+- Time moves in **discrete generations**
+- Each offspring **randomly picks a parent** from the previous generation
+- Track $p_k$ = proportion of [Luigis]{style="color:green;"} in generation $k$
+:::
+
+## Wright-Fisher Model: Visual {#wf-visual}
+
+![](images/WFImageLast.jpg){.r-stretch fig-align="center"}
+
+## Computers can roll dice! {#wf-simulation}
+
+**Key insight:** random sampling = rolling dice
+
+::: {.fragment}
+- N = 1,000 individuals?
+- Each generation: sample 1,000 parents (with replacement)
+- Fraction of [Luigis]{style="color:green;"} drifts up and down randomly
+:::
+
+::: {.fragment}
+```r
+# Simulate one generation
+sample(c("Mario", "Luigi"), size = 1000, replace = TRUE,
+       prob = c(1 - p, p))
+```
+:::
+
+::: {.fragment}
+- No calculus needed — just repeat millions of times
+- This is called **genetic drift**
+:::
+
+## Simulations: A few paths {#wf-few-paths}
+
+:::: {.columns}
+::: {.column width="60%"}
+- Start: 50% [Luigi]{style="color:green;"}, 50% [Mario]{style="color:red;"}
+- Each line = one simulated population
+- [Luigi proportion]{style="color:green;"} wanders randomly over generations
+- Different random histories → different outcomes
+:::
+::: {.column width="40%"}
+::: {.fragment}
+- Small population → faster drift
+- Large population → slower drift
+- Eventually... one allele wins
+:::
+:::
+::::
+
+## Simulations: Many paths → fixation {#wf-many-paths}
+
+:::: {.columns}
+::: {.column width="55%"}
+With 1,000 simulated populations:
+
+::: {.incremental}
+- Paths **spread out** over time
+- Eventually all reach 0% or 100%
+- Called **fixation** — one allele takes over
+- All [Mario]{style="color:red;"} or all [Luigi]{style="color:green;"}
+:::
+:::
+::: {.column width="45%"}
+::: {.fragment}
+**Adding mutation prevents fixation:**
+
+- Occasionally [Mario]{style="color:red;"} mutates → [Luigi]{style="color:green;"} (and vice versa)
+- Mutation rate $\mu \approx 10^{-4}$ per generation
+- Keeps both alleles in the population
+- Distribution of proportions reaches a **steady state**
+:::
+:::
+::::
+
+## From model to inference {#wf-inference}
+
+Back to the inference triangle:
+
+::: {.fragment}
+$$\text{Assumptions} + \text{Data} \xrightarrow{\text{WF model}} \text{Likelihood}$$
+:::
+
+::: {.incremental}
+- Run the WF model under many different population histories
+- Each history gives a different likelihood for the observed data
+- **Maximum likelihood:** pick the history with the highest probability
+- This is how we estimate things like: *when did humans leave Africa?*
+:::
+
+## Activity: Out of Africa {#out-of-africa}
+
+![](images/outofafrica.png){.r-stretch fig-align="center"}
+
+## Toy model: population size history {#toy-model}
+
+A simple three-phase model:
+
+:::: {.columns}
+::: {.column width="55%"}
+::: {.incremental}
+1. **Large ancestral population** — stable for many generations
+2. **Bottleneck** — small group migrates out of Africa
+   - Population size drops sharply
+3. **Exponential growth** — population expands in new environment
+:::
+:::
+::: {.column width="45%"}
+::: {.fragment}
+The shape looks like:
+
+- Flat → sharp dip → rapid rise
+
+Parameters to estimate:
+
+- When did the bottleneck happen?
+- How small did it get?
+:::
+:::
+::::
+
+## Your job: estimate the bottleneck {#activity}
+
+:::: {.columns}
+::: {.column width="60%"}
+- Open the Shiny app: [https://YOUR-APP-URL](https://YOUR-APP-URL)
+- Adjust sliders to match the observed genetic data
+- **Hints:**
+  1. Population before bottleneck: **1,000**
+  2. Total generations: **1,000**
+  3. Growth begins at generation **900**
+:::
+::: {.column width="40%"}
+::: {.fragment}
+**What you're estimating:**
+
+- Time of bottleneck (in generations)
+- Bottleneck population size
+
+This is real statistical inference — same idea researchers use on actual human genomic data!
+:::
+:::
+::::
+
+## Undergraduate research highlight {#anna-bauer}
+
+:::: {.columns}
+::: {.column width="40%"}
+![](images/anna.jpg)
+:::
+::: {.column width="60%"}
+**Anna Bauer**
+
+- Double major: Math & Biology
+- Junior
+- Goal: PhD in Bioinformatics
+
+**Project:** Population size history of Forest & Savanna Elephants
+
+- Applied WF-based inference to real genomic data
+- Compared two related species over thousands of generations
+:::
+::::
+
+---
+
+[← Back to Topics](#toc)
