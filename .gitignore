@@ -3,3 +3,6 @@ docs/
 *_cache/
 *_files/
 *.DS_Store
+
+/.quarto/
+**/*.quarto_ipynb

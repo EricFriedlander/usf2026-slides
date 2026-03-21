@@ -24,17 +24,12 @@ title-slide-attributes:
 
 ## About Me {#about}
 
-:::: {.columns}
-::: {.column width="30%"}
-![](images/HeadShot.jpg){width=220px style="border-radius: 50%; border: 4px solid #FFE42A;"}
-:::
-::: {.column width="70%"}
-- Assistant Professor of Mathematics — **College of Idaho**
-- PhD, Industrial Engineering & Operations Research — **UC Berkeley**
-- Postdoc, Population Genetics — **University of Edinburgh**
-- Research: queueing theory, population genetics, chemometrics, psychometrics
-:::
-::::
+- Born and raised outside New York City
+- B.A., Mathematics & Statistics - **Rice University**
+- PhD, Statistics & Operations Research — **UNC Chapel Hill**
+- Postdoc, Population Genetics — **University of Chicago**
+- Assistant Professor of Mathematics - **St. Nobert College**
+- Assistant Professor of Computer Science — **College of Idaho**
 
 ## Choose Your Adventure {#toc}
 
