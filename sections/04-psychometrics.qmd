@@ -36,13 +36,13 @@ Measuring the unmeasurable
 If I measure individuals with the same trait, do they score the same?
 
 - **Test-retest reliability:** if you measure someone twice... do they get the same score
-- **Internal consistency:** does each question positively correlate with total score?
+- **Internal consistency:** does each question positively correlate with the trait you're measuring?
   + **Chronbach's Alpha:** $\alpha = \frac{k}{k - 1} \left( \frac{\sum_{i\neq j} \sigma^2_{y_iy_j}}{\sigma^2_x} \right)$
 - **Inter-Rater Reliability:** if two people are scoring an assessment
 
 ## Validity
 
-Many types of validity (Coopers lists 12):
+Many types of validity (Cooper lists 12):
 
 - Content Validity: are the items a representative sample of the domain they measure
 - Criterion-Related Validity: how well do test scores correlate with an external, "real-world" outcome (the criterion)
@@ -57,7 +57,7 @@ Many types of validity (Coopers lists 12):
 
 ## Factor Analysis & PCA {#factor-analysis .smaller}
 
-- PCA: take correlation matrix $\to$ compute SVD
+- PCA: take correlation matrix $\to$ compute eigen-decomposition
 - Factor Analysis: 
   + Assume some generative model: $\mathbf{x} = \mathbf{\Lambda} \mathbf{f} + \boldsymbol{\epsilon}$
     + $\mathbf{x}:$ data
@@ -67,12 +67,19 @@ Many types of validity (Coopers lists 12):
   + Partition variance: $\mathbf{\Sigma} = \mathbf{\Lambda} \mathbf{\Lambda}^T + \mathbf{\Psi}$
   + Note $\mathbf{\Lambda}$ not unique so we must "rotate"
 
-## What Does Correlation Mean? {#correlation-intuition}
+## A question that get's ignored...
 
-:::{.incremental}
-- When X goes up, Y tends to go ___
+::: {.incremental}
+- Rate this talk on a scale of 1-5
+- Is this quantitative data?
 - What does it mean for a variable to be quantitative?
 - Are Likert scores quantitative?
+:::
+
+## What Does Correlation Mean? {#correlation-intuition}
+
+::: {.incremental}
+- When X goes up, Y tends to go ___
 - Suppose $X$ is a normal random variable and $Y$ is a binary variable (0/1) can they ever have a correlation of 1?
 ::: 
 
@@ -82,7 +89,7 @@ Many types of validity (Coopers lists 12):
 
 | Variable Combo | Method |
 |---|---|
-| Continuous × Binary | **Point-biserial** r |
+| Continuous × Binary | **Biserial** |
 | Continuous × Ordinal | **Polyserial** |
 | Binary × Binary | **Tetrachoric** |
 | Ordinal × Ordinal | **Polychoric** |
@@ -127,6 +134,15 @@ Thresholds ($\tau$) carve it into bins
 ::::
 :::
 
+## Factor Analysis
+
+Once correlations are computed:
+  
+- Exploratory factor analysis (CFA): Try out different numbers of factors, see which one fits the data best, and see if you can explain
+- Confirmatory factor analysis (CFA): Apply factor analysis, see if you can recover the predicted factor structure
+- Can use FA to assess the quality of an assessment (e.g. for bias)
+
+
 ## Item Response Theory (IRT) {.smaller}
 
 :::: {.columns}
@@ -141,12 +157,15 @@ $$P(\text{correct} \mid \theta) = \frac{1}{1 + e^{-\alpha(\theta - \beta)}}$$
 
 ::: {.column}
 ```{r}
+library(latex2exp)
+
 start <- 10
 x <- seq(-start, start, length.out = 100)
 y <- 1/(1+exp(-x))
 curve <- tibble(x=x, y=y)
 ggplot(aes(x = x, y = y), data=curve)+
-  geom_line()
+  geom_line() + 
+  labs(x = TeX("$\\theta$"))
 ```
 :::
 ::::

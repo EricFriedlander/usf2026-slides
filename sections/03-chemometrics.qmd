@@ -512,7 +512,7 @@ Statistics meets plant chemistry
 - Junior at College of Idaho
 :::
 ::: {.column}
-![](../images/HeadShot.jpg)
+![](images/HeadShot.jpg)
 :::
 ::::
 
@@ -758,6 +758,7 @@ plot_by_time(wyomingLong_PTW)
   - Create mask based on signal-to-noise ratio
   - Create mask for any peaks above threshold
 
+<!-- 
 
 ## Centering & Scaling
 
@@ -790,11 +791,11 @@ plot_by_time(earlyLong_PTW, title_input = "PTW-Aligned — Early")
 plot_by_time(wyomingLong_PTW, title_input = "PTW-Aligned — Wyoming")
 ```
 
-:::
+::: -->
 
-## SNR Mask + Scale
+## SNR Mask
 
-Gray = masked regions (SNR ≤ 3); SNR = max signal / IQR
+Gray = masked regions (SNR $\leq$ 3); SNR = max signal / IQR
 
 ```{r}
 #| echo: false
@@ -841,7 +842,7 @@ plot_by_time(wyomingLong_PTW, title_input = "SNR Mask (SNR > 3) — Wyoming") +
 
 ## Peak Threshold Mask + Scale
 
-Gray = masked regions (max signal ≤ 10 AU)
+Gray = masked regions (max signal $\leq$ 10 AU)
 
 ```{r}
 #| echo: false
@@ -974,6 +975,8 @@ volcano_stats |>
 
 - **Aiden Everard** — Undergraduate
 - **Carolyn Dadabay** — Chemistry Professor
+
+:::
 
 ::: {.column width="50%"}
 **Boise State University**

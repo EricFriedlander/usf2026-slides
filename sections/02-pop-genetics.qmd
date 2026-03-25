@@ -373,7 +373,7 @@ A simple three-phase model:
 3. **Exponential growth** — population expands in new environment
 :::
 
-
+<!-- 
 ## Your job: estimate the bottleneck {#activity}
 
 - Open the Shiny app: [https://YOUR-APP-URL](https://YOUR-APP-URL)
@@ -383,6 +383,6 @@ A simple three-phase model:
   2. Total generations: **1,000**
   3. Growth begins at generation **900**
 
----
+--- -->
 
 [← Back to Topics](#toc)

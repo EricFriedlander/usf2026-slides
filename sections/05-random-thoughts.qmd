@@ -32,7 +32,7 @@ Arithmetic mean: $\bar{x} = \frac{\sum x_i}{n}$
 
 ## Harder Example
 
-I have a 403B (retirement account). Suppose my the interest rates I'll receive over the next 20 years are represented as $x_i$... How should I compute the mean of $x_i$?
+I have a 403B (retirement account). Suppose the interest rates I'll receive over the next 20 years are represented as $x_i$... How should I compute the mean of $x_i$?
 
 . . .
 
@@ -42,7 +42,7 @@ Note: $\text{Balance}\times (1 + \bar{x})^{20} \neq \text{Balance}\times (1 + x_
 
 ## Geometric Mean
 
-$$M = \left(\prod_{i=1}^{n} x_i\right)^{1/n}$$
+$$M = \left(\prod_{i=1}^{n}(1 + x_i)\right)^{1/n}$$
 
 - Used when things compound or grow or shrink
 - Finance (1 + interest rates)
@@ -98,7 +98,7 @@ Short answer: **it depends on the algorithm**
 
 ---
 
-## The KNN Problem {#knn-dummies}
+## The KNN Problem {#knn-dummies .smaller}
 
 :::: {.columns}
 ::: {.column}
@@ -107,10 +107,10 @@ Short answer: **it depends on the algorithm**
 - `age`
 - `dogs_or_cats` 
 
-After standard scaling `(x - mean) / sd`:
+After standard scaling: $\frac{x - \text{mean}}{\text{sd}}$
 
 - `age`: stays roughly -3 to 3
-- `dogs_or_cats`: $\frac{p}{\sqrt{p(1-p)}}$
+- `dogs_or_cats`: $-\sqrt{\frac{p}{1-p}}$ or $\sqrt{\frac{1-p}{p}}$
 :::
 
 ::: {.column}
@@ -143,7 +143,7 @@ ggplot(aes(x = p, y = f), data = data) +
 LASSO penalty: $\lambda\times |\beta_j|$ for each coefficient
 
 - If we don't scale: $\beta_j$ will be in units of response variable (maybe really big)
-- If we do scale... $x_j$ will be come very largeand $\beta_j$ will become very small (i.e. not get penalized)
+- If we do scale... $x_j$ will be come very large and $\beta_j$ will become very small (i.e. not get penalized)
 - So what do we do?
 
 . . .

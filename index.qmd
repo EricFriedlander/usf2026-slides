@@ -1,6 +1,5 @@
 ---
 title: "Math, Models & Real-World Problems"
-subtitle: "A Tour of My Research"
 author: "Eric Friedlander"
 institute: "College of Idaho"
 date: today
@@ -18,7 +17,7 @@ format:
     navigation-mode: linear
     controls: true
     scrollable: true
-    footer: "Eric Friedlander | USF Math & Data Science Colloquium 2026"
+    footer: "Eric Friedlander | USF Colloquium 2026"
 title-slide-attributes:
   data-background-color: "#533860"
 execute:
@@ -44,17 +43,17 @@ library(reshape)
 ## Choose Your Adventure {#toc}
 
 ::: {style="font-size: 1.1em; line-height: 2.4em;"}
-[🎲 Graduate School: Large Networks](#grad-school)
+[🎲 Graduate School: Large Networks (Most Mathematical)](#grad-school)
 
-[🧬 Postdoc: Population Genetics](#pop-genetics)
+[🧬 Postdoc: Population Genetics (Most polished, between math and statistics)](#pop-genetics)
 
-[🌿 Chemometrics & Metabolomics](#chemometrics)
+[🌿 Chemometrics & Metabolomics (Current work, specific project)](#chemometrics)
 
-[📊 Psychometrics](#psychometrics)
+[📊 Psychometrics (A bit of an intro to an understudied field)](#psychometrics)
 
-[🌟 Star Formation](#star-formation)
+[🌟 Star Formation (Most ML-heavy)](#star-formation)
 
-[💡 Random Thoughts](#random-thoughts)
+[💡 Random Thoughts (Exactly what it sounds like)](#random-thoughts)
 :::
 
 {{< include sections/01-grad-school.qmd >}}
