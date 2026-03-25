@@ -214,21 +214,21 @@
     "href": "index.html#factor-analysis",
     "title": "Math, Models & Real-World Problems",
     "section": "Factor Analysis & PCA",
-    "text": "Factor Analysis & PCA\n\nPCA: take correlation matrix \\(\\to\\) compute SVD\nFactor Analysis:\n\nAssume some generative model: \\(\\mathbf{x} = \\mathbf{\\Lambda} \\mathbf{f} + \\boldsymbol{\\epsilon}\\)\n\n\\(\\mathbf{x}:\\) data\n\\(\\mathbf{\\Lambda}:\\) loadings (constant across all individuals)\n\\(\\mathbf{f}:\\) factor scores\n\\(\\boldsymbol{\\epsilon}:\\) error\n\nPartition variance: \\(\\mathbf{\\Sigma} = \\mathbf{\\Lambda} \\mathbf{\\Lambda}^T + \\mathbf{\\Psi}\\)\nNote \\(\\mathbf{\\Lambda}\\) not unique so we must “rotate”"
+    "text": "Factor Analysis & PCA\n\nPCA: take correlation matrix \\(\\to\\) compute eigen-decomposition\nFactor Analysis:\n\nAssume some generative model: \\(\\mathbf{x} = \\mathbf{\\Lambda} \\mathbf{f} + \\boldsymbol{\\epsilon}\\)\n\n\\(\\mathbf{x}:\\) data\n\\(\\mathbf{\\Lambda}:\\) loadings (constant across all individuals)\n\\(\\mathbf{f}:\\) factor scores\n\\(\\boldsymbol{\\epsilon}:\\) error\n\nPartition variance: \\(\\mathbf{\\Sigma} = \\mathbf{\\Lambda} \\mathbf{\\Lambda}^T + \\mathbf{\\Psi}\\)\nNote \\(\\mathbf{\\Lambda}\\) not unique so we must “rotate”"
   },
   {
     "objectID": "index.html#correlation-intuition",
     "href": "index.html#correlation-intuition",
     "title": "Math, Models & Real-World Problems",
     "section": "What Does Correlation Mean?",
-    "text": "What Does Correlation Mean?\n\nWhen X goes up, Y tends to go ___\nWhat does it mean for a variable to be quantitative?\nAre Likert scores quantitative?\nSuppose \\(X\\) is a normal random variable and \\(Y\\) is a binary variable (0/1) can they ever have a correlation of 1?"
+    "text": "What Does Correlation Mean?\n\nWhen X goes up, Y tends to go ___\nSuppose \\(X\\) is a normal random variable and \\(Y\\) is a binary variable (0/1) can they ever have a correlation of 1?"
   },
   {
     "objectID": "index.html#correlation-types",
     "href": "index.html#correlation-types",
     "title": "Math, Models & Real-World Problems",
     "section": "Types of Correlation in Psychometrics",
-    "text": "Types of Correlation in Psychometrics\nDifferent variable types → different correlation methods\n\n\n\nVariable Combo\nMethod\n\n\n\n\nContinuous × Binary\nPoint-biserial r\n\n\nContinuous × Ordinal\nPolyserial\n\n\nBinary × Binary\nTetrachoric\n\n\nOrdinal × Ordinal\nPolychoric"
+    "text": "Types of Correlation in Psychometrics\nDifferent variable types → different correlation methods\n\n\n\nVariable Combo\nMethod\n\n\n\n\nContinuous × Binary\nBiserial\n\n\nContinuous × Ordinal\nPolyserial\n\n\nBinary × Binary\nTetrachoric\n\n\nOrdinal × Ordinal\nPolychoric"
   },
   {
     "objectID": "index.html#latent-variable2",
@@ -284,14 +284,14 @@
     "href": "index.html#knn-dummies",
     "title": "Math, Models & Real-World Problems",
     "section": "The KNN Problem",
-    "text": "The KNN Problem\n\n\n2 features:\n\nage\ndogs_or_cats\n\nAfter standard scaling (x - mean) / sd:\n\nage: stays roughly -3 to 3\ndogs_or_cats: \\(\\frac{p}{\\sqrt{p(1-p)}}\\)"
+    "text": "The KNN Problem\n\n\n2 features:\n\nage\ndogs_or_cats\n\nAfter standard scaling: \\(\\frac{x - \\text{mean}}{\\text{sd}}\\)\n\nage: stays roughly -3 to 3\ndogs_or_cats: \\(-\\sqrt{\\frac{p}{1-p}}\\) or \\(\\sqrt{\\frac{1-p}{p}}\\)"
   },
   {
     "objectID": "index.html#lasso-dummies",
     "href": "index.html#lasso-dummies",
     "title": "Math, Models & Real-World Problems",
     "section": "The LASSO Problem",
-    "text": "The LASSO Problem\nLASSO penalty: \\(\\lambda\\times |\\beta_j|\\) for each coefficient\n\nIf we don’t scale: \\(\\beta_j\\) will be in units of response variable (maybe really big)\nIf we do scale… \\(x_j\\) will be come very largeand \\(\\beta_j\\) will become very small (i.e. not get penalized)\nSo what do we do?\n\n\n\nI honestly don’t know… but this idea applies to a variety of problems(e.g. feature importances, feature selection, normalization, etc.)"
+    "text": "The LASSO Problem\nLASSO penalty: \\(\\lambda\\times |\\beta_j|\\) for each coefficient\n\nIf we don’t scale: \\(\\beta_j\\) will be in units of response variable (maybe really big)\nIf we do scale… \\(x_j\\) will be come very large and \\(\\beta_j\\) will become very small (i.e. not get penalized)\nSo what do we do?\n\n\n\nI honestly don’t know… but this idea applies to a variety of problems(e.g. feature importances, feature selection, normalization, etc.)"
   },
   {
     "objectID": "index.html#star-formation",
@@ -305,69 +305,62 @@
     "href": "index.html#yso-intro",
     "title": "Math, Models & Real-World Problems",
     "section": "What Are Young Stellar Objects?",
-    "text": "What Are Young Stellar Objects?\n\n\nYoung Stellar Objects (YSOs)\n\nProtostars still in the process of forming\nEmbedded in dense clouds of gas and dust\nVisible light is blocked — only detectable in infrared\nStudying YSOs reveals how stars like our Sun formed\n\n\nThe MIRION “Yellowballs” Catalog\nNamed for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.\n\nCan we predict their physical properties from their light alone?"
+    "text": "What Are Young Stellar Objects?\n\nProtostars still in the process of forming\nEmbedded in dense clouds of gas and dust\nVisible light is blocked — only detectable in infrared\nStudying YSOs reveals how stars like our Sun formed"
   },
   {
     "objectID": "index.html#yso-data",
     "href": "index.html#yso-data",
     "title": "Math, Models & Real-World Problems",
-    "section": "The Data",
-    "text": "The Data\n\n\n43 Features from 4 observatories\n\n10 infrared flux measurements spanning 8–1100 μm\nPer-band photometric error and quality columns\nSources:\n\nSpitzer Space Telescope\nHerschel Space Observatory\nALMA / SCUBA submillimeter observations\n\n\n\n8 Target Variables to predict\n\n\n\nTarget\nProperty\n\n\n\n\nTEMP\nEffective temperature\n\n\nL_BOL\nBolometric luminosity\n\n\nMASS\nStellar mass\n\n\nDIAM\nDiameter\n\n\nSURF_DENS\nSurface density\n\n\nLM\nLuminosity/mass ratio\n\n\nT_BOL\nBolometric temperature\n\n\nLRATIO\nLuminosity ratio"
+    "section": "The Features",
+    "text": "The Features\n43 Features from 4 observatories\n\n10 infrared flux measurements spanning 8–1100 μm\nPer-band photometric error and quality columns\nSources: data comes from several differen sources"
+  },
+  {
+    "objectID": "index.html#yso-targets",
+    "href": "index.html#yso-targets",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Targets",
+    "text": "The Targets\n8 Target Variables to predict\n\n\nDistance-Independent\n\n\n\nTarget\nProperty\n\n\n\n\nTEMP\nEffective temperature\n\n\nT_BOL\nBolometric temperature\n\n\nLM\nLuminosity/mass ratio\n\n\nLRATIO\nLuminosity ratio\n\n\nSURF_DENS\nSurface density\n\n\n\n\nDistance-Dependent\n\n\n\nTarget\nProperty\n\n\n\n\nL_BOL\nBolometric luminosity\n\n\nMASS\nStellar mass\n\n\nDIAM\nDiameter"
   },
   {
     "objectID": "index.html#yso-pipeline",
     "href": "index.html#yso-pipeline",
     "title": "Math, Models & Real-World Problems",
-    "section": "The Pipeline: Bayesian Model Search",
-    "text": "The Pipeline: Bayesian Model Search\nFor each of the 8 targets, an independent pipeline was run:\n\nBayesSearchCV (150 iterations): efficient hyperparameter search across a large space — smarter than grid search\n6 model types searched simultaneously: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP\nPreprocessing pipeline: imputation → feature scaling → model\nBest single model selected and saved per target\nStacking ensemble: all 6 models combined with a Ridge meta-learner for final predictions"
+    "section": "The Pipeline",
+    "text": "The Pipeline\nFor each of the 8 targets, an independent pipeline was run:\n\nBayesian optimization (150 iterations): efficient hyperparameter search across a large space — smarter than grid search\n6 model types searched simultaneously: Random Forest, Gradient Boosting (Three different implementations), ElasticNet, MLP\nPreprocessing pipeline: imputating missing values → feature scaling → model fitting\nBest single model selected and saved per target"
   },
   {
     "objectID": "index.html#yso-cluster",
     "href": "index.html#yso-cluster",
     "title": "Math, Models & Real-World Problems",
     "section": "Running at Scale: Borah HPC",
-    "text": "Running at Scale: Borah HPC\nEach target = 150 BayesSearch iterations × 5-fold CV = 750 model fits\nSubmitted as a SLURM array job on Boise State’s Borah HPC cluster — one job per target.\n\n\n\nResource\nPer Job\n\n\n\n\nCPUs\n48 cores\n\n\nRAM\n128 GB\n\n\nWall time\nup to 24 hrs"
+    "text": "Running at Scale: Borah HPC\nEach target = 150 BayesSearchCV iterations × 5-fold CV = 750 model fits\nSubmitted to Boise State/Idaho National Lab’s Borah HPC cluster — one job per target.\n\n\n\nResource\nPer Job\n\n\n\n\nCPUs\n48 cores\n\n\nRAM\n128 GB"
   },
   {
     "objectID": "index.html#yso-cluster-parallel",
     "href": "index.html#yso-cluster-parallel",
     "title": "Math, Models & Real-World Problems",
     "section": "The Power of Parallelism",
-    "text": "The Power of Parallelism\nAll 8 targets ran simultaneously:\n48 CPUs × 8 jobs = 384 cores working in parallel\n\n\nWhat would take weeks on a laptop runs overnight on a cluster\nWall time: ~24 hrs total vs. ~192 hrs (8 days) sequentially\nHPC makes systematic hyperparameter search practical"
+    "text": "The Power of Parallelism\nAll 8 targets ran simultaneously:\n48 CPUs × 8 jobs = 384 cores working in parallel\n\n\nWhat would take a week on a laptop runs overnight on a cluster\nWall time: ~24 hrs total vs. ~192 hrs (8 days) sequentially\nHPC makes systematic hyperparameter search practical"
   },
   {
     "objectID": "index.html#yso-results",
     "href": "index.html#yso-results",
     "title": "Math, Models & Real-World Problems",
     "section": "Results: How Well Can We Predict?",
-    "text": "Results: How Well Can We Predict?\n\n\n\nTarget\nDescription\nCV R²\n\n\n\n\nTEMP\nEffective temperature\n0.916\n\n\nLM\nLuminosity/mass ratio\n0.890\n\n\nSURF_DENS\nSurface density\n0.826\n\n\nL_BOL\nBolometric luminosity\n0.553\n\n\nLRATIO\nLuminosity ratio\n0.474\n\n\nT_BOL\nBolometric temperature\n0.473\n\n\nMASS\nStellar mass\n0.427\n\n\nDIAM\nDiameter\n0.093\n\n\n\n\nXGBoost was the best model for 7 of 8 targets (GradientBoosting won for DIAM)"
+    "text": "Results: How Well Can We Predict?\n\n\nDistance-Independent\n\n\n\nDescription\nCV R²\n\n\n\n\nEffective temperature\n0.916\n\n\nLuminosity/mass ratio\n0.890\n\n\nSurface density\n0.826\n\n\nLuminosity ratio\n0.474\n\n\nBolometric temperature\n0.473\n\n\n\n\nDistance-Dependent\n\n\n\nDescription\nCV R²\n\n\n\n\nBolometric luminosity\n0.553\n\n\nStellar mass\n0.427\n\n\nDiameter\n0.093\n\n\n\n\n\nXGBoost was the best model for 7 of 8 targets (GradientBoosting won for DIAM)"
   },
   {
     "objectID": "index.html#yso-temp",
     "href": "index.html#yso-temp",
     "title": "Math, Models & Real-World Problems",
     "section": "Temperature: R² = 0.916",
-    "text": "Temperature: R² = 0.916\n\nLeft: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.\n\nEffective temperature is strongly encoded in the infrared color of a YSO"
-  },
-  {
-    "objectID": "index.html#yso-shap",
-    "href": "index.html#yso-shap",
-    "title": "Math, Models & Real-World Problems",
-    "section": "Which Wavelengths Drive Temperature Predictions?",
-    "text": "Which Wavelengths Drive Temperature Predictions?\n\nSHAP values show how each feature pushes the prediction. The 160 μm and 350 μm far-infrared bands dominate — consistent with Wien’s law (cooler objects emit more at longer wavelengths)."
-  },
-  {
-    "objectID": "index.html#yso-diam",
-    "href": "index.html#yso-diam",
-    "title": "Math, Models & Real-World Problems",
-    "section": "Not All Properties Are Equal",
-    "text": "Not All Properties Are Equal\n\nDiameter: R² = 0.093\n\nDiameter depends on distance assumptions — distance errors propagate directly into this target\n\n\nSome properties simply aren’t encoded in the photometry alone"
+    "text": "Temperature: R² = 0.916"
   },
   {
     "objectID": "index.html#yso-lessons",
     "href": "index.html#yso-lessons",
     "title": "Math, Models & Real-World Problems",
-    "section": "What We Learned",
-    "text": "What We Learned\n\nBayesian hyperparameter search efficiently explores complex model spaces\nXGBoost consistently outperforms simpler models on this dataset\nSome physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry\nOthers (diameter) require additional data or better distance estimates\nHPC enables systematic ML research that would be impractical on a laptop\nStacking ensembles offer modest gains over single best models\n\n\n\nInfrared light is a remarkably rich signal — but not every stellar secret is written in photons"
+    "section": "Where to go from here…",
+    "text": "Where to go from here…\n\nTry different transformations… (ratios of wavelengths are important)\nRegularization\nStory telling\nBigger project: extracting wavelengths from images (this summer)"
   }
 ]

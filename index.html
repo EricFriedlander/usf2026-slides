@@ -862,66 +862,59 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <li>Create mask for any peaks above threshold</li>
 </ul></li>
 </ul>
+<!-- 
+
+## Centering & Scaling
+
+
+
+::: {.panel-tabset}
+
+### Green
+
+::: {.cell}
+::: {.cell-output-display}
+![](index_files/figure-revealjs/unnamed-chunk-31-1.png){width=960}
+:::
+:::
+
+
+### White
+
+::: {.cell}
+::: {.cell-output-display}
+![](index_files/figure-revealjs/unnamed-chunk-32-1.png){width=960}
+:::
+:::
+
+
+### Early
+
+::: {.cell}
+::: {.cell-output-display}
+![](index_files/figure-revealjs/unnamed-chunk-33-1.png){width=960}
+:::
+:::
+
+
+### Wyoming
+
+::: {.cell}
+::: {.cell-output-display}
+![](index_files/figure-revealjs/unnamed-chunk-34-1.png){width=960}
+:::
+:::
+
+
+::: -->
 </section>
 <section class="slide level2">
-<h2>Centering &amp; Scaling</h2>
+<h2>SNR Mask</h2>
+<p>Gray = masked regions (SNR <span class="math inline">\(\leq\)</span> 3); SNR = max signal / IQR</p>
 <div class="panel-tabset">
 <ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Green</a></li><li><a href="#tabset-3-2">White</a></li><li><a href="#tabset-3-3">Early</a></li><li><a href="#tabset-3-4">Wyoming</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-2">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-3">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-4">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="slide level2">
-<h2>SNR Mask + Scale</h2>
-<p>Gray = masked regions (SNR ≤ 3); SNR = max signal / IQR</p>
-<div class="panel-tabset">
-<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Green</a></li><li><a href="#tabset-4-2">White</a></li><li><a href="#tabset-4-3">Early</a></li><li><a href="#tabset-4-4">Wyoming</a></li></ul>
-<div class="tab-content">
-<div id="tabset-4-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -932,7 +925,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-4-2">
+<div id="tabset-3-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -943,7 +936,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-4-3">
+<div id="tabset-3-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -954,7 +947,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-4-4">
+<div id="tabset-3-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -970,11 +963,11 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </section>
 <section class="slide level2">
 <h2>Peak Threshold Mask + Scale</h2>
-<p>Gray = masked regions (max signal ≤ 10 AU)</p>
+<p>Gray = masked regions (max signal <span class="math inline">\(\leq\)</span> 10 AU)</p>
 <div class="panel-tabset">
-<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Green</a></li><li><a href="#tabset-5-2">White</a></li><li><a href="#tabset-5-3">Early</a></li><li><a href="#tabset-5-4">Wyoming</a></li></ul>
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Green</a></li><li><a href="#tabset-4-2">White</a></li><li><a href="#tabset-4-3">Early</a></li><li><a href="#tabset-4-4">Wyoming</a></li></ul>
 <div class="tab-content">
-<div id="tabset-5-1">
+<div id="tabset-4-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -985,7 +978,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-5-2">
+<div id="tabset-4-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -996,7 +989,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-5-3">
+<div id="tabset-4-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1007,7 +1000,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-5-4">
+<div id="tabset-4-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1040,9 +1033,9 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <section class="slide level2">
 <h2>Volcano Plots: CYP Enzyme</h2>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Green</a></li><li><a href="#tabset-6-2">White</a></li><li><a href="#tabset-6-3">Early</a></li><li><a href="#tabset-6-4">Wyoming</a></li></ul>
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Green</a></li><li><a href="#tabset-5-2">White</a></li><li><a href="#tabset-5-3">Early</a></li><li><a href="#tabset-5-4">Wyoming</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
+<div id="tabset-5-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1053,7 +1046,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-6-2">
+<div id="tabset-5-2">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1064,7 +1057,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-6-3">
+<div id="tabset-5-3">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1075,7 +1068,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </div>
 </div>
 </div>
-<div id="tabset-6-4">
+<div id="tabset-5-4">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1159,7 +1152,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <p>If I measure individuals with the same trait, do they score the same?</p>
 <ul>
 <li><strong>Test-retest reliability:</strong> if you measure someone twice… do they get the same score</li>
-<li><strong>Internal consistency:</strong> does each question positively correlate with total score?
+<li><strong>Internal consistency:</strong> does each question positively correlate with the trait you’re measuring?
 <ul>
 <li><strong>Chronbach’s Alpha:</strong> <span class="math inline">\(\alpha = \frac{k}{k - 1} \left( \frac{\sum_{i\neq j} \sigma^2_{y_iy_j}}{\sigma^2_x} \right)\)</span></li>
 </ul></li>
@@ -1168,7 +1161,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </section>
 <section class="slide level2">
 <h2>Validity</h2>
-<p>Many types of validity (Coopers lists 12):</p>
+<p>Many types of validity (Cooper lists 12):</p>
 <ul>
 <li>Content Validity: are the items a representative sample of the domain they measure</li>
 <li>Criterion-Related Validity: how well do test scores correlate with an external, “real-world” outcome (the criterion)</li>
@@ -1189,7 +1182,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <section id="factor-analysis" class="slide level2 smaller">
 <h2>Factor Analysis &amp; PCA</h2>
 <ul>
-<li>PCA: take correlation matrix <span class="math inline">\(\to\)</span> compute SVD</li>
+<li>PCA: take correlation matrix <span class="math inline">\(\to\)</span> compute eigen-decomposition</li>
 <li>Factor Analysis:
 <ul>
 <li>Assume some generative model: <span class="math inline">\(\mathbf{x} = \mathbf{\Lambda} \mathbf{f} + \boldsymbol{\epsilon}\)</span>
@@ -1204,12 +1197,19 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </ul></li>
 </ul>
 </section>
+<section class="slide level2">
+<h2>A question that get’s ignored…</h2>
+<ul>
+<li class="fragment">Rate this talk on a scale of 1-5</li>
+<li class="fragment">Is this quantitative data?</li>
+<li class="fragment">What does it mean for a variable to be quantitative?</li>
+<li class="fragment">Are Likert scores quantitative?</li>
+</ul>
+</section>
 <section id="correlation-intuition" class="slide level2">
 <h2>What Does Correlation Mean?</h2>
 <ul>
 <li class="fragment">When X goes up, Y tends to go ___</li>
-<li class="fragment">What does it mean for a variable to be quantitative?</li>
-<li class="fragment">Are Likert scores quantitative?</li>
 <li class="fragment">Suppose <span class="math inline">\(X\)</span> is a normal random variable and <span class="math inline">\(Y\)</span> is a binary variable (0/1) can they ever have a correlation of 1?</li>
 </ul>
 </section>
@@ -1226,7 +1226,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <tbody>
 <tr class="odd">
 <td>Continuous × Binary</td>
-<td><strong>Point-biserial</strong> r</td>
+<td><strong>Biserial</strong></td>
 </tr>
 <tr class="even">
 <td>Continuous × Ordinal</td>
@@ -1277,6 +1277,15 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </ul>
 </div></div>
 </div>
+</section>
+<section class="slide level2">
+<h2>Factor Analysis</h2>
+<p>Once correlations are computed:</p>
+<ul>
+<li>Exploratory factor analysis (CFA): Try out different numbers of factors, see which one fits the data best, and see if you can explain</li>
+<li>Confirmatory factor analysis (CFA): Apply factor analysis, see if you can recover the predicted factor structure</li>
+<li>Can use FA to assess the quality of an assessment (e.g.&nbsp;for bias)</li>
+</ul>
 </section>
 <section class="slide level2 smaller">
 <h2>Item Response Theory (IRT)</h2>
@@ -1367,14 +1376,14 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </section>
 <section class="slide level2">
 <h2>Harder Example</h2>
-<p>I have a 403B (retirement account). Suppose my the interest rates I’ll receive over the next 20 years are represented as <span class="math inline">\(x_i\)</span>… How should I compute the mean of <span class="math inline">\(x_i\)</span>?</p>
+<p>I have a 403B (retirement account). Suppose the interest rates I’ll receive over the next 20 years are represented as <span class="math inline">\(x_i\)</span>… How should I compute the mean of <span class="math inline">\(x_i\)</span>?</p>
 <div class="fragment">
 <p>Note: <span class="math inline">\(\text{Balance}\times (1 + \bar{x})^{20} \neq \text{Balance}\times (1 + x_1)\times\cdots\times(1 + x_{20})\)</span></p>
 </div>
 </section>
 <section class="slide level2">
 <h2>Geometric Mean</h2>
-<p><span class="math display">\[M = \left(\prod_{i=1}^{n} x_i\right)^{1/n}\]</span></p>
+<p><span class="math display">\[M = \left(\prod_{i=1}^{n}(1 + x_i)\right)^{1/n}\]</span></p>
 <ul>
 <li>Used when things compound or grow or shrink</li>
 <li>Finance (1 + interest rates)</li>
@@ -1421,7 +1430,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <p>Short answer: <strong>it depends on the algorithm</strong></p>
 </div>
 </section>
-<section id="knn-dummies" class="slide level2">
+<section id="knn-dummies" class="slide level2 smaller">
 <h2>The KNN Problem</h2>
 <div class="columns">
 <div class="column">
@@ -1430,10 +1439,10 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <li><code>age</code></li>
 <li><code>dogs_or_cats</code></li>
 </ul>
-<p>After standard scaling <code>(x - mean) / sd</code>:</p>
+<p>After standard scaling: <span class="math inline">\(\frac{x - \text{mean}}{\text{sd}}\)</span></p>
 <ul>
 <li><code>age</code>: stays roughly -3 to 3</li>
-<li><code>dogs_or_cats</code>: <span class="math inline">\(\frac{p}{\sqrt{p(1-p)}}\)</span></li>
+<li><code>dogs_or_cats</code>: <span class="math inline">\(-\sqrt{\frac{p}{1-p}}\)</span> or <span class="math inline">\(\sqrt{\frac{1-p}{p}}\)</span></li>
 </ul>
 </div><div class="column">
 <div class="cell">
@@ -1465,7 +1474,7 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <p>LASSO penalty: <span class="math inline">\(\lambda\times |\beta_j|\)</span> for each coefficient</p>
 <ul>
 <li>If we don’t scale: <span class="math inline">\(\beta_j\)</span> will be in units of response variable (maybe really big)</li>
-<li>If we do scale… <span class="math inline">\(x_j\)</span> will be come very largeand <span class="math inline">\(\beta_j\)</span> will become very small (i.e.&nbsp;not get penalized)</li>
+<li>If we do scale… <span class="math inline">\(x_j\)</span> will be come very large and <span class="math inline">\(\beta_j\)</span> will become very small (i.e.&nbsp;not get penalized)</li>
 <li>So what do we do?</li>
 </ul>
 <div class="fragment">
@@ -1489,40 +1498,35 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 </section>
 <section id="yso-intro" class="slide level2">
 <h2>What Are Young Stellar Objects?</h2>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><strong>Young Stellar Objects (YSOs)</strong></p>
 <ul>
 <li>Protostars still in the process of forming</li>
 <li>Embedded in dense clouds of gas and dust</li>
 <li>Visible light is blocked — only detectable in <strong>infrared</strong></li>
 <li>Studying YSOs reveals how stars like our Sun formed</li>
 </ul>
-</div><div class="column" style="width:45%;">
-<p><strong>The MIRION “Yellowballs” Catalog</strong></p>
+</section>
+<section class="slide level2">
+<h2>The MIRION “Yellowballs” Catalog</h2>
 <p>Named for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.</p>
 <blockquote>
 <p>Can we predict their physical properties from their light alone?</p>
 </blockquote>
-</div></div>
 </section>
 <section id="yso-data" class="slide level2">
-<h2>The Data</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
+<h2>The Features</h2>
 <p><strong>43 Features</strong> from 4 observatories</p>
 <ul>
 <li>10 infrared flux measurements spanning <strong>8–1100 μm</strong></li>
 <li>Per-band photometric error and quality columns</li>
-<li>Sources:
-<ul>
-<li>Spitzer Space Telescope</li>
-<li>Herschel Space Observatory</li>
-<li>ALMA / SCUBA submillimeter observations</li>
-</ul></li>
+<li>Sources: data comes from several differen sources</li>
 </ul>
-</div><div class="column" style="width:50%;">
+</section>
+<section id="yso-targets" class="slide level2 smaller">
+<h2>The Targets</h2>
 <p><strong>8 Target Variables</strong> to predict</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Distance-Independent</strong></p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1536,52 +1540,63 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <td>Effective temperature</td>
 </tr>
 <tr class="even">
-<td>L_BOL</td>
-<td>Bolometric luminosity</td>
+<td>T_BOL</td>
+<td>Bolometric temperature</td>
 </tr>
 <tr class="odd">
-<td>MASS</td>
-<td>Stellar mass</td>
+<td>LM</td>
+<td>Luminosity/mass ratio</td>
 </tr>
 <tr class="even">
-<td>DIAM</td>
-<td>Diameter</td>
+<td>LRATIO</td>
+<td>Luminosity ratio</td>
 </tr>
 <tr class="odd">
 <td>SURF_DENS</td>
 <td>Surface density</td>
 </tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p><strong>Distance-Dependent</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Target</th>
+<th>Property</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>L_BOL</td>
+<td>Bolometric luminosity</td>
+</tr>
 <tr class="even">
-<td>LM</td>
-<td>Luminosity/mass ratio</td>
+<td>MASS</td>
+<td>Stellar mass</td>
 </tr>
 <tr class="odd">
-<td>T_BOL</td>
-<td>Bolometric temperature</td>
-</tr>
-<tr class="even">
-<td>LRATIO</td>
-<td>Luminosity ratio</td>
+<td>DIAM</td>
+<td>Diameter</td>
 </tr>
 </tbody>
 </table>
 </div></div>
 </section>
 <section id="yso-pipeline" class="slide level2">
-<h2>The Pipeline: Bayesian Model Search</h2>
+<h2>The Pipeline</h2>
 <p>For each of the <strong>8 targets</strong>, an independent pipeline was run:</p>
 <ul>
-<li class="fragment"><strong>BayesSearchCV</strong> (150 iterations): efficient hyperparameter search across a large space — smarter than grid search</li>
-<li class="fragment"><strong>6 model types searched simultaneously</strong>: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP</li>
-<li class="fragment"><strong>Preprocessing pipeline</strong>: imputation → feature scaling → model</li>
+<li class="fragment"><strong>Bayesian optimization</strong> (150 iterations): efficient hyperparameter search across a large space — smarter than grid search</li>
+<li class="fragment"><strong>6 model types searched simultaneously</strong>: Random Forest, Gradient Boosting (Three different implementations), ElasticNet, MLP</li>
+<li class="fragment"><strong>Preprocessing pipeline</strong>: imputating missing values → feature scaling → model fitting</li>
 <li class="fragment"><strong>Best single model</strong> selected and saved per target</li>
-<li class="fragment"><strong>Stacking ensemble</strong>: all 6 models combined with a Ridge meta-learner for final predictions</li>
 </ul>
 </section>
-<section id="yso-cluster" class="slide level2">
+<section id="yso-cluster" class="slide level2 smaller">
 <h2>Running at Scale: Borah HPC</h2>
-<p>Each target = <strong>150 BayesSearch iterations × 5-fold CV</strong> = 750 model fits</p>
-<p>Submitted as a <strong>SLURM array job</strong> on Boise State’s Borah HPC cluster — one job per target.</p>
+<p>Each target = <strong>150 BayesSearchCV iterations × 5-fold CV</strong> = 750 model fits</p>
+<p>Submitted to Boise State/Idaho National Lab’s Borah HPC cluster — one job per target.</p>
 <table class="caption-top">
 <thead>
 <tr class="header">
@@ -1598,10 +1613,6 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <td>RAM</td>
 <td>128 GB</td>
 </tr>
-<tr class="odd">
-<td>Wall time</td>
-<td>up to 24 hrs</td>
-</tr>
 </tbody>
 </table>
 </section>
@@ -1611,65 +1622,72 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <p><strong>48 CPUs × 8 jobs = 384 cores working in parallel</strong></p>
 <div class="fragment">
 <ul>
-<li>What would take <strong>weeks on a laptop</strong> runs <strong>overnight on a cluster</strong></li>
+<li>What would take <strong>a week on a laptop</strong> runs <strong>overnight on a cluster</strong></li>
 <li>Wall time: ~24 hrs total vs.&nbsp;~192 hrs (8 days) sequentially</li>
 <li>HPC makes systematic hyperparameter search practical</li>
 </ul>
 </div>
 </section>
-<section id="yso-results" class="slide level2">
+<section id="yso-results" class="slide level2 smaller">
 <h2>Results: How Well Can We Predict?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Distance-Independent</strong></p>
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th>Target</th>
 <th>Description</th>
 <th style="text-align: right;">CV R²</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>TEMP</td>
 <td>Effective temperature</td>
 <td style="text-align: right;">0.916</td>
 </tr>
 <tr class="even">
-<td>LM</td>
 <td>Luminosity/mass ratio</td>
 <td style="text-align: right;">0.890</td>
 </tr>
 <tr class="odd">
-<td>SURF_DENS</td>
 <td>Surface density</td>
 <td style="text-align: right;">0.826</td>
 </tr>
 <tr class="even">
-<td>L_BOL</td>
-<td>Bolometric luminosity</td>
-<td style="text-align: right;">0.553</td>
-</tr>
-<tr class="odd">
-<td>LRATIO</td>
 <td>Luminosity ratio</td>
 <td style="text-align: right;">0.474</td>
 </tr>
-<tr class="even">
-<td>T_BOL</td>
+<tr class="odd">
 <td>Bolometric temperature</td>
 <td style="text-align: right;">0.473</td>
 </tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<p><strong>Distance-Dependent</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Description</th>
+<th style="text-align: right;">CV R²</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
-<td>MASS</td>
+<td>Bolometric luminosity</td>
+<td style="text-align: right;">0.553</td>
+</tr>
+<tr class="even">
 <td>Stellar mass</td>
 <td style="text-align: right;">0.427</td>
 </tr>
-<tr class="even">
-<td>DIAM</td>
+<tr class="odd">
 <td>Diameter</td>
 <td style="text-align: right;">0.093</td>
 </tr>
 </tbody>
 </table>
+</div></div>
 <div class="fragment">
 <p><strong>XGBoost was the best model for 7 of 8 targets</strong> (GradientBoosting won for DIAM)</p>
 </div>
@@ -1677,42 +1695,15 @@ p, &amp; \text{if } y_i &gt; z_i \\[2mm]
 <section id="yso-temp" class="slide level2">
 <h2>Temperature: R² = 0.916</h2>
 
-<img data-src="images/sf_temp_performance.png" class="r-stretch quarto-figure quarto-figure-center"><p>Left: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.</p>
-<div class="fragment">
-<p>Effective temperature is strongly encoded in the <strong>infrared color</strong> of a YSO</p>
-</div>
-</section>
-<section id="yso-shap" class="slide level2">
-<h2>Which Wavelengths Drive Temperature Predictions?</h2>
-
-<img data-src="images/sf_shap_temp.png" class="r-stretch quarto-figure quarto-figure-center"><p>SHAP values show how each feature pushes the prediction. The <strong>160 μm</strong> and <strong>350 μm</strong> far-infrared bands dominate — consistent with Wien’s law (cooler objects emit more at longer wavelengths).</p>
-</section>
-<section id="yso-diam" class="slide level2">
-<h2>Not All Properties Are Equal</h2>
-
-<img data-src="images/sf_diam_performance.png" class="r-stretch quarto-figure quarto-figure-center"><p><strong>Diameter: R² = 0.093</strong></p>
-<div class="fragment">
-<p>Diameter depends on <strong>distance assumptions</strong> — distance errors propagate directly into this target</p>
-</div>
-<div class="fragment">
-<p>Some properties simply aren’t encoded in the photometry alone</p>
-</div>
-</section>
+<img data-src="images/sf_temp_performance.png" class="r-stretch quarto-figure quarto-figure-center"></section>
 <section id="yso-lessons" class="slide level2">
-<h2>What We Learned</h2>
+<h2>Where to go from here…</h2>
 <ul>
-<li class="fragment">Bayesian hyperparameter search efficiently explores complex model spaces</li>
-<li class="fragment">XGBoost consistently outperforms simpler models on this dataset</li>
-<li class="fragment">Some physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry</li>
-<li class="fragment">Others (diameter) require additional data or better distance estimates</li>
-<li class="fragment">HPC enables systematic ML research that would be impractical on a laptop</li>
-<li class="fragment">Stacking ensembles offer modest gains over single best models</li>
+<li class="fragment">Try different transformations… (ratios of wavelengths are important)</li>
+<li class="fragment">Regularization</li>
+<li class="fragment">Story telling</li>
+<li class="fragment">Bigger project: extracting wavelengths from images (this summer)</li>
 </ul>
-<div class="fragment">
-<blockquote>
-<p>Infrared light is a remarkably rich signal — but not every stellar secret is written in photons</p>
-</blockquote>
-</div>
 </section>
 <section class="slide level2">
 
