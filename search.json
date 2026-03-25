@@ -151,7 +151,14 @@
     "href": "index.html#toy-model",
     "title": "Math, Models & Real-World Problems",
     "section": "Toy model: population size history",
-    "text": "Toy model: population size history\nA simple three-phase model:\n\nLarge ancestral population — stable for many generations\nBottleneck — small group migrates out of Africa\n\nPopulation size drops sharply\n\nExponential growth — population expands in new environment\n\n\n← Back to Topics"
+    "text": "Toy model: population size history\nA simple three-phase model:\n\nLarge ancestral population — stable for many generations\nBottleneck — small group migrates out of Africa\n\nPopulation size drops sharply\n\nExponential growth — population expands in new environment"
+  },
+  {
+    "objectID": "index.html#activity",
+    "href": "index.html#activity",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Your job: estimate the bottleneck",
+    "text": "Your job: estimate the bottleneck\n\nBack to Shiny App\nhttps://efriedlander.shinyapps.io/usf-popgen/"
   },
   {
     "objectID": "index.html#chemometrics",
