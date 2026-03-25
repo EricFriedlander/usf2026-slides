@@ -1,4 +1,4 @@
-## {background-color="#533860"}
+## {#grad-school background-color="#533860"}
 
 ::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
 🎲 Graduate School: Large Networks
@@ -9,16 +9,15 @@ Probability & asymptotic methods for massive systems
 
 ---
 
-## Reality: Not So Easy {#grad-school-reality}
+## Modeling large systems {#grad-school-reality}
 
 ::: {.incremental}
-- Need to iterate through **lots** of scenarios
-- Large population → slow simulations
-- Too slow to be practical
-:::
-
-::: {.fragment}
-**Solution:** Assume population size is infinite
+- Suppose we have a system of $n$ "particles"
+- Particles can be anything (e.g. queues, individuals, molecules, etc...)
+- Each partical is evolving according to some random process
+- Modeling each of these particles directly $\Rightarrow$ $n$-dimensional process (infeasible for large $n$)
+- **Solution:** Assume $n$ is infinite
+- Umm... wut?
 :::
 
 ---
@@ -45,17 +44,13 @@ Waves: aggregate behavior, not individual particles
 
 ---
 
-## Wright-Fisher Diffusion {#wf-diffusion}
+## Asymptotics Approximations
 
-- **Asymptotic approximation** of the Wright-Fisher Model
-- Continuous limit → independent of population size $N$
-- One model works for any population
-
-::: {.fragment}
-**My research:**
-
-- Completed: ODE approximation (much faster)
-- In progress: *Accelerated* simulations via Large-Deviation Theory
+::: {.incremental}
+- A few general types of asymptotic approximations (you've heard of two)
+    1. Law's of large numbers (limit is deterministic)
+    2. Central limit theorem (limit is stochastic)
+    3. Large deviation theorem (how fast does LLN converge)
 :::
 
 ---
@@ -99,7 +94,7 @@ Sample 2 servers, pick the shorter queue
 
 ---
 
-## Power of Two: Dramatic Improvement {#power-of-two-2}
+## Power of Two Choices {#power-of-two-2}
 
 ![](images/LoadBalancing/Slide4.jpeg){fig-align="center" .r-stretch}
 
@@ -115,76 +110,43 @@ Always join the shortest queue — optimal, but expensive to implement
 
 ---
 
+## How do we evaluate this for lots of servers? {#eval}
+
+- LLN $\Rightarrow$ ODE on distribution of queue lengths
+    + What does the steady-state distribution of this ODE look like?
+        + JSQ: all queues are of length 0 or 1
+        + Random routing: queue lengths decay exponentially
+        + Power-of-two: queue lengths decay double-exponentially
+
+---
+
 ## Steady-State Distributions {#lb-steady-state}
 
 ![](images/LoadBalancing/decay.png){fig-align="center" .r-stretch}
 
-::: {style="font-size: 0.8em;"}
-JSQ achieves **exponential decay** in queue lengths — servers nearly always free
-:::
+---
+
+## What about the impact of randomness? {#eval2}
+
+- CLT $\Rightarrow$ SDE for distribution of queue lengths
+- This my work (specifically for power-of-two) $\Rightarrow$ about 40-pages of proofs... none of which I'll present here
+- SDE allows for more efficient simulation
 
 ---
 
-## {background-color="#533860"}
+## What about this Large-Deviation Theorem? {#ldt}
 
-::: {style="color: white; font-size: 1.5em; font-weight: bold;"}
-File Caching: gLRU
-:::
-::: {style="color: #FFE42A; font-size: 1.1em;"}
-Storing files efficiently in a large network
-:::
+I proved a LDT for JSQ.
 
----
-
-## The File Caching Problem {#file-caching}
-
-**Key question:** What's the best way to store files in a large network?
-
-::: {.incremental}
-- Standard **LRU** (Least-Recently-Used): evict oldest file
-- Problem: files have **different sizes**
-- Large files waste cache space
-- Small files get unfairly evicted
+::: {style="border-left: 4px solid #533860; background: #f5f3f7; padding: 0.3em 0.8em; font-size: 0.8em;"}
+**Theorem.**
+$$\begin{align}
+  \lim_{n\to\infty}\frac{1}{n}\log\mathbb{P}(X^n\in G)
+  &= \inf_{x\in G}I(x)
+\end{align}$$
 :::
 
----
-
-## gLRU: Chunk-Based Caching {#glru}
-
-:::: {.columns}
-::: {.column width="50%"}
-**Standard LRU**
-
-- Files treated as atomic units
-- One big file crowds out many small ones
-:::
-
-::: {.column width="50%"}
-**gLRU**
-
-- Subdivide files into **equal-sized chunks**
-- Add chunks of requested file
-- Remove chunks of least-recently-used file
-:::
-::::
-
-::: {.fragment}
-→ Cache space used far more **uniformly**
-:::
-
----
-
-## gLRU: Key Results {#glru-result}
-
-::: {.incremental}
-- **~32% reduction** in video streaming stall duration vs. standard LRU
-- Validated on real-world data (MSR Cambridge Traces)
-- Published in **ACM TOMPECS** (2019)
-:::
-
-::: {.fragment style="margin-top: 1em;"}
-**Applications:** Content delivery networks — Netflix, YouTube, Cloudflare
-:::
+Useful in estimating probabilities of rare-events.
 
 ---
 

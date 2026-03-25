@@ -1,4 +1,4 @@
-## {background-color="#533860"}
+## {#pop-genetics background-color="#533860"}
 
 ::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
 🧬 Postdoc: Population Genetics
@@ -7,41 +7,32 @@
 How we use statistics to learn about human history
 :::
 
-## What is genetic data? {#pop-genetics}
+## Let's begin with a biology lesson!
 
-:::: {.columns}
-::: {.column width="50%"}
-- DNA packaged into **chromosomes**
-- Humans: 23 pairs
-- Each position in the genome can vary between individuals
-- Variation = signal about history
+![](images/Graphics1-part-1.png){.r-stretch fig-align="center"}
 
-![](images/chromosomes.png)
-:::
-::: {.column width="50%"}
-![](images/03GENOME3-jumbo.jpg)
-:::
-::::
+## Let's begin with a biology lesson!
 
-## Big picture questions {#pop-gen-questions}
+![](images/chromosomes.png){.r-stretch fig-align="center"}
 
-:::: {.columns}
-::: {.column width="55%"}
-**Question 1:** What was the past size and structure of populations?
+## Big Picture: Questions about evolving populations
 
-![](images/outofafrica.png)
-:::
-::: {.column width="45%"}
-::: {.fragment}
-**Question 2:** Where in the genome is natural selection occurring?
+- What was the past size and structure of populations?
 
-- Which genes gave us an advantage?
-- Which variants spread — and why?
-:::
-:::
-::::
+![](images/outofafrica.png){.r-stretch fig-align="center"}
 
-## The modeling framework {#pop-gen-inference}
+## Big Picture: Questions about evolving populations
+
+- Where in the genome is natural selection occurring?
+
+![](images/lct-1.png){.r-stretch fig-align="center"}
+
+## Sequencing Data
+
+![](images/03GENOME3-jumbo.jpg){.r-stretch fig-align="center"}
+
+
+## The modeling framework {#pop-gen-inference .smaller}
 
 **Goal:** turn data into answers about history
 
@@ -75,11 +66,24 @@ $$\text{Assumptions} + \text{Data} \xrightarrow{\text{model}} \text{Likelihood (
 - Track $p_k$ = proportion of [Luigis]{style="color:green;"} in generation $k$
 :::
 
+
 ## Wright-Fisher Model: Visual {#wf-visual}
 
 ![](images/WFImageLast.jpg){.r-stretch fig-align="center"}
 
-## Computers can roll dice! {#wf-simulation}
+## Wright-Fisher Model
+
+```{r, fig.align="center"}
+data <- data.frame(x = 0:8, y = c(0.5, 0.4, 0.3, .3,.3,.5,.4,.5,.5))
+ggplot(data = data, aes(x =x, y= y)) +
+  geom_step() +
+  xlim(0, 8) +
+  ylim(0, 1) +
+  xlab("Generation") +
+  ylab("Luigi Proportion")
+```
+
+## Computers can roll dice! {#wf-simulation .smaller}
 
 **Key insight:** random sampling = rolling dice
 
@@ -92,8 +96,7 @@ $$\text{Assumptions} + \text{Data} \xrightarrow{\text{model}} \text{Likelihood (
 ::: {.fragment}
 ```r
 # Simulate one generation
-sample(c("Mario", "Luigi"), size = 1000, replace = TRUE,
-       prob = c(1 - p, p))
+sample(c("Mario", "Luigi"), size = 1000, replace = TRUE, prob = c(1 - p, p))
 ```
 :::
 
@@ -101,64 +104,259 @@ sample(c("Mario", "Luigi"), size = 1000, replace = TRUE,
 - No calculus needed — just repeat millions of times
 - This is called **genetic drift**
 :::
+## A few Simulations
 
-## Simulations: A few paths {#wf-few-paths}
+```{r}
+library(tidyverse)
+library(mosaic)
+library(reshape)
 
-:::: {.columns}
-::: {.column width="60%"}
-- Start: 50% [Luigi]{style="color:green;"}, 50% [Mario]{style="color:red;"}
-- Each line = one simulated population
-- [Luigi proportion]{style="color:green;"} wanders randomly over generations
-- Different random histories → different outcomes
+set.seed(1988)
+reps <- 1000
+pop_size <- 1000
+init <- .5
+gens <- 1000
+final_prob <- 0
+p <- matrix(nrow=reps, ncol=gens)
+p[ ,1] = init
+steps <- pop_size
+for(i in 2:gens){
+      p[, i] = rbinom(reps, size=pop_size, prob=p[,i-1])/pop_size
+}
+
+p_melted <- melt(p[1:3,])
+ggplot(aes(x = X2, y = value, color=as.factor(X1)), data=p_melted) +
+geom_line() +
+xlab("Generations") +
+ylab("Luigi Proportion")+
+ylim(0, 1) +
+theme(legend.position="none")
+```
+
+## Lots of Simulations
+
+```{r}
+p_melted <- melt(p)
+ggplot(aes(x = X2, y = value, color=as.factor(X1)), data=p_melted) +
+geom_line(alpha=0.7, lwd=.3) +
+xlab("Generations") +
+ylab("Luigi Proportion")+
+ylim(0, 1) +
+theme(legend.position="none")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+ggplot(aes(x = X2, y = value, color=as.factor(X1)), data=p_melted) +
+geom_line(alpha=0.7, lwd=.3) +
+geom_vline(aes(xintercept=100), color="red") +
+xlab("Generations") +
+ylab("Luigi Proportion")+
+ylim(0, 1) +
+theme(legend.position="none")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+y_max <- 8
+p_melted |>
+filter(X2 == 100) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 100 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+ggplot(aes(x = X2, y = value, color=as.factor(X1)), data=p_melted) +
+geom_line(alpha=0.7, lwd=.3) +
+geom_vline(xintercept=seq(100, 1000, 100), color="red") +
+xlab("Generations") +
+ylab("Luigi Proportion")+
+ylim(0, 1) +
+theme(legend.position="none")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 100) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 100 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 200) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 200 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 300) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 300 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 400) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 400 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 500) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 500 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 600) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 600 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 700) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 700 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 800) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 800 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 900) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 900 Generations")
+```
+
+## Lots of Simulations: Cross-Section
+
+```{r}
+p_melted |>
+filter(X2 == 1000) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 1000 Generations")
+```
+
+## Adding Complexity
+
+:::{.incremental}
+- What's going to happen eventually?
+  - All <span style="color:red;">Marios</span> or all <span style="color:green;">Luigis</span>
+- Mutation: Occasionally <span style="color:red;">Mario</span> mutates into <span style="color:green;">Luigi</span> (and vice versa)
+  - Adding Mutation to Model: Roll a die, 1 means mutation 
 :::
-::: {.column width="40%"}
-::: {.fragment}
-- Small population → faster drift
-- Large population → slower drift
-- Eventually... one allele wins
-:::
-:::
-::::
 
-## Simulations: Many paths → fixation {#wf-many-paths}
+## Adding in Mutation
 
-:::: {.columns}
-::: {.column width="55%"}
-With 1,000 simulated populations:
+```{r}
+set.seed(1988)
+reps <- 1000
+pop_size <- 1000
+init <- .5
+gens <- 1000
+mut <- 10^(-4)
+final_prob <- 0
+p <- matrix(nrow=reps, ncol=gens)
+p[ ,1] = init
+steps <- pop_size
+for(i in 2:gens){
+  psi <- p[,i-1]*(1-mut)+(1-p[,i-1])*mut
+  p[, i] <- rbinom(reps, size=pop_size, prob=psi)/pop_size
+}
 
-::: {.incremental}
-- Paths **spread out** over time
-- Eventually all reach 0% or 100%
-- Called **fixation** — one allele takes over
-- All [Mario]{style="color:red;"} or all [Luigi]{style="color:green;"}
-:::
-:::
-::: {.column width="45%"}
-::: {.fragment}
-**Adding mutation prevents fixation:**
+p_melted <- melt(p)
+p_melted |>
+filter(X2 == 1000) %>%
+ggplot(aes(x = value), data = .) +
+geom_histogram(aes(y = after_stat(density))) +
+  # geom_density() +
+  ylim(0,y_max) +
+  ylab("") +
+  xlab("Luigi Proportion 1000 Generations")
+```
 
-- Occasionally [Mario]{style="color:red;"} mutates → [Luigi]{style="color:green;"} (and vice versa)
-- Mutation rate $\mu \approx 10^{-4}$ per generation
-- Keeps both alleles in the population
-- Distribution of proportions reaches a **steady state**
-:::
-:::
-::::
+## How do we use this for inference?
 
-## From model to inference {#wf-inference}
-
-Back to the inference triangle:
-
-::: {.fragment}
-$$\text{Assumptions} + \text{Data} \xrightarrow{\text{WF model}} \text{Likelihood}$$
-:::
-
-::: {.incremental}
-- Run the WF model under many different population histories
-- Each history gives a different likelihood for the observed data
-- **Maximum likelihood:** pick the history with the highest probability
-- This is how we estimate things like: *when did humans leave Africa?*
-:::
+- Make assumptions: population size history, strength of selection, mutation rate, etc.
+- Input: Sequencing data
+- Output: "Likelihood" of data\pause
+- Assumptions \& Data $\stackrel{\text{model}}{\rightarrow}$ Likelihood
 
 ## Activity: Out of Africa {#out-of-africa}
 
@@ -168,71 +366,22 @@ $$\text{Assumptions} + \text{Data} \xrightarrow{\text{WF model}} \text{Likelihoo
 
 A simple three-phase model:
 
-:::: {.columns}
-::: {.column width="55%"}
 ::: {.incremental}
 1. **Large ancestral population** — stable for many generations
 2. **Bottleneck** — small group migrates out of Africa
    - Population size drops sharply
 3. **Exponential growth** — population expands in new environment
 :::
-:::
-::: {.column width="45%"}
-::: {.fragment}
-The shape looks like:
 
-- Flat → sharp dip → rapid rise
-
-Parameters to estimate:
-
-- When did the bottleneck happen?
-- How small did it get?
-:::
-:::
-::::
 
 ## Your job: estimate the bottleneck {#activity}
 
-:::: {.columns}
-::: {.column width="60%"}
 - Open the Shiny app: [https://YOUR-APP-URL](https://YOUR-APP-URL)
 - Adjust sliders to match the observed genetic data
 - **Hints:**
   1. Population before bottleneck: **1,000**
   2. Total generations: **1,000**
   3. Growth begins at generation **900**
-:::
-::: {.column width="40%"}
-::: {.fragment}
-**What you're estimating:**
-
-- Time of bottleneck (in generations)
-- Bottleneck population size
-
-This is real statistical inference — same idea researchers use on actual human genomic data!
-:::
-:::
-::::
-
-## Undergraduate research highlight {#anna-bauer}
-
-:::: {.columns}
-::: {.column width="40%"}
-![](images/anna.jpg)
-:::
-::: {.column width="60%"}
-**Anna Bauer**
-
-- Double major: Math & Biology
-- Junior
-- Goal: PhD in Bioinformatics
-
-**Project:** Population size history of Forest & Savanna Elephants
-
-- Applied WF-based inference to real genomic data
-- Compared two related species over thousands of generations
-:::
-::::
 
 ---
 

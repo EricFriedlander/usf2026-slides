@@ -1,4 +1,4 @@
-## {background-color="#533860"}
+## {#random-thoughts background-color="#533860"}
 
 ::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
 💡 Random Thoughts
@@ -9,75 +9,72 @@ Things that don't fit elsewhere (but should)
 
 ---
 
-## Three Ways to Average {#three-means}
+## What is the purpose of a mean? {#mean-purpose}
 
-- **Arithmetic**: sum / n — the default
-- **Geometric**: (x₁ × x₂ × ... × xₙ)^(1/n) → equivalently: `exp(mean(log(x)))`
-- **Harmonic**: n / (1/x₁ + 1/x₂ + ... + 1/xₙ)
+::: {.incremental}
+- What is a mean?
+- Why is the mean so important?
+- When should we use the mean descriptively? (Don't say anything about outliers)
+- My answer: when we're going to repeat some process over and over again...
+::: 
+
+---
+
+## Easy Example
+
+Every month 100,000's of customers come into my store. Suppose the money that customer $i$ spends is represented as $x_i$... How should I compute the mean of $x_i$?
+
+. . .
+
+Arithmetic mean: $\bar{x} = \frac{\sum x_i}{n}$
+
+---
+
+## Harder Example
+
+I have a 403B (retirement account). Suppose my the interest rates I'll receive over the next 20 years are represented as $x_i$... How should I compute the mean of $x_i$?
+
+. . .
+
+Note: $\text{Balance}\times (1 + \bar{x})^{20} \neq \text{Balance}\times (1 + x_1)\times\cdots\times(1 + x_{20})$
+
+---
+
+## Geometric Mean
+
+$$M = \left(\prod_{i=1}^{n} x_i\right)^{1/n}$$
+
+- Used when things compound or grow or shrink
+- Finance (1 + interest rates)
+- Population genetics (what was the average population size?)
+
+---
+
+## Hardest Example
+
+Suppose I drive from SF to LA at 80 MPH and then drive back at 60 MPH... What is my average speed?
 
 ::: {.fragment}
-**AM ≥ GM ≥ HM** — always true for positive numbers
+::: {.incremental}
+- It depends... am I weighting based on distance or time?
+- Distance: arthmetic mean.
+- Time... harmonic mean
+:::
 :::
 
 ---
 
-## When to Use Which {#which-mean}
+## Harmonic Mean {.smaller}
 
-:::: {.columns}
+$$M = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}$$
 
-::: {.column width="50%"}
-**Arithmetic**
+- Let's think about units
 
-- Avg height of students
-- Avg test score
-- Additive quantities
-:::
-
-::: {.column width="50%"}
-**Geometric**
-
-- Avg annual investment return
-- Compounding quantities
-- Growth rates
+$$ \frac{n}{\sum_{i=1}^{n}\frac{1}{\text{(Miles per hour)}}}= \frac{n}{\sum_{i=1}^{n} \frac{\text{Hours}}{\text{Miles}}} $$
 
 ::: {.fragment}
-+50% then −50%:
-
-- Arithmetic avg = **0%**
-- Geometric avg = **−13.4%** ← real answer
-:::
-:::
-
-::::
-
-::: {.fragment}
-**Harmonic**
-
-- Avg speed over equal *distances*
-- Drive 60 mph there, 40 mph back → avg is **NOT** 50 mph
-- 2 / (1/60 + 1/40) = **48 mph**
-- Also: F1-score in ML (balances precision & recall)
-:::
-
----
-
-## A Surprising Example {#investment-example}
-
-```{r}
-#| echo: true
-#| eval: false
-
-# Invest $1000 over 2 years
-# Year 1: +100% (doubles to $2000)
-# Year 2: -50% (back to $1000)
-arithmetic_avg <- mean(c(100, -50))             # = 25% — MISLEADING
-geometric_avg  <- prod(c(2.0, 0.5))^(1/2) - 1  # = 0%  — correct!
-```
-
-::: {.fragment}
-- Arithmetic mean says **25% average return**
-- You ended up with **exactly what you started with**
-- Geometric mean tells the truth
+- Use whenever you're averaging rates but weighting by the denominator
+- F1-Score: Harnomin mean of precision and recall
 :::
 
 ---
@@ -98,109 +95,60 @@ geometric_avg  <- prod(c(2.0, 0.5))^(1/2) - 1  # = 0%  — correct!
 Short answer: **it depends on the algorithm**
 :::
 
----
-
-## It Depends on the Algorithm {#scale-by-algo}
-
-| Algorithm | Scale dummies? | Why |
-|-----------|----------------|-----|
-| **KNN** | ❌ No | Distances between 0/1 are already meaningful |
-| **LASSO/Ridge** | ✓ Usually yes | Penalty should be scale-invariant |
-| **Tree methods** | Doesn't matter | Split-based, scale-invariant |
-| **Neural nets** | ✓ Yes | Gradient descent converges faster |
 
 ---
 
-## The KNN Problem — Don't Scale {#knn-dummies}
-
-2 features:
-
-- `age` (scaled to 0–1 range)
-- `is_rare_category` (mostly 0, rarely 1) — variance ≈ 0.02
-
-::: {.fragment}
-After standard scaling `(x - mean) / sd`:
-
-- `age`: stays roughly 0–1 range
-- `is_rare_category`: gets blown up to range ≈ **0–7!**
-:::
-
-::: {.fragment}
-```{r}
-#| echo: true
-#| eval: false
-
-set.seed(42)
-n        <- 1000
-age      <- runif(n, 18, 65)
-rare_cat <- rbinom(n, 1, 0.05)   # variance ≈ 0.0475
-
-age_scaled  <- scale(age)         # sd ≈ 1
-rare_scaled <- scale(rare_cat)    # sd = 1, but range ≈ -0.22 to 4.5!
-```
-
-Scaling **inflates** the influence of low-variance dummies in KNN distance calculations
-:::
-
----
-
-## The LASSO Problem — Maybe Scale {#lasso-dummies}
-
-LASSO penalty: λ × |β_j| for each coefficient
+## The KNN Problem {#knn-dummies}
 
 :::: {.columns}
+::: {.column}
+2 features:
 
-::: {.column width="50%"}
-**Without scaling**
+- `age`
+- `dogs_or_cats` 
 
-- `income` in dollars → small βs
-- `is_employed` in 0/1 → larger βs
-- LASSO penalizes `is_employed` more
-- Even if equally important
+After standard scaling `(x - mean) / sd`:
+
+- `age`: stays roughly -3 to 3
+- `dogs_or_cats`: $\frac{p}{\sqrt{p(1-p)}}$
 :::
 
-::: {.column width="50%"}
-::: {.fragment}
-**With scaling**
-
-- Penalty is "fair" across features
-- Coefficients live on the same scale
-
-**But:** low-variance dummies → scaling amplifies noise
+::: {.column}
+```{r}
+p <- seq(0.0001, 1-0.0001, length.out=100)
+f <- p/(sqrt(p*(1-p)))
+data <- tibble(p = p, f = f)
+ggplot(aes(x = p, y = f), data = data) +
+  geom_line()
+```
 :::
-:::
-
 ::::
 
 ---
 
-## The Low Variance Example {#low-variance-lasso}
+## What if we ask about favorite animal?
 
-```{r}
-#| echo: true
-#| eval: false
+- Suppose instead that we ask "What is your favorite animal?"
+- We get 20 different responses... 
+- What is the largest possible $p$ for the least frequent category?
 
-library(glmnet)
-set.seed(1)
-n <- 500
+. . .
 
-# True model: y = 2*x + 5*rare_event + noise
-x    <- rnorm(n)
-rare <- rbinom(n, 1, 0.02)   # only ~1% events
-y    <- 2*x + 5*rare + rnorm(n)
+- Moral of the story... probably don't scale for KNN (can scale to zero-one)
 
-X_unscaled <- cbind(x, rare)
-X_scaled   <- scale(X_unscaled)
+---
 
-fit_u <- glmnet(X_unscaled, y, alpha = 1)
-fit_s <- glmnet(X_scaled,   y, alpha = 1)
-```
+## The LASSO Problem {#lasso-dummies .smaller}
 
-::: {.fragment}
-- With only ~10 rare events, even scaling can't save you
-- LASSO may shrink the rare coefficient to **0** — signal just isn't there
-- Need more data, or a different approach
-:::
+LASSO penalty: $\lambda\times |\beta_j|$ for each coefficient
+
+- If we don't scale: $\beta_j$ will be in units of response variable (maybe really big)
+- If we do scale... $x_j$ will be come very largeand $\beta_j$ will become very small (i.e. not get penalized)
+- So what do we do?
+
+. . .
+
+- I honestly don't know... but this idea applies to a variety of problems(e.g. feature importances, feature selection, normalization, etc.)
 
 ---
 

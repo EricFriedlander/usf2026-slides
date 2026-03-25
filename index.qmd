@@ -17,16 +17,26 @@ format:
     transition: slide
     navigation-mode: linear
     controls: true
+    scrollable: true
     footer: "Eric Friedlander | USF Math & Data Science Colloquium 2026"
 title-slide-attributes:
   data-background-color: "#533860"
+execute:
+  cache: true
 ---
+
+```{r setup}
+library(tidyverse)
+library(mosaic)
+library(reshape)
+```
 
 ## About Me {#about}
 
 - Born and raised outside New York City
 - B.A., Mathematics & Statistics - **Rice University**
 - PhD, Statistics & Operations Research — **UNC Chapel Hill**
+- Business Analyst - **Capital One**
 - Postdoc, Population Genetics — **University of Chicago**
 - Assistant Professor of Mathematics - **St. Nobert College**
 - Assistant Professor of Computer Science — **College of Idaho**
@@ -42,6 +52,8 @@ title-slide-attributes:
 
 [📊 Psychometrics](#psychometrics)
 
+[🌟 Star Formation](#star-formation)
+
 [💡 Random Thoughts](#random-thoughts)
 :::
 
@@ -54,3 +66,5 @@ title-slide-attributes:
 {{< include sections/04-psychometrics.qmd >}}
 
 {{< include sections/05-random-thoughts.qmd >}}
+
+{{< include sections/06-star-formation.qmd >}}

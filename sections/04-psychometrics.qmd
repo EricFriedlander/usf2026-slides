@@ -1,4 +1,4 @@
-## {background-color="#533860"}
+## {#psychometrics background-color="#533860"}
 
 ::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
 📊 Psychometrics
@@ -7,59 +7,74 @@
 Measuring the unmeasurable
 :::
 
+## A book recommendation
+
+![One of the best textbooks I've ever read](images/cooper-book.jpg)
+
+## Basic questions in Psychometrics
+
+- How do we determine if a theory is real?
+- How do we decide if someone has learned something?
+- How do we decide if someone feels something?
+- How do we determine if it is possible to feel something?
+- How do we measure things?
+
+## Construct
+
+![Start with a construct](images/ffm.jpeg)
+
+## Developing an assessment
+
+- Design an exam or survey to assess your construct
+  + Each question is called an **item** in psych-talk
+- Is your assessment good?
+  + Reliability: is the measurement consistent?
+  + Validity: does it measure what it's supposed to?
+
+## Reliability
+
+If I measure individuals with the same trait, do they score the same?
+
+- **Test-retest reliability:** if you measure someone twice... do they get the same score
+- **Internal consistency:** does each question positively correlate with total score?
+  + **Chronbach's Alpha:** $\alpha = \frac{k}{k - 1} \left( \frac{\sum_{i\neq j} \sigma^2_{y_iy_j}}{\sigma^2_x} \right)$
+- **Inter-Rater Reliability:** if two people are scoring an assessment
+
+## Validity
+
+Many types of validity (Coopers lists 12):
+
+- Content Validity: are the items a representative sample of the domain they measure
+- Criterion-Related Validity: how well do test scores correlate with an external, "real-world" outcome (the criterion)
+- Construct Validity: the extent to which a test measures the theoretical construct it was designed to measure
+
+## Statistical Techniques
+
+- Factor analysis & PCA
+  + Exploratory Factor Analysis (EFA)
+  + Confirmatory Facotr Analysis (CFA)
+- Item-Response Theory (IRT)
+
+## Factor Analysis & PCA {#factor-analysis .smaller}
+
+- PCA: take correlation matrix $\to$ compute SVD
+- Factor Analysis: 
+  + Assume some generative model: $\mathbf{x} = \mathbf{\Lambda} \mathbf{f} + \boldsymbol{\epsilon}$
+    + $\mathbf{x}:$ data
+    + $\mathbf{\Lambda}:$ loadings (constant across all individuals)
+    + $\mathbf{f}:$ factor scores
+    + $\boldsymbol{\epsilon}:$ error
+  + Partition variance: $\mathbf{\Sigma} = \mathbf{\Lambda} \mathbf{\Lambda}^T + \mathbf{\Psi}$
+  + Note $\mathbf{\Lambda}$ not unique so we must "rotate"
+
 ## What Does Correlation Mean? {#correlation-intuition}
 
-**When X goes up, Y tends to go ___**
-
-:::: {.columns}
-
-::: {.column width="50%"}
-**Pearson r**
-
-- Measures linear relationship
-- Ranges from –1 to +1
-- r = 0: no linear pattern
-- r = 1: perfect positive line
-- r = –1: perfect negative line
-:::
-
-::: {.column width="50%"}
-**Real examples**
-
-- Height & weight: r ≈ 0.5
-- Hours studied & grade: r ≈ 0.4
-- Exercise & resting heart rate: r ≈ –0.3
-:::
-
-::::
-
-::: {.fragment}
-> Scatter plots: imagine a cloud of points — tighter cloud = stronger r
-:::
-
-## The Limits of Correlation {#correlation-limits}
-
-**r = ±1 requires a perfectly linear relationship**
-
-::: {.fragment}
-- If one variable is **binary** (0/1), r can *never* reach ±1
-:::
-::: {.fragment}
-- Why? Only two possible X-values → scatter pattern is constrained
-:::
-::: {.fragment}
-- Maximum |r| between binary and continuous depends on base rate p
-:::
-::: {.fragment}
-$$\text{max}|r_{\text{point-biserial}}| \propto \sqrt{p(1-p)}$$
-
-- p = 0.5 → highest possible max |r|
-- p = 0.1 or 0.9 → max |r| shrinks substantially
-:::
-
-::: {.fragment}
-**Survey items are often binary or ordinal — this matters!**
-:::
+:::{.incremental}
+- When X goes up, Y tends to go ___
+- What does it mean for a variable to be quantitative?
+- Are Likert scores quantitative?
+- Suppose $X$ is a normal random variable and $Y$ is a binary variable (0/1) can they ever have a correlation of 1?
+::: 
 
 ## Types of Correlation in Psychometrics {#correlation-types}
 
@@ -72,21 +87,7 @@ $$\text{max}|r_{\text{point-biserial}}| \propto \sqrt{p(1-p)}$$
 | Binary × Binary | **Tetrachoric** |
 | Ordinal × Ordinal | **Polychoric** |
 
-::: {.fragment}
-- Most psych scales use **Likert items** (ordinal)
-- Polychoric is the workhorse of psychometrics
-- Using Pearson r on ordinal data **underestimates** true relationship
-:::
-
-::: {.fragment}
-```r
-library(polycor)
-cor(x, y)         # Pearson — underestimates on ordinal
-polychor(x, y)    # Polychoric — assumes latent normal
-```
-:::
-
-## The Latent Variable Assumption {#latent-variable}
+## The Latent Variable Assumption {#latent-variable2}
 
 **What polychoric/tetrachoric actually assume**
 
@@ -94,6 +95,8 @@ polychor(x, y)    # Polychoric — assumes latent normal
 - Observed categories = **discretization** of a hidden continuous variable
 - Latent variable assumed to be **normally distributed**
 :::
+
+## The Latent Variable Assumption {#latent-variable}
 
 ::: {.fragment}
 **Example: "Rate your pain 1–5"**
@@ -108,11 +111,11 @@ polychor(x, y)    # Polychoric — assumes latent normal
 ::: {.column width="55%"}
 Hidden number line:
 
-`——|——|——|——|——→`
+`——|——|——|——|——`
 
-`  1   2   3   4   5`
+`1  2  3  4  5`
 
-Thresholds (τ) carve it into bins
+Thresholds ($\tau$) carve it into bins
 :::
 
 ::: {.column width="45%"}
@@ -124,63 +127,41 @@ Thresholds (τ) carve it into bins
 ::::
 :::
 
-## Factor Analysis vs PCA {#factor-analysis}
+## Item Response Theory (IRT) {.smaller}
 
 :::: {.columns}
-
-::: {.column width="50%"}
-**PCA**
-
-- Decomposes *total* variance
-- Finds directions of max variance
-- Components explain a bit of everything
-- No noise/signal separation
-:::
-
-::: {.column width="50%"}
-**Factor Analysis**
-
-- Decomposes *shared* variance
-- Finds latent constructs
-- Factors explain specific clusters
-- Separates signal from noise
-:::
-
-::::
-
-::: {.fragment}
-**FA assumes**: variance = common + unique + error
-
-**Classic example**: Reading, math, verbal all load on latent **"g"** (general intelligence)
-
-FA recovers this structure; PCA just rotates the data
-:::
-
-## Item Response Theory (IRT) {#irt}
-
-**Models probability of a correct/positive response**
-
-::: {.fragment}
-Two key parameters per item:
-
-- **Difficulty (β)**: where on ability scale does P(correct) = 0.5?
-- **Discrimination (α)**: how steeply does the curve rise?
-:::
-
-::: {.fragment}
+::: {.column}
 **Item Characteristic Curve (ICC)**:
 
 $$P(\text{correct} \mid \theta) = \frac{1}{1 + e^{-\alpha(\theta - \beta)}}$$
 
-S-shaped logistic curve, θ = person's latent ability
+- **Difficulty ($\beta$)**: where on ability scale does P(correct) = 0.5?
+- **Discrimination ($\alpha$)**: how steeply does the curve rise?
 :::
 
-::: {.fragment}
+::: {.column}
+```{r}
+start <- 10
+x <- seq(-start, start, length.out = 100)
+y <- 1/(1+exp(-x))
+curve <- tibble(x=x, y=y)
+ggplot(aes(x = x, y = y), data=curve)+
+  geom_line()
+```
+:::
+::::
+
+
+## IRT: Why It Matters {#irt-advantages}
+
 **Advantages over classical test theory**
 
 - Item parameters don't depend on the sample
 - Person ability doesn't depend on which items used
 - Used by: GRE, SAT, LSAT, AP exams
+
+::: {.fragment}
+> A student taking a harder test version gets a **fair** ability estimate
 :::
 
 ## The Big Caveat {#psych-caveat}
@@ -197,17 +178,6 @@ S-shaped logistic curve, θ = person's latent ability
 - Correlations and factor loadings become **misleading**
   - Artificially inflated or deflated
   - Factors may reflect response style, not constructs
-:::
-
-::: {.fragment}
-- **Open questions**:
-  - Are Likert responses truly ordinal?
-  - Is "strongly agree → agree" the same distance as "agree → neutral"?
-  - When does misspecification affect conclusions enough to matter?
-:::
-
-::: {.fragment}
-> Active area of research — no settled answer
 :::
 
 ---

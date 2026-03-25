@@ -65,19 +65,22 @@ $link-color-hover: darken($ci-mauve, 10%);
 // SLIDE BACKGROUNDS
 // ============================================================
 
-// Default slide: white bg, dark text
+// Default slide: transparent so RevealJS background layer shows through
 .reveal .slides section {
   font-family: Georgia, "Times New Roman", serif;
   color: $ci-dark;
+  background-color: transparent;
+}
+
+// White background only on regular content slides (not title or colored-bg slides)
+.reveal .slides section:not([data-background-color]):not(.title-slide) {
   background-color: $ci-white;
 }
 
-// Title slide: full purple bg, white text, yellow bottom bar
-// Use class="title" on your YAML title-slide-attributes or
-// the auto-generated .title-slide class from Quarto
+// Title slide: let RevealJS background layer handle the purple bg
 .reveal .slides .title-slide,
 .reveal .slides section.title {
-  background-color: $ci-purple;
+  background-color: transparent;
   color: $ci-white;
 
   // Yellow accent bar at bottom (mirrors PPTX title layout)
@@ -103,11 +106,19 @@ $link-color-hover: darken($ci-mauve, 10%);
   }
 
   a { color: $ci-yellow; }
+
+  // Prevent any inner Quarto wrappers from painting over background
+  .quarto-title-block,
+  .quarto-title-block-inner,
+  > div {
+    background-color: transparent;
+  }
 }
 
-// Section divider slide: purple bg (use divider: true or slide class)
+// Section divider slide: transparent so background layer shows
 .reveal .slides section.divider,
 .reveal .slides section[data-background-color="#533860"] {
+  background-color: transparent;
   color: $ci-white;
   h1, h2, h3 { color: $ci-yellow; }
 }
@@ -169,13 +180,39 @@ $link-color-hover: darken($ci-mauve, 10%);
   list-style: none;
   padding-left: 1.2em;
 
-  li::before {
+  > li::before {
     content: "▸";
     color: $ci-yellow;
     font-weight: bold;
     display: inline-block;
     width: 1em;
     margin-left: -1em;
+  }
+}
+
+// Remove bullet glyphs from panel-tabset nav tabs
+.reveal .panel-tabset ul > li::before,
+.reveal .nav-tabs > li::before {
+  content: none;
+}
+
+// Level 2 sub-bullets: same glyph, muted purple
+.reveal ul ul {
+  list-style: none;
+  > li::before {
+    content: "▸";
+    color: $ci-mauve;
+    font-weight: normal;
+  }
+}
+
+// Level 3 sub-bullets: en-dash, light gray
+.reveal ul ul ul {
+  list-style: none;
+  > li::before {
+    content: "–";
+    color: lighten($ci-dark, 20%);
+    font-weight: normal;
   }
 }
 

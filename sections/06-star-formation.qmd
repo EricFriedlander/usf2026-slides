@@ -1,0 +1,165 @@
+## {#star-formation background-color="#533860"}
+
+::: {style="color: white; font-size: 1.8em; font-weight: bold;"}
+🌟 Star Formation
+:::
+::: {style="color: #FFE42A; font-size: 1.1em;"}
+Machine learning for astrophysics
+:::
+
+## What Are Young Stellar Objects? {#yso-intro}
+
+:::: {.columns}
+
+::: {.column width="55%"}
+**Young Stellar Objects (YSOs)**
+
+- Protostars still in the process of forming
+- Embedded in dense clouds of gas and dust
+- Visible light is blocked — only detectable in **infrared**
+- Studying YSOs reveals how stars like our Sun formed
+:::
+
+::: {.column width="45%"}
+**The MIRION "Yellowballs" Catalog**
+
+Named for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.
+
+> Can we predict their physical properties from their light alone?
+:::
+
+::::
+
+## The Data {#yso-data}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**43 Features** from 4 observatories
+
+- 10 infrared flux measurements spanning **8–1100 μm**
+- Per-band photometric error and quality columns
+- Sources:
+  - Spitzer Space Telescope
+  - Herschel Space Observatory
+  - ALMA / SCUBA submillimeter observations
+:::
+
+::: {.column width="50%"}
+**8 Target Variables** to predict
+
+| Target | Property |
+|--------|----------|
+| TEMP | Effective temperature |
+| L_BOL | Bolometric luminosity |
+| MASS | Stellar mass |
+| DIAM | Diameter |
+| SURF_DENS | Surface density |
+| LM | Luminosity/mass ratio |
+| T_BOL | Bolometric temperature |
+| LRATIO | Luminosity ratio |
+:::
+
+::::
+
+## The Pipeline: Bayesian Model Search {#yso-pipeline}
+
+For each of the **8 targets**, an independent pipeline was run:
+
+::: {.incremental}
+- **BayesSearchCV** (150 iterations): efficient hyperparameter search across a large space — smarter than grid search
+- **6 model types searched simultaneously**: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP
+- **Preprocessing pipeline**: imputation → feature scaling → model
+- **Best single model** selected and saved per target
+- **Stacking ensemble**: all 6 models combined with a Ridge meta-learner for final predictions
+:::
+
+## Running at Scale: Borah HPC {#yso-cluster}
+
+Each target = **150 BayesSearch iterations × 5-fold CV** = 750 model fits
+
+Submitted as a **SLURM array job** on Boise State's Borah HPC cluster — one job per target.
+
+| Resource | Per Job |
+|----------|---------|
+| CPUs | 48 cores |
+| RAM | 128 GB |
+| Wall time | up to 24 hrs |
+
+## The Power of Parallelism {#yso-cluster-parallel}
+
+All 8 targets ran simultaneously:
+
+**48 CPUs × 8 jobs = 384 cores working in parallel**
+
+::: {.fragment}
+- What would take **weeks on a laptop** runs **overnight on a cluster**
+- Wall time: ~24 hrs total vs. ~192 hrs (8 days) sequentially
+- HPC makes systematic hyperparameter search practical
+:::
+
+## Results: How Well Can We Predict? {#yso-results}
+
+| Target | Description | CV R² |
+|--------|-------------|------:|
+| TEMP | Effective temperature | 0.916 |
+| LM | Luminosity/mass ratio | 0.890 |
+| SURF_DENS | Surface density | 0.826 |
+| L_BOL | Bolometric luminosity | 0.553 |
+| LRATIO | Luminosity ratio | 0.474 |
+| T_BOL | Bolometric temperature | 0.473 |
+| MASS | Stellar mass | 0.427 |
+| DIAM | Diameter | 0.093 |
+
+::: {.fragment}
+**XGBoost was the best model for 7 of 8 targets** (GradientBoosting won for DIAM)
+:::
+
+## Temperature: R² = 0.916 {#yso-temp}
+
+![](images/sf_temp_performance.png){.r-stretch fig-align="center"}
+
+Left: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.
+
+::: {.fragment}
+Effective temperature is strongly encoded in the **infrared color** of a YSO
+:::
+
+## Which Wavelengths Drive Temperature Predictions? {#yso-shap}
+
+![](images/sf_shap_temp.png){.r-stretch fig-align="center"}
+
+SHAP values show how each feature pushes the prediction. The **160 μm** and **350 μm** far-infrared bands dominate — consistent with Wien's law (cooler objects emit more at longer wavelengths).
+
+## Not All Properties Are Equal {#yso-diam}
+
+![](images/sf_diam_performance.png){.r-stretch fig-align="center"}
+
+**Diameter: R² = 0.093**
+
+::: {.fragment}
+Diameter depends on **distance assumptions** — distance errors propagate directly into this target
+:::
+
+::: {.fragment}
+Some properties simply aren't encoded in the photometry alone
+:::
+
+## What We Learned {#yso-lessons}
+
+::: {.incremental}
+- Bayesian hyperparameter search efficiently explores complex model spaces
+- XGBoost consistently outperforms simpler models on this dataset
+- Some physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry
+- Others (diameter) require additional data or better distance estimates
+- HPC enables systematic ML research that would be impractical on a laptop
+- Stacking ensembles offer modest gains over single best models
+:::
+
+::: {.fragment}
+> Infrared light is a remarkably rich signal — but not every stellar secret is written in photons
+:::
+
+---
+
+[← Back to Topics](#toc)
