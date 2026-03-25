@@ -66,6 +66,10 @@ $$\text{Assumptions} + \text{Data} \xrightarrow{\text{model}} \text{Likelihood (
 - Track $p_k$ = proportion of [Luigis]{style="color:green;"} in generation $k$
 :::
 
+## Shiny App
+
+- [Try this](https://efriedlander.shinyapps.io/usf-popgen/)
+- https://tinyurl.com/usf-ef
 
 ## Wright-Fisher Model: Visual {#wf-visual}
 
@@ -373,16 +377,12 @@ A simple three-phase model:
 3. **Exponential growth** — population expands in new environment
 :::
 
-<!-- 
+
 ## Your job: estimate the bottleneck {#activity}
 
-- Open the Shiny app: [https://YOUR-APP-URL](https://YOUR-APP-URL)
-- Adjust sliders to match the observed genetic data
-- **Hints:**
-  1. Population before bottleneck: **1,000**
-  2. Total generations: **1,000**
-  3. Growth begins at generation **900**
+- [Back to Shiny App](https://efriedlander.shinyapps.io/usf-popgen/)
+- https://tinyurl.com/usf-ef
 
---- -->
+---
 
 [← Back to Topics](#toc)
