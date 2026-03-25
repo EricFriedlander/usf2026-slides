@@ -1,0 +1,380 @@
+[
+  {
+    "objectID": "index.html#about",
+    "href": "index.html#about",
+    "title": "Math, Models & Real-World Problems",
+    "section": "About Me",
+    "text": "About Me\n\nBorn and raised outside New York City\nB.A., Mathematics & Statistics - Rice University\nPhD, Statistics & Operations Research — UNC Chapel Hill\nBusiness Analyst - Capital One\nPostdoc, Population Genetics — University of Chicago\nAssistant Professor of Mathematics - St. Nobert College\nAssistant Professor of Computer Science — College of Idaho"
+  },
+  {
+    "objectID": "index.html#toc",
+    "href": "index.html#toc",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Choose Your Adventure",
+    "text": "Choose Your Adventure\n\n🎲 Graduate School: Large Networks (Most Mathematical)\n🧬 Postdoc: Population Genetics (Most polished, between math and statistics)\n🌿 Chemometrics & Metabolomics (Current work, specific project)\n📊 Psychometrics (A bit of an intro to an understudied field)\n🌟 Star Formation (Most ML-heavy)\n💡 Random Thoughts (Exactly what it sounds like)"
+  },
+  {
+    "objectID": "index.html#grad-school",
+    "href": "index.html#grad-school",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "🎲 Graduate School: Large Networks\n\n\nProbability & asymptotic methods for massive systems"
+  },
+  {
+    "objectID": "index.html#grad-school-reality",
+    "href": "index.html#grad-school-reality",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Modeling large systems",
+    "text": "Modeling large systems\n\nSuppose we have a system of \\(n\\) “particles”\nParticles can be anything (e.g. queues, individuals, molecules, etc…)\nEach partical is evolving according to some random process\nModeling each of these particles directly \\(\\Rightarrow\\) \\(n\\)-dimensional process (infeasible for large \\(n\\))\nSolution: Assume \\(n\\) is infinite\nUmm… wut?"
+  },
+  {
+    "objectID": "index.html#asymptotic-approx",
+    "href": "index.html#asymptotic-approx",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Asymptotic Approximations",
+    "text": "Asymptotic Approximations\n\n\n\n\n\nFluid dynamics\n\n\n\nFluid: continuous limit of discrete molecules\n\n\n\n\n\nRipples\n\n\n\nWaves: aggregate behavior, not individual particles"
+  },
+  {
+    "objectID": "index.html#load-balancing",
+    "href": "index.html#load-balancing",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Load Balancing",
+    "text": "Load Balancing\nKey question: What’s the best way to route tasks in a large server network?"
+  },
+  {
+    "objectID": "index.html#random-routing",
+    "href": "index.html#random-routing",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Random Routing",
+    "text": "Random Routing\n\n\nAssign each task to a random server — simple, but inefficient"
+  },
+  {
+    "objectID": "index.html#power-of-two",
+    "href": "index.html#power-of-two",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Power of Two Choices",
+    "text": "Power of Two Choices\n\n\nSample 2 servers, pick the shorter queue"
+  },
+  {
+    "objectID": "index.html#power-of-two-2",
+    "href": "index.html#power-of-two-2",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Power of Two Choices",
+    "text": "Power of Two Choices"
+  },
+  {
+    "objectID": "index.html#jsq",
+    "href": "index.html#jsq",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Join-the-Shortest-Queue",
+    "text": "Join-the-Shortest-Queue\n\n\nAlways join the shortest queue — optimal, but expensive to implement"
+  },
+  {
+    "objectID": "index.html#eval",
+    "href": "index.html#eval",
+    "title": "Math, Models & Real-World Problems",
+    "section": "How do we evaluate this for lots of servers?",
+    "text": "How do we evaluate this for lots of servers?\n\nLLN \\(\\Rightarrow\\) ODE on distribution of queue lengths\n\nWhat does the steady-state distribution of this ODE look like?\n\nJSQ: all queues are of length 0 or 1\nRandom routing: queue lengths decay exponentially\nPower-of-two: queue lengths decay double-exponentially"
+  },
+  {
+    "objectID": "index.html#lb-steady-state",
+    "href": "index.html#lb-steady-state",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Steady-State Distributions",
+    "text": "Steady-State Distributions"
+  },
+  {
+    "objectID": "index.html#eval2",
+    "href": "index.html#eval2",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What about the impact of randomness?",
+    "text": "What about the impact of randomness?\n\nCLT \\(\\Rightarrow\\) SDE for distribution of queue lengths\nThis my work (specifically for power-of-two) \\(\\Rightarrow\\) about 40-pages of proofs… none of which I’ll present here\nSDE allows for more efficient simulation"
+  },
+  {
+    "objectID": "index.html#ldt",
+    "href": "index.html#ldt",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What about this Large-Deviation Theorem?",
+    "text": "What about this Large-Deviation Theorem?\nI proved a LDT for JSQ.\n\nTheorem. \\[\\begin{align}\n  \\lim_{n\\to\\infty}\\frac{1}{n}\\log\\mathbb{P}(X^n\\in G)\n  &= \\inf_{x\\in G}I(x)\n\\end{align}\\]\n\nUseful in estimating probabilities of rare-events."
+  },
+  {
+    "objectID": "index.html#pop-genetics",
+    "href": "index.html#pop-genetics",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "🧬 Postdoc: Population Genetics\n\n\nHow we use statistics to learn about human history"
+  },
+  {
+    "objectID": "index.html#pop-gen-inference",
+    "href": "index.html#pop-gen-inference",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The modeling framework",
+    "text": "The modeling framework\nGoal: turn data into answers about history\n\n\\[\\text{Assumptions} + \\text{Data} \\xrightarrow{\\text{model}} \\text{Likelihood (Probability)}\\]\n\n\n\nAssumptions: population size history, mutation rate, selection strength\nData: sequencing data from real individuals\nOutput: probability of seeing that data under our assumptions\n\n\n\n\nVary the assumptions → find the ones that make the data most probable"
+  },
+  {
+    "objectID": "index.html#wf-intro",
+    "href": "index.html#wf-intro",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Let’s build a model!",
+    "text": "Let’s build a model!"
+  },
+  {
+    "objectID": "index.html#wf-setup",
+    "href": "index.html#wf-setup",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Wright-Fisher Model: Setup",
+    "text": "Wright-Fisher Model: Setup\n\nFocus on one position in the genome\nTwo versions (“alleles”) at that site:\n\nMario and Luigi\n\nPopulation size N (fixed each generation)\nTime moves in discrete generations\nEach offspring randomly picks a parent from the previous generation\nTrack \\(p_k\\) = proportion of Luigis in generation \\(k\\)"
+  },
+  {
+    "objectID": "index.html#wf-visual",
+    "href": "index.html#wf-visual",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Wright-Fisher Model: Visual",
+    "text": "Wright-Fisher Model: Visual"
+  },
+  {
+    "objectID": "index.html#wf-simulation",
+    "href": "index.html#wf-simulation",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Computers can roll dice!",
+    "text": "Computers can roll dice!\nKey insight: random sampling = rolling dice\n\n\nN = 1,000 individuals?\nEach generation: sample 1,000 parents (with replacement)\nFraction of Luigis drifts up and down randomly\n\n\n\n# Simulate one generation\nsample(c(\"Mario\", \"Luigi\"), size = 1000, replace = TRUE, prob = c(1 - p, p))\n\n\n\nNo calculus needed — just repeat millions of times\nThis is called genetic drift"
+  },
+  {
+    "objectID": "index.html#out-of-africa",
+    "href": "index.html#out-of-africa",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Activity: Out of Africa",
+    "text": "Activity: Out of Africa"
+  },
+  {
+    "objectID": "index.html#toy-model",
+    "href": "index.html#toy-model",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Toy model: population size history",
+    "text": "Toy model: population size history\nA simple three-phase model:\n\nLarge ancestral population — stable for many generations\nBottleneck — small group migrates out of Africa\n\nPopulation size drops sharply\n\nExponential growth — population expands in new environment"
+  },
+  {
+    "objectID": "index.html#activity",
+    "href": "index.html#activity",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Your job: estimate the bottleneck",
+    "text": "Your job: estimate the bottleneck\n\nOpen the Shiny app: https://YOUR-APP-URL\nAdjust sliders to match the observed genetic data\nHints:\n\nPopulation before bottleneck: 1,000\nTotal generations: 1,000\nGrowth begins at generation 900"
+  },
+  {
+    "objectID": "index.html#chemometrics",
+    "href": "index.html#chemometrics",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "🌿 Chemometrics & Metabolomics\n\n\nStatistics meets plant chemistry"
+  },
+  {
+    "objectID": "index.html#lcms-intro",
+    "href": "index.html#lcms-intro",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Liquid Chromatography",
+    "text": "Liquid Chromatography\n\n\n\nThe LC column — heart of the separation step\n\n\n\nEach sample exits at a different retention time"
+  },
+  {
+    "objectID": "index.html#lcms-data",
+    "href": "index.html#lcms-data",
+    "title": "Math, Models & Real-World Problems",
+    "section": "LC-MS Data: Questions",
+    "text": "LC-MS Data: Questions\nOne plant sample → one enormous table\n\nThousands of retention time points\nThousands of mass values\nResult: 100,000+ features per sample"
+  },
+  {
+    "objectID": "index.html#preprocessing",
+    "href": "index.html#preprocessing",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Baseline Correction",
+    "text": "Baseline Correction\n\nInstrument reads a “floor” even with no signal\nAsymmetric least squares fits and removes this floor\nThink: subtract a wavy background from a photo\n\n\\[\n\\min_{z} \\; \\sum_{i=1}^{n} w_i \\, (y_i - z_i)^2 \\;+\\; \\lambda \\sum_{i=2}^{n-1} (z_{i-1} - 2 z_i + z_{i+1})^2\n\\]\nwhere:\n\n\\(y_i\\) : observed signal at point \\(i\\)\n\n\\(z_i\\) : estimated baseline at point \\(i\\)\n\n\\(w_i\\) : asymmetric weights, updated iteratively:\n\n\\[\nw_i =\n\\begin{cases}\np, & \\text{if } y_i &gt; z_i \\\\[2mm]\n1 - p, & \\text{if } y_i \\le z_i\n\\end{cases}\n\\]\n\n\\(\\lambda\\) : smoothing parameter controlling baseline smoothness\n\n\\(p\\) : asymmetry parameter (small values keep the baseline below peaks)"
+  },
+  {
+    "objectID": "index.html#peak-alignment",
+    "href": "index.html#peak-alignment",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Peak Alignment",
+    "text": "Peak Alignment\n\nParametric time-warping\nSame compound exits at slightly different times across runs\nWarping stretches/compresses the time axis to align peaks\nThink: syncing two audio tracks that drifted out of time\nQuestion: how do you align different species to one another?"
+  },
+  {
+    "objectID": "index.html#preprocessing-normalize",
+    "href": "index.html#preprocessing-normalize",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Normalization",
+    "text": "Normalization\n\nSamples may have different total amounts loaded\nScale each sample so totals are comparable\nCollaborators disagree on whether do this"
+  },
+  {
+    "objectID": "index.html#chemometrics-collab",
+    "href": "index.html#chemometrics-collab",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Collaborators",
+    "text": "Collaborators\n\n\nCollege of Idaho\n\nAiden Everard — Undergraduate\nCarolyn Dadabay — Chemistry Professor\n\n\nBoise State University\n\nJenn Forby — Biology Professor\nMaddy Skinner — Master’s Student\n\n\nUndergraduate-driven research: from raw LC-MS data to publishable analysis\n← Back to Topics\n\n\n📊 Psychometrics\n\n\nMeasuring the unmeasurable\n\n\nA book recommendation\n\nOne of the best textbooks I’ve ever read\nBasic questions in Psychometrics\n\nHow do we determine if a theory is real?\nHow do we decide if someone has learned something?\nHow do we decide if someone feels something?\nHow do we determine if it is possible to feel something?\nHow do we measure things?\n\n\nConstruct\n\nStart with a construct\nDeveloping an assessment\n\nDesign an exam or survey to assess your construct\n\nEach question is called an item in psych-talk\n\nIs your assessment good?\n\nReliability: is the measurement consistent?\nValidity: does it measure what it’s supposed to?\n\n\n\nReliability\nIf I measure individuals with the same trait, do they score the same?\n\nTest-retest reliability: if you measure someone twice… do they get the same score\nInternal consistency: does each question positively correlate with total score?\n\nChronbach’s Alpha: \\(\\alpha = \\frac{k}{k - 1} \\left( \\frac{\\sum_{i\\neq j} \\sigma^2_{y_iy_j}}{\\sigma^2_x} \\right)\\)\n\nInter-Rater Reliability: if two people are scoring an assessment\n\n\nValidity\nMany types of validity (Coopers lists 12):\n\nContent Validity: are the items a representative sample of the domain they measure\nCriterion-Related Validity: how well do test scores correlate with an external, “real-world” outcome (the criterion)\nConstruct Validity: the extent to which a test measures the theoretical construct it was designed to measure\n\n\nStatistical Techniques\n\nFactor analysis & PCA\n\nExploratory Factor Analysis (EFA)\nConfirmatory Facotr Analysis (CFA)\n\nItem-Response Theory (IRT)\n\n\nFactor Analysis & PCA\n\nPCA: take correlation matrix \\(\\to\\) compute SVD\nFactor Analysis:\n\nAssume some generative model: \\(\\mathbf{x} = \\mathbf{\\Lambda} \\mathbf{f} + \\boldsymbol{\\epsilon}\\)\n\n\\(\\mathbf{x}:\\) data\n\\(\\mathbf{\\Lambda}:\\) loadings (constant across all individuals)\n\\(\\mathbf{f}:\\) factor scores\n\\(\\boldsymbol{\\epsilon}:\\) error\n\nPartition variance: \\(\\mathbf{\\Sigma} = \\mathbf{\\Lambda} \\mathbf{\\Lambda}^T + \\mathbf{\\Psi}\\)\nNote \\(\\mathbf{\\Lambda}\\) not unique so we must “rotate”\n\n\n\nWhat Does Correlation Mean?\n\nWhen X goes up, Y tends to go ___\nWhat does it mean for a variable to be quantitative?\nAre Likert scores quantitative?\nSuppose \\(X\\) is a normal random variable and \\(Y\\) is a binary variable (0/1) can they ever have a correlation of 1?\n\n\nTypes of Correlation in Psychometrics\nDifferent variable types → different correlation methods\n\n\n\nVariable Combo\nMethod\n\n\n\n\nContinuous × Binary\nPoint-biserial r\n\n\nContinuous × Ordinal\nPolyserial\n\n\nBinary × Binary\nTetrachoric\n\n\nOrdinal × Ordinal\nPolychoric\n\n\n\n\nThe Latent Variable Assumption\nWhat polychoric/tetrachoric actually assume\n\n\nObserved categories = discretization of a hidden continuous variable\nLatent variable assumed to be normally distributed\n\n\n\nThe Latent Variable Assumption\n\nExample: “Rate your pain 1–5”\n\nYour actual pain exists on a continuous scale\nYou cross a threshold → you report the next category up\n\n\n\n\n\nHidden number line:\n——|——|——|——|——\n1  2  3  4  5\nThresholds (\\(\\tau\\)) carve it into bins\n\n\nWe only observe which bin\nLatent value is inferred\nPolychoric recovers the latent correlation\n\n\n\n\nItem Response Theory (IRT)\n\n\nItem Characteristic Curve (ICC):\n\\[P(\\text{correct} \\mid \\theta) = \\frac{1}{1 + e^{-\\alpha(\\theta - \\beta)}}\\]\n\nDifficulty (\\(\\beta\\)): where on ability scale does P(correct) = 0.5?\nDiscrimination (\\(\\alpha\\)): how steeply does the curve rise?\n\n\n\n\n\n\n\n\n\n\n\n\n\nIRT: Why It Matters\nAdvantages over classical test theory\n\nItem parameters don’t depend on the sample\nPerson ability doesn’t depend on which items used\nUsed by: GRE, SAT, LSAT, AP exams\n\n\n\nA student taking a harder test version gets a fair ability estimate\n\n\n\nThe Big Caveat\nAll of this assumes (at least latent) continuity\n\n\nWhat if variables are truly categorical?\n\nNot discretized — genuinely unordered\nPolychoric/IRT assumptions break down\n\n\n\n\n\nCorrelations and factor loadings become misleading\n\nArtificially inflated or deflated\nFactors may reflect response style, not constructs\n\n\n\n\n← Back to Topics\n\n\n\n💡 Random Thoughts\n\n\nThings that don’t fit elsewhere (but should)\n\n\n\nWhat is the purpose of a mean?\n\nWhat is a mean?\nWhy is the mean so important?\nWhen should we use the mean descriptively? (Don’t say anything about outliers)\nMy answer: when we’re going to repeat some process over and over again…\n\n\n\nEasy Example\nEvery month 100,000’s of customers come into my store. Suppose the money that customer \\(i\\) spends is represented as \\(x_i\\)… How should I compute the mean of \\(x_i\\)?\n\nArithmetic mean: \\(\\bar{x} = \\frac{\\sum x_i}{n}\\)\n\n\n\nHarder Example\nI have a 403B (retirement account). Suppose my the interest rates I’ll receive over the next 20 years are represented as \\(x_i\\)… How should I compute the mean of \\(x_i\\)?\n\nNote: \\(\\text{Balance}\\times (1 + \\bar{x})^{20} \\neq \\text{Balance}\\times (1 + x_1)\\times\\cdots\\times(1 + x_{20})\\)\n\n\n\nGeometric Mean\n\\[M = \\left(\\prod_{i=1}^{n} x_i\\right)^{1/n}\\]\n\nUsed when things compound or grow or shrink\nFinance (1 + interest rates)\nPopulation genetics (what was the average population size?)\n\n\n\nHardest Example\nSuppose I drive from SF to LA at 80 MPH and then drive back at 60 MPH… What is my average speed?\n\n\nIt depends… am I weighting based on distance or time?\nDistance: arthmetic mean.\nTime… harmonic mean\n\n\n\n\nHarmonic Mean\n\\[M = \\frac{n}{\\sum_{i=1}^{n} \\frac{1}{x_i}}\\]\n\nLet’s think about units\n\n\\[ \\frac{n}{\\sum_{i=1}^{n}\\frac{1}{\\text{(Miles per hour)}}}= \\frac{n}{\\sum_{i=1}^{n} \\frac{\\text{Hours}}{\\text{Miles}}} \\]\n\n\nUse whenever you’re averaging rates but weighting by the denominator\nF1-Score: Harnomin mean of precision and recall\n\n\n\n\nShould You Scale Dummy Variables?\nSetup: one-hot encoding\n\nConvert categorical → binary dummy variables\n“Color: Red/Blue/Green” → is_red, is_blue, is_green\nEach column is 0 or 1\n\n\nThe question: after encoding, should you center and scale these binary columns?\n\n\nShort answer: it depends on the algorithm\n\n\n\nThe KNN Problem\n\n\n2 features:\n\nage\ndogs_or_cats\n\nAfter standard scaling (x - mean) / sd:\n\nage: stays roughly -3 to 3\ndogs_or_cats: \\(\\frac{p}{\\sqrt{p(1-p)}}\\)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhat if we ask about favorite animal?\n\nSuppose instead that we ask “What is your favorite animal?”\nWe get 20 different responses…\nWhat is the largest possible \\(p\\) for the least frequent category?\n\n\n\nMoral of the story… probably don’t scale for KNN (can scale to zero-one)\n\n\n\n\nThe LASSO Problem\nLASSO penalty: \\(\\lambda\\times |\\beta_j|\\) for each coefficient\n\nIf we don’t scale: \\(\\beta_j\\) will be in units of response variable (maybe really big)\nIf we do scale… \\(x_j\\) will be come very largeand \\(\\beta_j\\) will become very small (i.e. not get penalized)\nSo what do we do?\n\n\n\nI honestly don’t know… but this idea applies to a variety of problems(e.g. feature importances, feature selection, normalization, etc.)\n\n\n← Back to Topics\n\n\n\n\n🌟 Star Formation\n\n\nMachine learning for astrophysics\n\n\nWhat Are Young Stellar Objects?\n\n\nYoung Stellar Objects (YSOs)\n\nProtostars still in the process of forming\nEmbedded in dense clouds of gas and dust\nVisible light is blocked — only detectable in infrared\nStudying YSOs reveals how stars like our Sun formed\n\n\nThe MIRION “Yellowballs” Catalog\nNamed for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.\n\nCan we predict their physical properties from their light alone?\n\n\n\nThe Data\n\n\n43 Features from 4 observatories\n\n10 infrared flux measurements spanning 8–1100 μm\nPer-band photometric error and quality columns\nSources:\n\nSpitzer Space Telescope\nHerschel Space Observatory\nALMA / SCUBA submillimeter observations\n\n\n\n8 Target Variables to predict\n\n\n\nTarget\nProperty\n\n\n\n\nTEMP\nEffective temperature\n\n\nL_BOL\nBolometric luminosity\n\n\nMASS\nStellar mass\n\n\nDIAM\nDiameter\n\n\nSURF_DENS\nSurface density\n\n\nLM\nLuminosity/mass ratio\n\n\nT_BOL\nBolometric temperature\n\n\nLRATIO\nLuminosity ratio\n\n\n\n\n\nThe Pipeline: Bayesian Model Search\nFor each of the 8 targets, an independent pipeline was run:\n\nBayesSearchCV (150 iterations): efficient hyperparameter search across a large space — smarter than grid search\n6 model types searched simultaneously: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP\nPreprocessing pipeline: imputation → feature scaling → model\nBest single model selected and saved per target\nStacking ensemble: all 6 models combined with a Ridge meta-learner for final predictions\n\n\nRunning at Scale: Borah HPC\nEach target = 150 BayesSearch iterations × 5-fold CV = 750 model fits\nSubmitted as a SLURM array job on Boise State’s Borah HPC cluster — one job per target.\n\n\n\nResource\nPer Job\n\n\n\n\nCPUs\n48 cores\n\n\nRAM\n128 GB\n\n\nWall time\nup to 24 hrs\n\n\n\n\nThe Power of Parallelism\nAll 8 targets ran simultaneously:\n48 CPUs × 8 jobs = 384 cores working in parallel\n\n\nWhat would take weeks on a laptop runs overnight on a cluster\nWall time: ~24 hrs total vs. ~192 hrs (8 days) sequentially\nHPC makes systematic hyperparameter search practical\n\n\n\nResults: How Well Can We Predict?\n\n\n\nTarget\nDescription\nCV R²\n\n\n\n\nTEMP\nEffective temperature\n0.916\n\n\nLM\nLuminosity/mass ratio\n0.890\n\n\nSURF_DENS\nSurface density\n0.826\n\n\nL_BOL\nBolometric luminosity\n0.553\n\n\nLRATIO\nLuminosity ratio\n0.474\n\n\nT_BOL\nBolometric temperature\n0.473\n\n\nMASS\nStellar mass\n0.427\n\n\nDIAM\nDiameter\n0.093\n\n\n\n\nXGBoost was the best model for 7 of 8 targets (GradientBoosting won for DIAM)\n\n\nTemperature: R² = 0.916\n\nLeft: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.\n\nEffective temperature is strongly encoded in the infrared color of a YSO\n\n\nWhich Wavelengths Drive Temperature Predictions?\n\nSHAP values show how each feature pushes the prediction. The 160 μm and 350 μm far-infrared bands dominate — consistent with Wien’s law (cooler objects emit more at longer wavelengths).\n\nNot All Properties Are Equal\n\nDiameter: R² = 0.093\n\nDiameter depends on distance assumptions — distance errors propagate directly into this target\n\n\nSome properties simply aren’t encoded in the photometry alone\n\n\nWhat We Learned\n\nBayesian hyperparameter search efficiently explores complex model spaces\nXGBoost consistently outperforms simpler models on this dataset\nSome physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry\nOthers (diameter) require additional data or better distance estimates\nHPC enables systematic ML research that would be impractical on a laptop\nStacking ensembles offer modest gains over single best models\n\n\n\nInfrared light is a remarkably rich signal — but not every stellar secret is written in photons\n\n\n\n← Back to Topics"
+  },
+  {
+    "objectID": "index.html#psychometrics",
+    "href": "index.html#psychometrics",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "📊 Psychometrics\n\n\nMeasuring the unmeasurable"
+  },
+  {
+    "objectID": "index.html#factor-analysis",
+    "href": "index.html#factor-analysis",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Factor Analysis & PCA",
+    "text": "Factor Analysis & PCA\n\nPCA: take correlation matrix \\(\\to\\) compute SVD\nFactor Analysis:\n\nAssume some generative model: \\(\\mathbf{x} = \\mathbf{\\Lambda} \\mathbf{f} + \\boldsymbol{\\epsilon}\\)\n\n\\(\\mathbf{x}:\\) data\n\\(\\mathbf{\\Lambda}:\\) loadings (constant across all individuals)\n\\(\\mathbf{f}:\\) factor scores\n\\(\\boldsymbol{\\epsilon}:\\) error\n\nPartition variance: \\(\\mathbf{\\Sigma} = \\mathbf{\\Lambda} \\mathbf{\\Lambda}^T + \\mathbf{\\Psi}\\)\nNote \\(\\mathbf{\\Lambda}\\) not unique so we must “rotate”"
+  },
+  {
+    "objectID": "index.html#correlation-intuition",
+    "href": "index.html#correlation-intuition",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What Does Correlation Mean?",
+    "text": "What Does Correlation Mean?\n\nWhen X goes up, Y tends to go ___\nWhat does it mean for a variable to be quantitative?\nAre Likert scores quantitative?\nSuppose \\(X\\) is a normal random variable and \\(Y\\) is a binary variable (0/1) can they ever have a correlation of 1?"
+  },
+  {
+    "objectID": "index.html#correlation-types",
+    "href": "index.html#correlation-types",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Types of Correlation in Psychometrics",
+    "text": "Types of Correlation in Psychometrics\nDifferent variable types → different correlation methods\n\n\n\nVariable Combo\nMethod\n\n\n\n\nContinuous × Binary\nPoint-biserial r\n\n\nContinuous × Ordinal\nPolyserial\n\n\nBinary × Binary\nTetrachoric\n\n\nOrdinal × Ordinal\nPolychoric"
+  },
+  {
+    "objectID": "index.html#latent-variable2",
+    "href": "index.html#latent-variable2",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Latent Variable Assumption",
+    "text": "The Latent Variable Assumption\nWhat polychoric/tetrachoric actually assume\n\n\nObserved categories = discretization of a hidden continuous variable\nLatent variable assumed to be normally distributed"
+  },
+  {
+    "objectID": "index.html#latent-variable",
+    "href": "index.html#latent-variable",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Latent Variable Assumption",
+    "text": "The Latent Variable Assumption\n\nExample: “Rate your pain 1–5”\n\nYour actual pain exists on a continuous scale\nYou cross a threshold → you report the next category up\n\n\n\n\n\nHidden number line:\n——|——|——|——|——\n1  2  3  4  5\nThresholds (\\(\\tau\\)) carve it into bins\n\n\nWe only observe which bin\nLatent value is inferred\nPolychoric recovers the latent correlation"
+  },
+  {
+    "objectID": "index.html#irt-advantages",
+    "href": "index.html#irt-advantages",
+    "title": "Math, Models & Real-World Problems",
+    "section": "IRT: Why It Matters",
+    "text": "IRT: Why It Matters\nAdvantages over classical test theory\n\nItem parameters don’t depend on the sample\nPerson ability doesn’t depend on which items used\nUsed by: GRE, SAT, LSAT, AP exams\n\n\n\nA student taking a harder test version gets a fair ability estimate"
+  },
+  {
+    "objectID": "index.html#psych-caveat",
+    "href": "index.html#psych-caveat",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Big Caveat",
+    "text": "The Big Caveat\nAll of this assumes (at least latent) continuity\n\n\nWhat if variables are truly categorical?\n\nNot discretized — genuinely unordered\nPolychoric/IRT assumptions break down\n\n\n\n\n\nCorrelations and factor loadings become misleading\n\nArtificially inflated or deflated\nFactors may reflect response style, not constructs\n\n\n\n\n← Back to Topics"
+  },
+  {
+    "objectID": "index.html#random-thoughts",
+    "href": "index.html#random-thoughts",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "💡 Random Thoughts\n\n\nThings that don’t fit elsewhere (but should)"
+  },
+  {
+    "objectID": "index.html#mean-purpose",
+    "href": "index.html#mean-purpose",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What is the purpose of a mean?",
+    "text": "What is the purpose of a mean?\n\nWhat is a mean?\nWhy is the mean so important?\nWhen should we use the mean descriptively? (Don’t say anything about outliers)\nMy answer: when we’re going to repeat some process over and over again…"
+  },
+  {
+    "objectID": "index.html#scale-dummies",
+    "href": "index.html#scale-dummies",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Should You Scale Dummy Variables?",
+    "text": "Should You Scale Dummy Variables?\nSetup: one-hot encoding\n\nConvert categorical → binary dummy variables\n“Color: Red/Blue/Green” → is_red, is_blue, is_green\nEach column is 0 or 1\n\n\nThe question: after encoding, should you center and scale these binary columns?\n\n\nShort answer: it depends on the algorithm"
+  },
+  {
+    "objectID": "index.html#knn-dummies",
+    "href": "index.html#knn-dummies",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The KNN Problem",
+    "text": "The KNN Problem\n\n\n2 features:\n\nage\ndogs_or_cats\n\nAfter standard scaling (x - mean) / sd:\n\nage: stays roughly -3 to 3\ndogs_or_cats: \\(\\frac{p}{\\sqrt{p(1-p)}}\\)"
+  },
+  {
+    "objectID": "index.html#lasso-dummies",
+    "href": "index.html#lasso-dummies",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The LASSO Problem",
+    "text": "The LASSO Problem\nLASSO penalty: \\(\\lambda\\times |\\beta_j|\\) for each coefficient\n\nIf we don’t scale: \\(\\beta_j\\) will be in units of response variable (maybe really big)\nIf we do scale… \\(x_j\\) will be come very largeand \\(\\beta_j\\) will become very small (i.e. not get penalized)\nSo what do we do?\n\n\n\nI honestly don’t know… but this idea applies to a variety of problems(e.g. feature importances, feature selection, normalization, etc.)\n\n\n← Back to Topics"
+  },
+  {
+    "objectID": "index.html#star-formation",
+    "href": "index.html#star-formation",
+    "title": "Math, Models & Real-World Problems",
+    "section": "",
+    "text": "🌟 Star Formation\n\n\nMachine learning for astrophysics"
+  },
+  {
+    "objectID": "index.html#yso-intro",
+    "href": "index.html#yso-intro",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What Are Young Stellar Objects?",
+    "text": "What Are Young Stellar Objects?\n\n\nYoung Stellar Objects (YSOs)\n\nProtostars still in the process of forming\nEmbedded in dense clouds of gas and dust\nVisible light is blocked — only detectable in infrared\nStudying YSOs reveals how stars like our Sun formed\n\n\nThe MIRION “Yellowballs” Catalog\nNamed for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.\n\nCan we predict their physical properties from their light alone?"
+  },
+  {
+    "objectID": "index.html#yso-data",
+    "href": "index.html#yso-data",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Data",
+    "text": "The Data\n\n\n43 Features from 4 observatories\n\n10 infrared flux measurements spanning 8–1100 μm\nPer-band photometric error and quality columns\nSources:\n\nSpitzer Space Telescope\nHerschel Space Observatory\nALMA / SCUBA submillimeter observations\n\n\n\n8 Target Variables to predict\n\n\n\nTarget\nProperty\n\n\n\n\nTEMP\nEffective temperature\n\n\nL_BOL\nBolometric luminosity\n\n\nMASS\nStellar mass\n\n\nDIAM\nDiameter\n\n\nSURF_DENS\nSurface density\n\n\nLM\nLuminosity/mass ratio\n\n\nT_BOL\nBolometric temperature\n\n\nLRATIO\nLuminosity ratio"
+  },
+  {
+    "objectID": "index.html#yso-pipeline",
+    "href": "index.html#yso-pipeline",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Pipeline: Bayesian Model Search",
+    "text": "The Pipeline: Bayesian Model Search\nFor each of the 8 targets, an independent pipeline was run:\n\nBayesSearchCV (150 iterations): efficient hyperparameter search across a large space — smarter than grid search\n6 model types searched simultaneously: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP\nPreprocessing pipeline: imputation → feature scaling → model\nBest single model selected and saved per target\nStacking ensemble: all 6 models combined with a Ridge meta-learner for final predictions"
+  },
+  {
+    "objectID": "index.html#yso-cluster",
+    "href": "index.html#yso-cluster",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Running at Scale: Borah HPC",
+    "text": "Running at Scale: Borah HPC\nEach target = 150 BayesSearch iterations × 5-fold CV = 750 model fits\nSubmitted as a SLURM array job on Boise State’s Borah HPC cluster — one job per target.\n\n\n\nResource\nPer Job\n\n\n\n\nCPUs\n48 cores\n\n\nRAM\n128 GB\n\n\nWall time\nup to 24 hrs"
+  },
+  {
+    "objectID": "index.html#yso-cluster-parallel",
+    "href": "index.html#yso-cluster-parallel",
+    "title": "Math, Models & Real-World Problems",
+    "section": "The Power of Parallelism",
+    "text": "The Power of Parallelism\nAll 8 targets ran simultaneously:\n48 CPUs × 8 jobs = 384 cores working in parallel\n\n\nWhat would take weeks on a laptop runs overnight on a cluster\nWall time: ~24 hrs total vs. ~192 hrs (8 days) sequentially\nHPC makes systematic hyperparameter search practical"
+  },
+  {
+    "objectID": "index.html#yso-results",
+    "href": "index.html#yso-results",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Results: How Well Can We Predict?",
+    "text": "Results: How Well Can We Predict?\n\n\n\nTarget\nDescription\nCV R²\n\n\n\n\nTEMP\nEffective temperature\n0.916\n\n\nLM\nLuminosity/mass ratio\n0.890\n\n\nSURF_DENS\nSurface density\n0.826\n\n\nL_BOL\nBolometric luminosity\n0.553\n\n\nLRATIO\nLuminosity ratio\n0.474\n\n\nT_BOL\nBolometric temperature\n0.473\n\n\nMASS\nStellar mass\n0.427\n\n\nDIAM\nDiameter\n0.093\n\n\n\n\nXGBoost was the best model for 7 of 8 targets (GradientBoosting won for DIAM)"
+  },
+  {
+    "objectID": "index.html#yso-temp",
+    "href": "index.html#yso-temp",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Temperature: R² = 0.916",
+    "text": "Temperature: R² = 0.916\n\nLeft: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.\n\nEffective temperature is strongly encoded in the infrared color of a YSO"
+  },
+  {
+    "objectID": "index.html#yso-shap",
+    "href": "index.html#yso-shap",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Which Wavelengths Drive Temperature Predictions?",
+    "text": "Which Wavelengths Drive Temperature Predictions?\n\nSHAP values show how each feature pushes the prediction. The 160 μm and 350 μm far-infrared bands dominate — consistent with Wien’s law (cooler objects emit more at longer wavelengths)."
+  },
+  {
+    "objectID": "index.html#yso-diam",
+    "href": "index.html#yso-diam",
+    "title": "Math, Models & Real-World Problems",
+    "section": "Not All Properties Are Equal",
+    "text": "Not All Properties Are Equal\n\nDiameter: R² = 0.093\n\nDiameter depends on distance assumptions — distance errors propagate directly into this target\n\n\nSome properties simply aren’t encoded in the photometry alone"
+  },
+  {
+    "objectID": "index.html#yso-lessons",
+    "href": "index.html#yso-lessons",
+    "title": "Math, Models & Real-World Problems",
+    "section": "What We Learned",
+    "text": "What We Learned\n\nBayesian hyperparameter search efficiently explores complex model spaces\nXGBoost consistently outperforms simpler models on this dataset\nSome physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry\nOthers (diameter) require additional data or better distance estimates\nHPC enables systematic ML research that would be impractical on a laptop\nStacking ensembles offer modest gains over single best models\n\n\n\nInfrared light is a remarkably rich signal — but not every stellar secret is written in photons\n\n\n\n← Back to Topics"
+  }
+]

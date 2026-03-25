@@ -1,0 +1,2114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Eric Friedlander">
+  <meta name="dcterms.date" content="2026-03-25">
+  <title>Math, Models &amp; Real-World Problems</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-b3be1611f4189ddcaa9dbaa21a6cda92.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section data-background-color="#533860" class="quarto-title-block center">
+  <h1 class="title">Math, Models &amp; Real-World Problems</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Eric Friedlander 
+</div>
+        <p class="quarto-title-affiliation">
+            College of Idaho
+          </p>
+    </div>
+</div>
+
+  <p class="date">2026-03-25</p>
+</section>
+<section id="about" class="slide level2">
+<h2>About Me</h2>
+<ul>
+<li>Born and raised outside New York City</li>
+<li>B.A., Mathematics &amp; Statistics - <strong>Rice University</strong></li>
+<li>PhD, Statistics &amp; Operations Research — <strong>UNC Chapel Hill</strong></li>
+<li>Business Analyst - <strong>Capital One</strong></li>
+<li>Postdoc, Population Genetics — <strong>University of Chicago</strong></li>
+<li>Assistant Professor of Mathematics - <strong>St.&nbsp;Nobert College</strong></li>
+<li>Assistant Professor of Computer Science — <strong>College of Idaho</strong></li>
+</ul>
+</section>
+<section id="toc" class="slide level2">
+<h2>Choose Your Adventure</h2>
+<div style="font-size: 1.1em; line-height: 2.4em;">
+<p><a href="#/grad-school">🎲 Graduate School: Large Networks (Most Mathematical)</a></p>
+<p><a href="#/pop-genetics">🧬 Postdoc: Population Genetics (Most polished, between math and statistics)</a></p>
+<p><a href="#/chemometrics">🌿 Chemometrics &amp; Metabolomics (Current work, specific project)</a></p>
+<p><a href="#/psychometrics">📊 Psychometrics (A bit of an intro to an understudied field)</a></p>
+<p><a href="#/star-formation">🌟 Star Formation (Most ML-heavy)</a></p>
+<p><a href="#/random-thoughts">💡 Random Thoughts (Exactly what it sounds like)</a></p>
+</div>
+</section>
+<section id="grad-school" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>🎲 Graduate School: Large Networks</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Probability &amp; asymptotic methods for massive systems</p>
+</div>
+</section>
+<section id="grad-school-reality" class="slide level2">
+<h2>Modeling large systems</h2>
+<ul>
+<li class="fragment">Suppose we have a system of <span class="math inline">\(n\)</span> “particles”</li>
+<li class="fragment">Particles can be anything (e.g.&nbsp;queues, individuals, molecules, etc…)</li>
+<li class="fragment">Each partical is evolving according to some random process</li>
+<li class="fragment">Modeling each of these particles directly <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(n\)</span>-dimensional process (infeasible for large <span class="math inline">\(n\)</span>)</li>
+<li class="fragment"><strong>Solution:</strong> Assume <span class="math inline">\(n\)</span> is infinite</li>
+<li class="fragment">Umm… wut?</li>
+</ul>
+</section>
+<section id="asymptotic-approx" class="slide level2">
+<h2>Asymptotic Approximations</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/fluiddynamics.png"></p>
+<figcaption>Fluid dynamics</figcaption>
+</figure>
+</div>
+<div style="font-size: 0.75em; color: #555;">
+<p>Fluid: continuous limit of discrete molecules</p>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/Ripples.png"></p>
+<figcaption>Ripples</figcaption>
+</figure>
+</div>
+<div style="font-size: 0.75em; color: #555;">
+<p>Waves: aggregate behavior, not individual particles</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2 scrollable">
+<h2>Asymptotics Approximations</h2>
+<ul>
+<li class="fragment">A few general types of asymptotic approximations (you’ve heard of two)
+<ol type="1">
+<li class="fragment">Law’s of large numbers (limit is deterministic)</li>
+<li class="fragment">Central limit theorem (limit is stochastic)</li>
+<li class="fragment">Large deviation theorem (how fast does LLN converge)</li>
+</ol></li>
+</ul>
+</section>
+<section class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.5em; font-weight: bold;">
+<p>Load Balancing</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Routing tasks in a large server network</p>
+</div>
+</section>
+<section id="load-balancing" class="slide level2">
+<h2>Load Balancing</h2>
+<p><strong>Key question:</strong> What’s the best way to route tasks in a large server network?</p>
+
+<img data-src="images/LoadBalancing/Slide1.jpeg" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="random-routing" class="slide level2">
+<h2>Random Routing</h2>
+
+<img data-src="images/LoadBalancing/Slide2.jpeg" class="r-stretch quarto-figure quarto-figure-center"><div style="font-size: 0.8em;">
+<p>Assign each task to a random server — simple, but inefficient</p>
+</div>
+</section>
+<section id="power-of-two" class="slide level2">
+<h2>Power of Two Choices</h2>
+
+<img data-src="images/LoadBalancing/Slide3.jpeg" class="r-stretch quarto-figure quarto-figure-center"><div style="font-size: 0.8em;">
+<p>Sample 2 servers, pick the shorter queue</p>
+</div>
+</section>
+<section id="power-of-two-2" class="slide level2">
+<h2>Power of Two Choices</h2>
+
+<img data-src="images/LoadBalancing/Slide4.jpeg" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="jsq" class="slide level2">
+<h2>Join-the-Shortest-Queue</h2>
+
+<img data-src="images/LoadBalancing/Slide5.jpeg" class="r-stretch quarto-figure quarto-figure-center"><div style="font-size: 0.8em;">
+<p>Always join the shortest queue — optimal, but expensive to implement</p>
+</div>
+</section>
+<section id="eval" class="slide level2">
+<h2>How do we evaluate this for lots of servers?</h2>
+<ul>
+<li>LLN <span class="math inline">\(\Rightarrow\)</span> ODE on distribution of queue lengths
+<ul>
+<li>What does the steady-state distribution of this ODE look like?
+<ul>
+<li>JSQ: all queues are of length 0 or 1</li>
+<li>Random routing: queue lengths decay exponentially</li>
+<li>Power-of-two: queue lengths decay double-exponentially</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="lb-steady-state" class="slide level2">
+<h2>Steady-State Distributions</h2>
+
+<img data-src="images/LoadBalancing/decay.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="eval2" class="slide level2">
+<h2>What about the impact of randomness?</h2>
+<ul>
+<li>CLT <span class="math inline">\(\Rightarrow\)</span> SDE for distribution of queue lengths</li>
+<li>This my work (specifically for power-of-two) <span class="math inline">\(\Rightarrow\)</span> about 40-pages of proofs… none of which I’ll present here</li>
+<li>SDE allows for more efficient simulation</li>
+</ul>
+</section>
+<section id="ldt" class="slide level2">
+<h2>What about this Large-Deviation Theorem?</h2>
+<p>I proved a LDT for JSQ.</p>
+<div style="border-left: 4px solid #533860; background: #f5f3f7; padding: 0.3em 0.8em; font-size: 0.8em;">
+<p><strong>Theorem.</strong> <span class="math display">\[\begin{align}
+  \lim_{n\to\infty}\frac{1}{n}\log\mathbb{P}(X^n\in G)
+  &amp;= \inf_{x\in G}I(x)
+\end{align}\]</span></p>
+</div>
+<p>Useful in estimating probabilities of rare-events.</p>
+</section>
+<section class="slide level2">
+
+<p><a href="#/toc">← Back to Topics</a></p>
+</section>
+<section id="pop-genetics" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>🧬 Postdoc: Population Genetics</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>How we use statistics to learn about human history</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Let’s begin with a biology lesson!</h2>
+
+<img data-src="images/Graphics1-part-1.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section class="slide level2">
+<h2>Let’s begin with a biology lesson!</h2>
+
+<img data-src="images/chromosomes.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section class="slide level2">
+<h2>Big Picture: Questions about evolving populations</h2>
+<ul>
+<li>What was the past size and structure of populations?</li>
+</ul>
+
+<img data-src="images/outofafrica.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section class="slide level2">
+<h2>Big Picture: Questions about evolving populations</h2>
+<ul>
+<li>Where in the genome is natural selection occurring?</li>
+</ul>
+
+<img data-src="images/lct-1.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section class="slide level2">
+<h2>Sequencing Data</h2>
+
+<img data-src="images/03GENOME3-jumbo.jpg" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="pop-gen-inference" class="slide level2 smaller">
+<h2>The modeling framework</h2>
+<p><strong>Goal:</strong> turn data into answers about history</p>
+<div class="fragment">
+<p><span class="math display">\[\text{Assumptions} + \text{Data} \xrightarrow{\text{model}} \text{Likelihood (Probability)}\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li><strong>Assumptions:</strong> population size history, mutation rate, selection strength</li>
+<li><strong>Data:</strong> sequencing data from real individuals</li>
+<li><strong>Output:</strong> probability of seeing that data under our assumptions</li>
+</ul>
+</div>
+<div class="fragment">
+<blockquote>
+<p>Vary the assumptions → find the ones that make the data most probable</p>
+</blockquote>
+</div>
+</section>
+<section id="wf-intro" class="slide level2">
+<h2>Let’s build a model!</h2>
+
+<img data-src="images/builder_mario_and_builder_luigi.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="wf-setup" class="slide level2">
+<h2>Wright-Fisher Model: Setup</h2>
+<ul>
+<li class="fragment">Focus on <strong>one position</strong> in the genome</li>
+<li class="fragment">Two versions (“alleles”) at that site:
+<ul>
+<li class="fragment"><span style="color:red;"><strong>Mario</strong></span> and <span style="color:green;"><strong>Luigi</strong></span></li>
+</ul></li>
+<li class="fragment">Population size <strong>N</strong> (fixed each generation)</li>
+<li class="fragment">Time moves in <strong>discrete generations</strong></li>
+<li class="fragment">Each offspring <strong>randomly picks a parent</strong> from the previous generation</li>
+<li class="fragment">Track <span class="math inline">\(p_k\)</span> = proportion of <span style="color:green;">Luigis</span> in generation <span class="math inline">\(k\)</span></li>
+</ul>
+</section>
+<section id="wf-visual" class="slide level2">
+<h2>Wright-Fisher Model: Visual</h2>
+
+<img data-src="images/WFImageLast.jpg" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section class="slide level2">
+<h2>Wright-Fisher Model</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="wf-simulation" class="slide level2 smaller">
+<h2>Computers can roll dice!</h2>
+<p><strong>Key insight:</strong> random sampling = rolling dice</p>
+<div class="fragment">
+<ul>
+<li>N = 1,000 individuals?</li>
+<li>Each generation: sample 1,000 parents (with replacement)</li>
+<li>Fraction of <span style="color:green;">Luigis</span> drifts up and down randomly</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Simulate one generation</span></span>
+<span id="cb1-2"><a></a><span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Mario"</span>, <span class="st">"Luigi"</span>), <span class="at">size =</span> <span class="dv">1000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> p, p))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<ul>
+<li>No calculus needed — just repeat millions of times</li>
+<li>This is called <strong>genetic drift</strong></li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+<h2>A few Simulations</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Lots of Simulations: Cross-Section</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Adding Complexity</h2>
+<ul>
+<li class="fragment">What’s going to happen eventually?
+<ul>
+<li class="fragment">All <span style="color:red;">Marios</span> or all <span style="color:green;">Luigis</span></li>
+</ul></li>
+<li class="fragment">Mutation: Occasionally <span style="color:red;">Mario</span> mutates into <span style="color:green;">Luigi</span> (and vice versa)
+<ul>
+<li class="fragment">Adding Mutation to Model: Roll a die, 1 means mutation</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Adding in Mutation</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>How do we use this for inference?</h2>
+<ul>
+<li>Make assumptions: population size history, strength of selection, mutation rate, etc.</li>
+<li>Input: Sequencing data</li>
+<li>Output: “Likelihood” of data</li>
+<li>Assumptions &amp; Data <span class="math inline">\(\stackrel{\text{model}}{\rightarrow}\)</span> Likelihood</li>
+</ul>
+</section>
+<section id="out-of-africa" class="slide level2">
+<h2>Activity: Out of Africa</h2>
+
+<img data-src="images/outofafrica.png" class="r-stretch quarto-figure quarto-figure-center"></section>
+<section id="toy-model" class="slide level2 scrollable">
+<h2>Toy model: population size history</h2>
+<p>A simple three-phase model:</p>
+<ol type="1">
+<li class="fragment"><strong>Large ancestral population</strong> — stable for many generations</li>
+<li class="fragment"><strong>Bottleneck</strong> — small group migrates out of Africa
+<ul>
+<li class="fragment">Population size drops sharply</li>
+</ul></li>
+<li class="fragment"><strong>Exponential growth</strong> — population expands in new environment</li>
+</ol>
+</section>
+<section id="activity" class="slide level2 scrollable">
+<h2>Your job: estimate the bottleneck</h2>
+<ul>
+<li>Open the Shiny app: <a href="https://YOUR-APP-URL">https://YOUR-APP-URL</a></li>
+<li>Adjust sliders to match the observed genetic data</li>
+<li><strong>Hints:</strong>
+<ol type="1">
+<li>Population before bottleneck: <strong>1,000</strong></li>
+<li>Total generations: <strong>1,000</strong></li>
+<li>Growth begins at generation <strong>900</strong></li>
+</ol></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p><a href="#/toc">← Back to Topics</a></p>
+</section>
+<section id="chemometrics" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>🌿 Chemometrics &amp; Metabolomics</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Statistics meets plant chemistry</p>
+</div>
+</section>
+<section class="slide level2">
+<h2>Undergraduate Collaborator</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>This work completed in conjunction with Aiden Everard</li>
+<li>Junior at College of Idaho</li>
+</ul>
+</div><div class="column">
+<p><img data-src="../images/HeadShot.jpg"></p>
+</div></div>
+</section>
+<section class="slide level2 smaller">
+<h2>Ecology</h2>
+<p>Sagebrush is vast</p>
+<ul>
+<li>There are many species of sagebrush</li>
+<li>Each subspecies of sagebrush has a unqiue chemical profile.</li>
+</ul>
+<p>Sagegrouse diet is in large part sagebrush</p>
+<ul>
+<li>Enzymes in the grouse liver modify defensive chemicals.</li>
+</ul>
+<p>Reasearch question</p>
+<ul>
+<li>Which compounds are present in certain species of Sagebrush but not other that the Sagegrouse enzymes ALSO interact with</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Experiment</h2>
+<ul>
+<li>Collect samples from different species of sagebrush</li>
+<li>Treat samples with different grouse liver enzymes</li>
+<li>Apply Liquid Chromatography - Mass Spectrometry (LCMS) to extract chemical profile at different incubation times</li>
+</ul>
+</section>
+<section id="lcms-intro" class="slide level2">
+<h2>Liquid Chromatography</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/LC_Column.jpeg" height="420"></p>
+<figcaption>The LC column — heart of the separation step</figcaption>
+</figure>
+</div>
+<ul>
+<li>Each sample exits at a different <strong>retention time</strong></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>What does the data look like?</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Mass Spectrometry</h2>
+<ul>
+<li>Compounds are broken apart and ionized</li>
+<li>Detector records each fragment’s <strong>mass-to-charge ratio</strong></li>
+<li>Intensity = how much of that fragment is present</li>
+</ul>
+</section>
+<section id="lcms-data" class="slide level2 smaller">
+<h2>LC-MS Data: Questions</h2>
+<p><strong>One plant sample → one enormous table</strong></p>
+<ul>
+<li>Thousands of retention time points</li>
+<li>Thousands of mass values</li>
+<li>Result: <strong>100,000+ features per sample</strong></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Data Analysis Problems</h2>
+<ul>
+<li>Far more features than samples</li>
+<li>Lot’s of (potential) preprocessing steps</li>
+<li>Data Integration</li>
+<li>Main differences in species aren’t what we’re interested in</li>
+</ul>
+</section>
+<section id="preprocessing" class="slide level2 smaller scrollable">
+<h2>Baseline Correction</h2>
+<ul>
+<li>Instrument reads a “floor” even with no signal</li>
+<li>Asymmetric least squares fits and removes this floor</li>
+<li>Think: subtract a wavy background from a photo</li>
+</ul>
+<p><span class="math display">\[
+\min_{z} \; \sum_{i=1}^{n} w_i \, (y_i - z_i)^2 \;+\; \lambda \sum_{i=2}^{n-1} (z_{i-1} - 2 z_i + z_{i+1})^2
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(y_i\)</span> : observed signal at point <span class="math inline">\(i\)</span><br>
+</li>
+<li><span class="math inline">\(z_i\)</span> : estimated baseline at point <span class="math inline">\(i\)</span><br>
+</li>
+<li><span class="math inline">\(w_i\)</span> : asymmetric weights, updated iteratively:</li>
+</ul>
+<p><span class="math display">\[
+w_i =
+\begin{cases}
+p, &amp; \text{if } y_i &gt; z_i \\[2mm]
+1 - p, &amp; \text{if } y_i \le z_i
+\end{cases}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\lambda\)</span> : smoothing parameter controlling baseline smoothness<br>
+</li>
+<li><span class="math inline">\(p\)</span> : asymmetry parameter (small values keep the baseline below peaks)</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Baseline Correction</h2>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Green</a></li><li><a href="#tabset-1-2">White</a></li><li><a href="#tabset-1-3">Early</a></li><li><a href="#tabset-1-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="peak-alignment" class="slide level2">
+<h2>Peak Alignment</h2>
+<ul>
+<li>Parametric time-warping</li>
+<li>Same compound exits at slightly different times across runs</li>
+<li>Warping stretches/compresses the time axis to align peaks</li>
+<li>Think: syncing two audio tracks that drifted out of time</li>
+<li>Question: how do you align different species to one another?</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Parametric Time-Warping</h2>
+<ul>
+<li>Warping function <span class="math inline">\(w(t)\)</span>: Polynomial of degree <span class="math inline">\(K\)</span></li>
+<li>Goal: align sample <span class="math inline">\(S(t)\)</span> to a reference signal <span class="math inline">\(R(t)\)</span> by “warping” time: <span class="math inline">\(S(w(t))\)</span></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Alignment</h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Green</a></li><li><a href="#tabset-2-2">White</a></li><li><a href="#tabset-2-3">Early</a></li><li><a href="#tabset-2-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Standardizing</h2>
+<ul>
+<li>Typically: center and scale data</li>
+<li>Problem: Low concentration compounds blow-up</li>
+<li>Potential solutions:
+<ul>
+<li>Create mask based on signal-to-noise ratio</li>
+<li>Create mask for any peaks above threshold</li>
+</ul></li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>Centering &amp; Scaling</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Green</a></li><li><a href="#tabset-3-2">White</a></li><li><a href="#tabset-3-3">Early</a></li><li><a href="#tabset-3-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>SNR Mask + Scale</h2>
+<p>Gray = masked regions (SNR ≤ 3); SNR = max signal / IQR</p>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Green</a></li><li><a href="#tabset-4-2">White</a></li><li><a href="#tabset-4-3">Early</a></li><li><a href="#tabset-4-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+<h2>Peak Threshold Mask + Scale</h2>
+<p>Gray = masked regions (max signal ≤ 10 AU)</p>
+<div class="panel-tabset">
+<ul id="tabset-5" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-5-1">Green</a></li><li><a href="#tabset-5-2">White</a></li><li><a href="#tabset-5-3">Early</a></li><li><a href="#tabset-5-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-5-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="preprocessing-normalize" class="slide level2">
+<h2>Normalization</h2>
+<ul>
+<li>Samples may have different total amounts loaded</li>
+<li>Scale each sample so totals are comparable</li>
+<li>Collaborators disagree on whether do this</li>
+</ul>
+</section>
+<section class="slide level2">
+<h2>PCA: Unnormalized</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-46-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>PCA: Row Normalized</h2>
+
+<img data-src="index_files/figure-revealjs/unnamed-chunk-48-1.png" width="960" class="r-stretch"></section>
+<section class="slide level2">
+<h2>Volcano Plots: CYP Enzyme</h2>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Green</a></li><li><a href="#tabset-6-2">White</a></li><li><a href="#tabset-6-3">Early</a></li><li><a href="#tabset-6-4">Wyoming</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-2">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-51-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-3">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-52-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-6-4">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-53-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="chemometrics-collab" class="slide level2">
+<h2>Collaborators</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>College of Idaho</strong></p>
+<ul>
+<li><strong>Aiden Everard</strong> — Undergraduate</li>
+<li><strong>Carolyn Dadabay</strong> — Chemistry Professor</li>
+</ul>
+<div class="column" style="width:50%;">
+<p><strong>Boise State University</strong></p>
+<ul>
+<li><strong>Jenn Forby</strong> — Biology Professor</li>
+<li><strong>Maddy Skinner</strong> — Master’s Student</li>
+</ul>
+</div></div><div class="fragment">
+<p><em>Undergraduate-driven research: from raw LC-MS data to publishable analysis</em></p>
+</div><hr><p><a href="#/toc">← Back to Topics</a></p><section id="psychometrics" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>📊 Psychometrics</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Measuring the unmeasurable</p>
+</div>
+</section><section class="slide level2">
+<h2>A book recommendation</h2>
+
+<img data-src="images/cooper-book.jpg" class="r-stretch quarto-figure-center"><p class="caption">One of the best textbooks I’ve ever read</p></section><section class="slide level2">
+<h2>Basic questions in Psychometrics</h2>
+<ul>
+<li>How do we determine if a theory is real?</li>
+<li>How do we decide if someone has learned something?</li>
+<li>How do we decide if someone feels something?</li>
+<li>How do we determine if it is possible to feel something?</li>
+<li>How do we measure things?</li>
+</ul>
+</section><section class="slide level2">
+<h2>Construct</h2>
+
+<img data-src="images/ffm.jpeg" class="r-stretch quarto-figure-center"><p class="caption">Start with a construct</p></section><section class="slide level2">
+<h2>Developing an assessment</h2>
+<ul>
+<li>Design an exam or survey to assess your construct
+<ul>
+<li>Each question is called an <strong>item</strong> in psych-talk</li>
+</ul></li>
+<li>Is your assessment good?
+<ul>
+<li>Reliability: is the measurement consistent?</li>
+<li>Validity: does it measure what it’s supposed to?</li>
+</ul></li>
+</ul>
+</section><section class="slide level2">
+<h2>Reliability</h2>
+<p>If I measure individuals with the same trait, do they score the same?</p>
+<ul>
+<li><strong>Test-retest reliability:</strong> if you measure someone twice… do they get the same score</li>
+<li><strong>Internal consistency:</strong> does each question positively correlate with total score?
+<ul>
+<li><strong>Chronbach’s Alpha:</strong> <span class="math inline">\(\alpha = \frac{k}{k - 1} \left( \frac{\sum_{i\neq j} \sigma^2_{y_iy_j}}{\sigma^2_x} \right)\)</span></li>
+</ul></li>
+<li><strong>Inter-Rater Reliability:</strong> if two people are scoring an assessment</li>
+</ul>
+</section><section class="slide level2">
+<h2>Validity</h2>
+<p>Many types of validity (Coopers lists 12):</p>
+<ul>
+<li>Content Validity: are the items a representative sample of the domain they measure</li>
+<li>Criterion-Related Validity: how well do test scores correlate with an external, “real-world” outcome (the criterion)</li>
+<li>Construct Validity: the extent to which a test measures the theoretical construct it was designed to measure</li>
+</ul>
+</section><section class="slide level2">
+<h2>Statistical Techniques</h2>
+<ul>
+<li>Factor analysis &amp; PCA
+<ul>
+<li>Exploratory Factor Analysis (EFA)</li>
+<li>Confirmatory Facotr Analysis (CFA)</li>
+</ul></li>
+<li>Item-Response Theory (IRT)</li>
+</ul>
+</section><section id="factor-analysis" class="slide level2 smaller">
+<h2>Factor Analysis &amp; PCA</h2>
+<ul>
+<li>PCA: take correlation matrix <span class="math inline">\(\to\)</span> compute SVD</li>
+<li>Factor Analysis:
+<ul>
+<li>Assume some generative model: <span class="math inline">\(\mathbf{x} = \mathbf{\Lambda} \mathbf{f} + \boldsymbol{\epsilon}\)</span>
+<ul>
+<li><span class="math inline">\(\mathbf{x}:\)</span> data</li>
+<li><span class="math inline">\(\mathbf{\Lambda}:\)</span> loadings (constant across all individuals)</li>
+<li><span class="math inline">\(\mathbf{f}:\)</span> factor scores</li>
+<li><span class="math inline">\(\boldsymbol{\epsilon}:\)</span> error</li>
+</ul></li>
+<li>Partition variance: <span class="math inline">\(\mathbf{\Sigma} = \mathbf{\Lambda} \mathbf{\Lambda}^T + \mathbf{\Psi}\)</span></li>
+<li>Note <span class="math inline">\(\mathbf{\Lambda}\)</span> not unique so we must “rotate”</li>
+</ul></li>
+</ul>
+</section><section id="correlation-intuition" class="slide level2">
+<h2>What Does Correlation Mean?</h2>
+<ul>
+<li class="fragment">When X goes up, Y tends to go ___</li>
+<li class="fragment">What does it mean for a variable to be quantitative?</li>
+<li class="fragment">Are Likert scores quantitative?</li>
+<li class="fragment">Suppose <span class="math inline">\(X\)</span> is a normal random variable and <span class="math inline">\(Y\)</span> is a binary variable (0/1) can they ever have a correlation of 1?</li>
+</ul>
+</section><section id="correlation-types" class="slide level2">
+<h2>Types of Correlation in Psychometrics</h2>
+<p><strong>Different variable types → different correlation methods</strong></p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Variable Combo</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Continuous × Binary</td>
+<td><strong>Point-biserial</strong> r</td>
+</tr>
+<tr class="even">
+<td>Continuous × Ordinal</td>
+<td><strong>Polyserial</strong></td>
+</tr>
+<tr class="odd">
+<td>Binary × Binary</td>
+<td><strong>Tetrachoric</strong></td>
+</tr>
+<tr class="even">
+<td>Ordinal × Ordinal</td>
+<td><strong>Polychoric</strong></td>
+</tr>
+</tbody>
+</table>
+</section><section id="latent-variable2" class="slide level2">
+<h2>The Latent Variable Assumption</h2>
+<p><strong>What polychoric/tetrachoric actually assume</strong></p>
+<div class="fragment">
+<ul>
+<li>Observed categories = <strong>discretization</strong> of a hidden continuous variable</li>
+<li>Latent variable assumed to be <strong>normally distributed</strong></li>
+</ul>
+</div>
+</section><section id="latent-variable" class="slide level2">
+<h2>The Latent Variable Assumption</h2>
+<div class="fragment">
+<p><strong>Example: “Rate your pain 1–5”</strong></p>
+<ul>
+<li>Your actual pain exists on a continuous scale</li>
+<li>You cross a threshold → you report the next category up</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Hidden number line:</p>
+<p><code>——|——|——|——|——</code></p>
+<p><code>1  2  3  4  5</code></p>
+<p>Thresholds (<span class="math inline">\(\tau\)</span>) carve it into bins</p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>We only observe which bin</li>
+<li>Latent value is inferred</li>
+<li>Polychoric recovers the <strong>latent correlation</strong></li>
+</ul>
+</div></div>
+</div>
+</section><section class="slide level2 smaller">
+<h2>Item Response Theory (IRT)</h2>
+<div class="columns">
+<div class="column">
+<p><strong>Item Characteristic Curve (ICC)</strong>:</p>
+<p><span class="math display">\[P(\text{correct} \mid \theta) = \frac{1}{1 + e^{-\alpha(\theta - \beta)}}\]</span></p>
+<ul>
+<li><strong>Difficulty (<span class="math inline">\(\beta\)</span>)</strong>: where on ability scale does P(correct) = 0.5?</li>
+<li><strong>Discrimination (<span class="math inline">\(\alpha\)</span>)</strong>: how steeply does the curve rise?</li>
+</ul>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-54-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section><section id="irt-advantages" class="slide level2">
+<h2>IRT: Why It Matters</h2>
+<p><strong>Advantages over classical test theory</strong></p>
+<ul>
+<li>Item parameters don’t depend on the sample</li>
+<li>Person ability doesn’t depend on which items used</li>
+<li>Used by: GRE, SAT, LSAT, AP exams</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>A student taking a harder test version gets a <strong>fair</strong> ability estimate</p>
+</blockquote>
+</div>
+</section><section id="psych-caveat" class="slide level2">
+<h2>The Big Caveat</h2>
+<p><strong>All of this assumes (at least latent) continuity</strong></p>
+<div class="fragment">
+<ul>
+<li>What if variables are <strong>truly categorical</strong>?
+<ul>
+<li>Not discretized — genuinely unordered</li>
+<li>Polychoric/IRT assumptions break down</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Correlations and factor loadings become <strong>misleading</strong>
+<ul>
+<li>Artificially inflated or deflated</li>
+<li>Factors may reflect response style, not constructs</li>
+</ul></li>
+</ul>
+</div>
+<hr>
+<p><a href="#/toc">← Back to Topics</a></p>
+</section><section id="random-thoughts" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>💡 Random Thoughts</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Things that don’t fit elsewhere (but should)</p>
+</div>
+<hr>
+</section><section id="mean-purpose" class="slide level2">
+<h2>What is the purpose of a mean?</h2>
+<ul>
+<li class="fragment">What is a mean?</li>
+<li class="fragment">Why is the mean so important?</li>
+<li class="fragment">When should we use the mean descriptively? (Don’t say anything about outliers)</li>
+<li class="fragment">My answer: when we’re going to repeat some process over and over again…</li>
+</ul>
+<hr>
+</section><section class="slide level2">
+<h2>Easy Example</h2>
+<p>Every month 100,000’s of customers come into my store. Suppose the money that customer <span class="math inline">\(i\)</span> spends is represented as <span class="math inline">\(x_i\)</span>… How should I compute the mean of <span class="math inline">\(x_i\)</span>?</p>
+<div class="fragment">
+<p>Arithmetic mean: <span class="math inline">\(\bar{x} = \frac{\sum x_i}{n}\)</span></p>
+<hr>
+</div>
+</section><section class="slide level2">
+<h2>Harder Example</h2>
+<p>I have a 403B (retirement account). Suppose my the interest rates I’ll receive over the next 20 years are represented as <span class="math inline">\(x_i\)</span>… How should I compute the mean of <span class="math inline">\(x_i\)</span>?</p>
+<div class="fragment">
+<p>Note: <span class="math inline">\(\text{Balance}\times (1 + \bar{x})^{20} \neq \text{Balance}\times (1 + x_1)\times\cdots\times(1 + x_{20})\)</span></p>
+<hr>
+</div>
+</section><section class="slide level2">
+<h2>Geometric Mean</h2>
+<p><span class="math display">\[M = \left(\prod_{i=1}^{n} x_i\right)^{1/n}\]</span></p>
+<ul>
+<li>Used when things compound or grow or shrink</li>
+<li>Finance (1 + interest rates)</li>
+<li>Population genetics (what was the average population size?)</li>
+</ul>
+<hr>
+</section><section class="slide level2">
+<h2>Hardest Example</h2>
+<p>Suppose I drive from SF to LA at 80 MPH and then drive back at 60 MPH… What is my average speed?</p>
+<div class="fragment">
+<ul>
+<li class="fragment">It depends… am I weighting based on distance or time?</li>
+<li class="fragment">Distance: arthmetic mean.</li>
+<li class="fragment">Time… harmonic mean</li>
+</ul>
+</div>
+<hr>
+</section><section class="slide level2 smaller">
+<h2>Harmonic Mean</h2>
+<p><span class="math display">\[M = \frac{n}{\sum_{i=1}^{n} \frac{1}{x_i}}\]</span></p>
+<ul>
+<li>Let’s think about units</li>
+</ul>
+<p><span class="math display">\[ \frac{n}{\sum_{i=1}^{n}\frac{1}{\text{(Miles per hour)}}}= \frac{n}{\sum_{i=1}^{n} \frac{\text{Hours}}{\text{Miles}}} \]</span></p>
+<div class="fragment">
+<ul>
+<li>Use whenever you’re averaging rates but weighting by the denominator</li>
+<li>F1-Score: Harnomin mean of precision and recall</li>
+</ul>
+</div>
+<hr>
+</section><section id="scale-dummies" class="slide level2">
+<h2>Should You Scale Dummy Variables?</h2>
+<p><strong>Setup: one-hot encoding</strong></p>
+<ul>
+<li>Convert categorical → binary dummy variables</li>
+<li>“Color: Red/Blue/Green” → <code>is_red</code>, <code>is_blue</code>, <code>is_green</code></li>
+<li>Each column is 0 or 1</li>
+</ul>
+<div class="fragment">
+<p><strong>The question</strong>: after encoding, should you <strong>center and scale</strong> these binary columns?</p>
+</div>
+<div class="fragment">
+<p>Short answer: <strong>it depends on the algorithm</strong></p>
+</div>
+<hr>
+</section><section id="knn-dummies" class="slide level2">
+<h2>The KNN Problem</h2>
+<div class="columns">
+<div class="column">
+<p>2 features:</p>
+<ul>
+<li><code>age</code></li>
+<li><code>dogs_or_cats</code></li>
+</ul>
+<p>After standard scaling <code>(x - mean) / sd</code>:</p>
+<ul>
+<li><code>age</code>: stays roughly -3 to 3</li>
+<li><code>dogs_or_cats</code>: <span class="math inline">\(\frac{p}{\sqrt{p(1-p)}}\)</span></li>
+</ul>
+</div><div class="column">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-55-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<hr>
+</section><section class="slide level2">
+<h2>What if we ask about favorite animal?</h2>
+<ul>
+<li>Suppose instead that we ask “What is your favorite animal?”</li>
+<li>We get 20 different responses…</li>
+<li>What is the largest possible <span class="math inline">\(p\)</span> for the least frequent category?</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Moral of the story… probably don’t scale for KNN (can scale to zero-one)</li>
+</ul>
+<hr>
+</div>
+</section><section id="lasso-dummies" class="slide level2 smaller">
+<h2>The LASSO Problem</h2>
+<p>LASSO penalty: <span class="math inline">\(\lambda\times |\beta_j|\)</span> for each coefficient</p>
+<ul>
+<li>If we don’t scale: <span class="math inline">\(\beta_j\)</span> will be in units of response variable (maybe really big)</li>
+<li>If we do scale… <span class="math inline">\(x_j\)</span> will be come very largeand <span class="math inline">\(\beta_j\)</span> will become very small (i.e.&nbsp;not get penalized)</li>
+<li>So what do we do?</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>I honestly don’t know… but this idea applies to a variety of problems(e.g.&nbsp;feature importances, feature selection, normalization, etc.)</li>
+</ul>
+<hr>
+<p><a href="#/toc">← Back to Topics</a></p>
+</div>
+</section><section id="star-formation" class="slide level2" data-background-color="#533860">
+<h2></h2>
+<div style="color: white; font-size: 1.8em; font-weight: bold;">
+<p>🌟 Star Formation</p>
+</div>
+<div style="color: #FFE42A; font-size: 1.1em;">
+<p>Machine learning for astrophysics</p>
+</div>
+</section><section id="yso-intro" class="slide level2">
+<h2>What Are Young Stellar Objects?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><strong>Young Stellar Objects (YSOs)</strong></p>
+<ul>
+<li>Protostars still in the process of forming</li>
+<li>Embedded in dense clouds of gas and dust</li>
+<li>Visible light is blocked — only detectable in <strong>infrared</strong></li>
+<li>Studying YSOs reveals how stars like our Sun formed</li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><strong>The MIRION “Yellowballs” Catalog</strong></p>
+<p>Named for their distinctive yellow-green appearance in Spitzer Space Telescope infrared images, Yellowballs are a population of compact YSO candidates.</p>
+<blockquote>
+<p>Can we predict their physical properties from their light alone?</p>
+</blockquote>
+</div></div>
+</section><section id="yso-data" class="slide level2">
+<h2>The Data</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>43 Features</strong> from 4 observatories</p>
+<ul>
+<li>10 infrared flux measurements spanning <strong>8–1100 μm</strong></li>
+<li>Per-band photometric error and quality columns</li>
+<li>Sources:
+<ul>
+<li>Spitzer Space Telescope</li>
+<li>Herschel Space Observatory</li>
+<li>ALMA / SCUBA submillimeter observations</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>8 Target Variables</strong> to predict</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Target</th>
+<th>Property</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TEMP</td>
+<td>Effective temperature</td>
+</tr>
+<tr class="even">
+<td>L_BOL</td>
+<td>Bolometric luminosity</td>
+</tr>
+<tr class="odd">
+<td>MASS</td>
+<td>Stellar mass</td>
+</tr>
+<tr class="even">
+<td>DIAM</td>
+<td>Diameter</td>
+</tr>
+<tr class="odd">
+<td>SURF_DENS</td>
+<td>Surface density</td>
+</tr>
+<tr class="even">
+<td>LM</td>
+<td>Luminosity/mass ratio</td>
+</tr>
+<tr class="odd">
+<td>T_BOL</td>
+<td>Bolometric temperature</td>
+</tr>
+<tr class="even">
+<td>LRATIO</td>
+<td>Luminosity ratio</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section><section id="yso-pipeline" class="slide level2">
+<h2>The Pipeline: Bayesian Model Search</h2>
+<p>For each of the <strong>8 targets</strong>, an independent pipeline was run:</p>
+<ul>
+<li class="fragment"><strong>BayesSearchCV</strong> (150 iterations): efficient hyperparameter search across a large space — smarter than grid search</li>
+<li class="fragment"><strong>6 model types searched simultaneously</strong>: Random Forest, Gradient Boosting, XGBoost, LightGBM, ElasticNet, MLP</li>
+<li class="fragment"><strong>Preprocessing pipeline</strong>: imputation → feature scaling → model</li>
+<li class="fragment"><strong>Best single model</strong> selected and saved per target</li>
+<li class="fragment"><strong>Stacking ensemble</strong>: all 6 models combined with a Ridge meta-learner for final predictions</li>
+</ul>
+</section><section id="yso-cluster" class="slide level2">
+<h2>Running at Scale: Borah HPC</h2>
+<p>Each target = <strong>150 BayesSearch iterations × 5-fold CV</strong> = 750 model fits</p>
+<p>Submitted as a <strong>SLURM array job</strong> on Boise State’s Borah HPC cluster — one job per target.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Resource</th>
+<th>Per Job</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CPUs</td>
+<td>48 cores</td>
+</tr>
+<tr class="even">
+<td>RAM</td>
+<td>128 GB</td>
+</tr>
+<tr class="odd">
+<td>Wall time</td>
+<td>up to 24 hrs</td>
+</tr>
+</tbody>
+</table>
+</section><section id="yso-cluster-parallel" class="slide level2">
+<h2>The Power of Parallelism</h2>
+<p>All 8 targets ran simultaneously:</p>
+<p><strong>48 CPUs × 8 jobs = 384 cores working in parallel</strong></p>
+<div class="fragment">
+<ul>
+<li>What would take <strong>weeks on a laptop</strong> runs <strong>overnight on a cluster</strong></li>
+<li>Wall time: ~24 hrs total vs.&nbsp;~192 hrs (8 days) sequentially</li>
+<li>HPC makes systematic hyperparameter search practical</li>
+</ul>
+</div>
+</section><section id="yso-results" class="slide level2">
+<h2>Results: How Well Can We Predict?</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Target</th>
+<th>Description</th>
+<th style="text-align: right;">CV R²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TEMP</td>
+<td>Effective temperature</td>
+<td style="text-align: right;">0.916</td>
+</tr>
+<tr class="even">
+<td>LM</td>
+<td>Luminosity/mass ratio</td>
+<td style="text-align: right;">0.890</td>
+</tr>
+<tr class="odd">
+<td>SURF_DENS</td>
+<td>Surface density</td>
+<td style="text-align: right;">0.826</td>
+</tr>
+<tr class="even">
+<td>L_BOL</td>
+<td>Bolometric luminosity</td>
+<td style="text-align: right;">0.553</td>
+</tr>
+<tr class="odd">
+<td>LRATIO</td>
+<td>Luminosity ratio</td>
+<td style="text-align: right;">0.474</td>
+</tr>
+<tr class="even">
+<td>T_BOL</td>
+<td>Bolometric temperature</td>
+<td style="text-align: right;">0.473</td>
+</tr>
+<tr class="odd">
+<td>MASS</td>
+<td>Stellar mass</td>
+<td style="text-align: right;">0.427</td>
+</tr>
+<tr class="even">
+<td>DIAM</td>
+<td>Diameter</td>
+<td style="text-align: right;">0.093</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>XGBoost was the best model for 7 of 8 targets</strong> (GradientBoosting won for DIAM)</p>
+</div>
+</section><section id="yso-temp" class="slide level2">
+<h2>Temperature: R² = 0.916</h2>
+
+<img data-src="images/sf_temp_performance.png" class="r-stretch quarto-figure quarto-figure-center"><p>Left: feature importance. Center: training fit. Right: 5-fold cross-validation holdout predictions.</p>
+<div class="fragment">
+<p>Effective temperature is strongly encoded in the <strong>infrared color</strong> of a YSO</p>
+</div>
+</section><section id="yso-shap" class="slide level2">
+<h2>Which Wavelengths Drive Temperature Predictions?</h2>
+
+<img data-src="images/sf_shap_temp.png" class="r-stretch quarto-figure quarto-figure-center"><p>SHAP values show how each feature pushes the prediction. The <strong>160 μm</strong> and <strong>350 μm</strong> far-infrared bands dominate — consistent with Wien’s law (cooler objects emit more at longer wavelengths).</p>
+</section><section id="yso-diam" class="slide level2">
+<h2>Not All Properties Are Equal</h2>
+
+<img data-src="images/sf_diam_performance.png" class="r-stretch quarto-figure quarto-figure-center"><p><strong>Diameter: R² = 0.093</strong></p>
+<div class="fragment">
+<p>Diameter depends on <strong>distance assumptions</strong> — distance errors propagate directly into this target</p>
+</div>
+<div class="fragment">
+<p>Some properties simply aren’t encoded in the photometry alone</p>
+</div>
+</section><section id="yso-lessons" class="slide level2">
+<h2>What We Learned</h2>
+<ul>
+<li class="fragment">Bayesian hyperparameter search efficiently explores complex model spaces</li>
+<li class="fragment">XGBoost consistently outperforms simpler models on this dataset</li>
+<li class="fragment">Some physical properties (temperature, luminosity ratio) are reliably predictable from infrared photometry</li>
+<li class="fragment">Others (diameter) require additional data or better distance estimates</li>
+<li class="fragment">HPC enables systematic ML research that would be impractical on a laptop</li>
+<li class="fragment">Stacking ensembles offer modest gains over single best models</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>Infrared light is a remarkably rich signal — but not every stellar secret is written in photons</p>
+</blockquote>
+</div>
+<hr>
+<p><a href="#/toc">← Back to Topics</a></p>
+
+
+</section>
+</div>
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="images/coilogo.png" class="slide-logo"></p>
+<div class="footer footer-default">
+<p>Eric Friedlander | USF Colloquium 2026</p>
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': false,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/EricFriedlander\.github\.io\/usf2026-slides\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
