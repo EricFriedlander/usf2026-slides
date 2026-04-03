@@ -1,0 +1,868 @@
+---
+title: "Chemometrics & Metabolomics"
+subtitle: "Statistics meets plant chemistry"
+author: "Eric Friedlander"
+date: today
+format: pptx
+execute:
+  echo: false
+  eval: true
+  cache: true
+---
+
+```{r}
+#| include: false
+
+# FUNCTIONS
+split_by_species <- function(df, species_col = "species") {
+  split(df, df[[species_col]])
+}
+
+correct_baseline <- function(df, l = 1*10^7, meta_in = TRUE) {
+  meta <- df |> select(time_point, species, sample, enzyme, instrument)
+  numeric_df <- df |> select(where(is.numeric))
+  numeric_corrected <- baseline.corr(numeric_df, lambda = l, p = 0.001, eps = 1e-8)
+  if (meta_in) {
+    combined <- bind_cols(meta, numeric_corrected)
+    return(combined)
+  }
+  return(numeric_corrected)
+}
+
+plot_by_time <- function(df, title_input = "Title") {
+  df |>
+    filter(instrument == "DAD") |>
+    mutate(sample_id = paste(enzyme, sample, time_point, species, sep = "_")) |>
+    ggplot(
+      aes(
+        x = time,
+        y = intensity,
+        color = time_point,
+        group = sample_id,
+      )
+    ) +
+    geom_line() +
+    scale_color_viridis_d(
+      option = "viridis",
+      name = "Incubation Time"
+    ) +
+    labs(
+      title = title_input,
+      x = "Retention Time",
+      y = "Intensity (au)",
+      shape = "Species"
+    ) +
+    theme(
+      plot.title = element_text(face = "bold"),
+      axis.title.x = element_text(face = "bold"),
+      axis.title.y = element_text(face = "bold")
+    )
+}
+
+wide_to_long <- function(df) {
+  df |>
+    pivot_longer(
+      cols = where(is.numeric),
+      names_to = "time",
+      values_to = "intensity"
+    ) |>
+    mutate(time = as.numeric(time))
+}
+
+pca <- function(df, num_comp = 10, center_in = TRUE, scale_in = TRUE, scale_na = FALSE) {
+  df <- df |>
+    mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+
+  metadata <- df |>
+    select(!where(is.numeric))
+
+  if (scale_na) {
+    dataPCA <- df |>
+      select(where(is.numeric)) |>
+      mutate(across(
+        everything(),
+        ~ ifelse(is.na(.), min(., na.rm = TRUE) / 2, .)
+      ))
+  } else {
+    dataPCA <- df |>
+      select(where(is.numeric))
+  }
+
+  pca_res <- prcomp(dataPCA, center = center_in, scale. = scale_in)
+
+  scores <- as.data.frame(pca_res$x[, 1:num_comp, drop = FALSE])
+  scores <- bind_cols(metadata, scores)
+  loadings <- as.data.frame(pca_res$rotation[, 1:num_comp, drop = FALSE])
+  variance <- data.frame(variance = (pca_res$sdev^2) / sum(pca_res$sdev^2))
+
+  list(
+    df = df,
+    scores = scores,
+    loadings = loadings,
+    variance = variance
+  )
+}
+
+plot_scores <- function(scores, PC_first, PC_second, title_in = "", file_path = NULL) {
+  PC_first  <- rlang::enquo(PC_first)
+  PC_second <- rlang::enquo(PC_second)
+
+  circle_df <- scores |>
+    group_by(species) |>
+    summarize(
+      x0 = mean(!!PC_first, na.rm = TRUE),
+      y0 = mean(!!PC_second, na.rm = TRUE),
+      r = max(
+        sqrt((!!PC_first - x0)^2 + (!!PC_second - y0)^2),
+        na.rm = TRUE
+      ),
+      .groups = "drop"
+    )
+
+  label_positions <- circle_df |>
+    mutate(
+      dx = x0 / sqrt(x0^2 + y0^2),
+      dy = y0 / sqrt(x0^2 + y0^2),
+      x = x0 + dx * (r * 1.08),
+      y = y0 + dy * (r * 1.08)
+    )
+
+  p <- ggplot(scores, aes(x = !!PC_first, y = !!PC_second)) +
+    geom_point(
+      aes(color = time_point, shape = species),
+      size = 3
+    ) +
+    scale_color_viridis_d(
+      option = "viridis",
+      name = "Incubation Time"
+    ) +
+    labs(
+      title = title_in,
+      subtitle = "Colored by incubation time; species-level dispersion shown",
+      x = rlang::as_label(PC_first),
+      y = rlang::as_label(PC_second),
+      shape = "Species"
+    ) +
+    coord_equal() +
+    theme_minimal()
+
+  if (!missing(file_path) && !is.null(file_path)) {
+    ggsave(
+      filename = file_path,
+      plot = last_plot(),
+      dpi = 300,
+      width = 8,
+      height = 6,
+      units = "in"
+    )
+  }
+  return(p)
+}
+
+plot_loadings <- function(df, PC) {
+  PC  <- rlang::enquo(PC)
+
+  ggplot(df, aes(x = time, y = !!PC))+
+    geom_line()+
+    labs(title = "PCA Loadings Plot",
+         x = "Time",
+         y = rlang::as_label(PC)) +
+    theme_minimal()
+}
+
+plot_scree <- function(df){
+  df <- df |>
+    mutate(
+      PC = factor(
+        paste0("PC", row_number()),
+        levels = paste0("PC", row_number())
+      )
+    )
+
+  df_new <- df |>
+    mutate(cumulative = cumsum(variance)) |>
+    slice(1:10)
+
+  ggplot(df_new, aes(x = PC, y = variance, group = 1)) +
+    geom_line(linewidth = .7) +
+    geom_point(size = 1) +
+    geom_text(data = df_new |> slice(1:4),
+              inherit.aes = FALSE,
+              aes(x = PC, y = variance, label = paste0(round(cumulative*100), "%")),
+              vjust = -0.5, hjust = -.4, size = 3) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+    labs(
+      title = "Scree Plot of Principal Components",
+      x = "Principal Component",
+      y = "Proportion of Variance Explained",
+      caption = "Percentages indicate cumulative variance explained"
+    ) +
+    theme_minimal()
+}
+
+ptw_function <- function(df) {
+  meta <- df |>
+    select(time_point, species, sample, enzyme, instrument)
+
+  reference <- df |>
+    dplyr::filter(time_point == 30, sample == "m4", enzyme == "CYP+UGT") |>
+    dplyr::slice(1)
+
+  if (nrow(reference) == 0) {
+    reference <- df |> dplyr::slice(1)
+  }
+
+  samples <- df |>
+    dplyr::anti_join(
+      reference |> select(time_point, species, sample, enzyme, instrument),
+      by = c("time_point", "species", "sample", "enzyme", "instrument")
+    )
+
+  reference_meta <- reference |> select(time_point, species, sample, enzyme, instrument)
+  samples_meta   <- samples   |> select(time_point, species, sample, enzyme, instrument)
+
+  reference_num <- reference |> select(where(is.numeric))
+  samples_num   <- samples   |> select(where(is.numeric))
+
+  res <- ptw(reference_num, samples_num, warp.type = "individual")
+
+  warped_df    <- as.data.frame(res$warped.sample)
+  reference_df <- as.data.frame(res$reference)
+
+  colnames(warped_df) <- colnames(reference_df)
+
+  final_df <- bind_rows(
+    bind_cols(reference_meta, reference_df),
+    bind_cols(samples_meta,   warped_df)
+  )
+
+  return(final_df)
+}
+
+scale_wide <- function(df) {
+  meta <- df |> select(!where(is.numeric))
+  numeric_df <- df |> select(where(is.numeric))
+  scaled <- as.data.frame(scale(numeric_df, center = TRUE, scale = TRUE))
+  scaled[is.nan(as.matrix(scaled))] <- 0
+  bind_cols(meta, scaled)
+}
+
+snr_mask <- function(df, threshold = 5) {
+  numeric_df <- df |> select(where(is.numeric))
+  snr <- apply(numeric_df, 2, function(x) {
+    max(x, na.rm = TRUE) / (IQR(x, na.rm = TRUE) + 1e-8)
+  })
+  keep <- names(snr)[snr > threshold]
+  meta <- df |> select(!where(is.numeric))
+  bind_cols(meta, numeric_df |> select(all_of(keep)))
+}
+
+max_mask <- function(df, threshold = 20) {
+  numeric_df <- df |> select(where(is.numeric))
+  max_signal <- apply(numeric_df, 2, max, na.rm = TRUE)
+  keep <- names(max_signal)[max_signal > threshold]
+  meta <- df |> select(!where(is.numeric))
+  bind_cols(meta, numeric_df |> select(all_of(keep)))
+}
+
+find_masked_ranges <- function(df, mask_fn, ...) {
+  all_times  <- sort(as.numeric(names(df  |> select(where(is.numeric)))))
+  kept_times <- sort(as.numeric(names(mask_fn(df, ...) |> select(where(is.numeric)))))
+  masked <- setdiff(all_times, kept_times)
+  if (length(masked) == 0) return(data.frame(xmin = numeric(0), xmax = numeric(0)))
+  avg_gap <- median(diff(all_times))
+  breaks  <- which(diff(masked) > avg_gap * 2)
+  data.frame(
+    xmin = c(masked[1],          masked[breaks + 1]),
+    xmax = c(masked[breaks],     masked[length(masked)])
+  )
+}
+
+normalize_rows <- function(df) {
+  meta <- df |> select(!where(is.numeric))
+  nums <- df |> select(where(is.numeric))
+  bind_cols(meta, sweep(nums, 1, rowSums(nums, na.rm = TRUE), "/"))
+}
+
+peak_ranges <- function(df, min_height = 0.25, min_time_distance = 0.1, expand_frac = 0.05) {
+  library(pracma)
+  df <- df |> dplyr::arrange(time)
+  dt <- median(diff(df$time))
+  min_distance_rows <- round(min_time_distance / dt)
+
+  p <- findpeaks(df$intensity, minpeakheight = min_height, minpeakdistance = min_distance_rows)
+  if (is.null(p)) return(tibble::tibble())
+
+  apex_indices <- sort(p[, 2])
+
+  peak_ranges_list <- vector("list", length(apex_indices))
+  for (i in seq_along(apex_indices)) {
+    apex_idx  <- apex_indices[i]
+    threshold <- df$intensity[apex_idx] * expand_frac
+    start_idx <- apex_idx
+    while (start_idx > 1 && df$intensity[start_idx] > threshold) start_idx <- start_idx - 1
+    if (i > 1) start_idx <- max(start_idx, apex_indices[i - 1] + 1)
+    end_idx <- apex_idx
+    while (end_idx < nrow(df) && df$intensity[end_idx] > threshold) end_idx <- end_idx + 1
+    if (i < length(apex_indices)) end_idx <- min(end_idx, apex_indices[i + 1] - 1)
+    peak_ranges_list[[i]] <- c(start_idx, end_idx)
+  }
+
+  peak_ranges_mat <- do.call(rbind, peak_ranges_list)
+  t <- tibble::tibble(
+    start_time  = df$time[peak_ranges_mat[, 1]],
+    apex_time   = df$time[apex_indices],
+    end_time    = df$time[peak_ranges_mat[, 2]],
+    peak_height = p[order(apex_indices), 1]
+  )
+  if (nrow(t) == 0) return(t)
+
+  merged <- list(t[1, ])
+  for (i in 2:nrow(t)) {
+    prev <- merged[[length(merged)]]
+    if (t$apex_time[i] - prev$apex_time < 0.02) {
+      merged[[length(merged)]] <- tibble::tibble(
+        start_time  = min(prev$start_time, t$start_time[i]),
+        apex_time   = if (t$peak_height[i] > prev$peak_height) t$apex_time[i] else prev$apex_time,
+        end_time    = max(prev$end_time, t$end_time[i]),
+        peak_height = max(prev$peak_height, t$peak_height[i])
+      )
+    } else {
+      merged <- append(merged, list(t[i, ]))
+    }
+  }
+
+  do.call(rbind, merged) |>
+    dplyr::mutate(peak_group = dplyr::row_number()) |>
+    dplyr::select(peak_group, dplyr::everything())
+}
+
+riemann_integrate <- function(df, rt1, rt2) {
+  df |>
+    dplyr::filter(time >= rt1, time <= rt2) |>
+    dplyr::arrange(time) |>
+    dplyr::mutate(
+      dt            = time - dplyr::lag(time),
+      intensity_mid = (intensity + dplyr::lag(intensity)) / 2,
+      area          = dt * intensity_mid
+    ) |>
+    dplyr::filter(!is.na(area)) |>
+    dplyr::summarise(area = sum(area)) |>
+    dplyr::pull(area)
+}
+
+compute_volcano_stats <- function(wide_df) {
+  long_df <- wide_to_long(wide_df) |>
+    dplyr::filter(instrument == "DAD") |>
+    dplyr::mutate(time_point = as.character(time_point))
+
+  ref <- long_df |>
+    dplyr::group_by(species, enzyme, time) |>
+    dplyr::summarize(intensity = mean(intensity, na.rm = TRUE), .groups = "drop")
+
+  raw_peaks <- ref |>
+    dplyr::group_by(species, enzyme) |>
+    dplyr::group_modify(~ peak_ranges(.x)) |>
+    dplyr::ungroup()
+
+  collapsed_peaks <- raw_peaks |>
+    dplyr::group_by(species, enzyme) |>
+    dplyr::arrange(apex_time) |>
+    dplyr::mutate(peak_group2 = cumsum(c(TRUE, diff(apex_time) > 0.15))) |>
+    dplyr::group_by(species, enzyme, peak_group2) |>
+    dplyr::summarize(
+      start_time  = min(start_time),
+      apex_time   = apex_time[which.max(peak_height)],
+      end_time    = max(end_time),
+      peak_height = max(peak_height),
+      .groups     = "drop"
+    ) |>
+    dplyr::rename(peak_number = peak_group2)
+
+  peak_areas <- long_df |>
+    dplyr::group_by(species, enzyme, time_point, sample) |>
+    dplyr::group_modify(~ {
+      sp   <- .y$species
+      enz  <- .y$enzyme
+      pkls <- collapsed_peaks |> dplyr::filter(species == sp, enzyme == enz)
+      if (nrow(pkls) == 0) return(tibble::tibble())
+      purrr::map_dfr(seq_len(nrow(pkls)), function(i) {
+        pk <- pkls[i, ]
+        tibble::tibble(
+          peak_number = pk$peak_number,
+          apex_time   = pk$apex_time,
+          area        = riemann_integrate(.x, pk$start_time, pk$end_time)
+        )
+      })
+    }) |>
+    dplyr::ungroup()
+
+  baseline_areas <- peak_areas |>
+    dplyr::filter(time_point == "0") |>
+    dplyr::select(species, enzyme, peak_number, apex_time, sample, base_area = area)
+
+  peak_areas |>
+    dplyr::filter(time_point != "0") |>
+    dplyr::left_join(
+      baseline_areas |> dplyr::select(-sample),
+      by = c("species", "enzyme", "peak_number", "apex_time"),
+      relationship = "many-to-many"
+    ) |>
+    dplyr::group_by(species, enzyme, peak_number, apex_time, time_point) |>
+    dplyr::summarize(
+      fc      = mean(area, na.rm = TRUE) / (mean(base_area, na.rm = TRUE) + 1e-8),
+      p_value = tryCatch(
+        t.test(area, base_area)$p.value,
+        error = function(e) NA_real_
+      ),
+      .groups = "drop"
+    ) |>
+    dplyr::mutate(
+      log2fc     = log2(fc + 1e-8),
+      neg_log10p = -log10(p_value),
+      status     = dplyr::case_when(
+        log2fc >  0.4 & !is.na(p_value) & p_value < 0.05 ~ "Up Regulated",
+        log2fc < -0.4 & !is.na(p_value) & p_value < 0.05 ~ "Down Regulated",
+        TRUE ~ "Insignificant"
+      ),
+      rt_label = paste0(round(apex_time, 2), " RT ", time_point, " min"),
+      delabel  = dplyr::if_else(status != "Insignificant", rt_label, NA_character_)
+    )
+}
+
+plot_volcano <- function(stats_df, title_in = "") {
+  ggplot(stats_df, aes(x = log2fc, y = neg_log10p, color = status)) +
+    geom_point(alpha = 0.6, size = 1.5) +
+    geom_vline(xintercept = c(-0.4, 0.4), col = "black", linetype = "dashed") +
+    geom_hline(yintercept = -log10(0.05), col = "black", linetype = "dashed") +
+    geom_text_repel(aes(label = delabel), show.legend = FALSE) +
+    scale_color_manual(
+      values = c("Up Regulated" = "red", "Down Regulated" = "blue", "Insignificant" = "grey"),
+      name = "Group"
+    ) +
+    labs(
+      title    = title_in,
+      subtitle = "Fold Change Compared to Zero Time Point",
+      x        = "log2(FoldChange)",
+      y        = "-log10(p-value)"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title    = element_text(face = "bold"),
+      plot.subtitle = element_text(face = "bold"),
+      axis.title.x  = element_text(face = "bold"),
+      axis.title.y  = element_text(face = "bold"),
+      legend.title  = element_text(face = "bold"),
+      legend.text   = element_text(face = "bold")
+    )
+}
+
+# LIBRARY LOADS AND DATA IMPORT
+library(arrow)
+library(tidyverse)
+library(patchwork)
+library(here)
+library(ptw)
+library(ggrepel)
+library(pracma)
+
+combinedWide <- read_parquet("data/prepared/combinedWide.parquet")
+combinedWide <- combinedWide |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+
+combinedLong <- read_parquet("data/prepared/combinedLong.parquet")
+combinedLong <- combinedLong |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+```
+
+## Undergraduate Collaborator
+
+:::: {.columns}
+::: {.column}
+- This work completed in conjunction with Aiden Everard
+- Junior at College of Idaho
+:::
+::: {.column}
+![](images/HeadShot.jpg)
+:::
+::::
+
+## Ecology
+
+Sagebrush is vast
+
+- There are many species of sagebrush
+- Each subspecies of sagebrush has a unique chemical profile.
+
+Sagegrouse diet is in large part sagebrush
+
+- Enzymes in the grouse liver modify defensive chemicals.
+
+Research question
+
+- Which compounds are present in certain species of Sagebrush but not others that the Sagegrouse enzymes ALSO interact with
+
+## Experiment
+
+- Collect samples from different species of sagebrush
+- Treat samples with different grouse liver enzymes
+- Apply Liquid Chromatography - Mass Spectrometry (LCMS) to extract chemical profile at different incubation times
+
+## Liquid Chromatography
+
+![The LC column — heart of the separation step](images/LC_Column.jpeg){fig-align="center" height="420px"}
+
+- Each sample exits at a different **retention time**
+
+## What does the data look like?
+
+```{r}
+combinedLong |>
+  filter(instrument == "DAD") |>
+  mutate(sample_id = paste(enzyme, sample, time_point, species, sep = "_")) |>
+  ggplot(
+    aes(
+      x = time,
+      y = intensity,
+      color = time_point,
+      group = sample_id,
+    )) +
+  geom_line(alpha = .7) +
+  facet_wrap(~species) +
+  scale_color_viridis_d(
+    option = "viridis",
+    name = "Incubation Time"
+  ) +
+  labs(
+    title = "Raw Chromatogram of Each Species",
+    x = "Retention Time",
+    y = "Intensity (au)"
+  ) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"))
+```
+
+## Mass Spectrometry
+
+- Compounds are broken apart and ionized
+- Detector records each fragment's **mass-to-charge ratio**
+- Intensity = how much of that fragment is present
+
+## LC-MS Data: Questions
+
+**One plant sample → one enormous table**
+
+- Thousands of retention time points
+- Thousands of mass values
+- Result: **100,000+ features per sample**
+
+## Data Analysis Problems
+
+- Far more features than samples
+- Lot's of (potential) preprocessing steps
+- Data Integration
+- Main differences in species aren't what we're interested in
+
+## Baseline Correction
+
+- Instrument reads a "floor" even with no signal
+- Asymmetric least squares fits and removes this floor
+- Think: subtract a wavy background from a photo
+
+$$
+\min_{z} \; \sum_{i=1}^{n} w_i \, (y_i - z_i)^2 \;+\; \lambda \sum_{i=2}^{n-1} (z_{i-1} - 2 z_i + z_{i+1})^2
+$$
+
+where $y_i$ is observed signal, $z_i$ is estimated baseline, $w_i$ are asymmetric weights updated iteratively, $\lambda$ controls smoothness, $p$ is the asymmetry parameter.
+
+## Baseline Correction — Green
+
+```{r}
+species_df <- split_by_species(combinedWide)
+
+green <- species_df[['green']]
+greenWide <- correct_baseline(green, 1*10^9)
+greenLong <- wide_to_long(greenWide)
+greenLong_raw <- wide_to_long(green)
+
+plot_by_time(greenLong, title_input = "Baseline Corrected — Green") /
+plot_by_time(greenLong_raw, title_input = "Raw Spectra — Green")
+```
+
+## Baseline Correction — White
+
+```{r}
+white <- species_df[['white']]
+whiteWide <- correct_baseline(white, 1*10^9)
+whiteLong <- wide_to_long(whiteWide)
+whiteLong_raw <- wide_to_long(white)
+
+plot_by_time(whiteLong, title_input = "Baseline Corrected — White") /
+plot_by_time(whiteLong_raw, title_input = "Raw Spectra — White")
+```
+
+## Baseline Correction — Early
+
+```{r}
+early <- species_df[['early']]
+earlyWide <- correct_baseline(early, 1*10^9)
+earlyLong <- wide_to_long(earlyWide)
+earlyLong_raw <- wide_to_long(early)
+
+plot_by_time(earlyLong, title_input = "Baseline Corrected — Early") /
+plot_by_time(earlyLong_raw, title_input = "Raw Spectra — Early")
+```
+
+## Baseline Correction — Wyoming
+
+```{r}
+wyoming <- species_df[['wyoming']]
+wyomingWide <- correct_baseline(wyoming, 1*10^9)
+wyomingLong <- wide_to_long(wyomingWide)
+wyomingLong_raw <- wide_to_long(wyoming)
+
+plot_by_time(wyomingLong, title_input = "Baseline Corrected — Wyoming") /
+plot_by_time(wyomingLong_raw, title_input = "Raw Spectra — Wyoming")
+```
+
+## Peak Alignment
+
+- Parametric time-warping
+- Same compound exits at slightly different times across runs
+- Warping stretches/compresses the time axis to align peaks
+- Think: syncing two audio tracks that drifted out of time
+- Question: how do you align different species to one another?
+
+## Parametric Time-Warping
+
+- Warping function $w(t)$: Polynomial of degree $K$
+- Goal: align sample $S(t)$ to a reference signal $R(t)$ by "warping" time: $S(w(t))$
+
+## Alignment Results
+
+```{r}
+greenPTW <- read_parquet("data/processed/greenPTW.parquet")
+whitePTW <- read_parquet("data/processed/whitePTW.parquet")
+earlyPTW <- read_parquet("data/processed/earlyPTW.parquet")
+wyomingPTW <- read_parquet("data/processed/wyomingPTW.parquet")
+totalWide_PTW <- bind_rows(greenPTW, earlyPTW, whitePTW, wyomingPTW) |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+greenLong_PTW <- wide_to_long(greenPTW) |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+whiteLong_PTW <- wide_to_long(whitePTW) |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+earlyLong_PTW <- wide_to_long(earlyPTW) |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+wyomingLong_PTW <- wide_to_long(wyomingPTW) |>
+  mutate(time_point = factor(time_point, levels = c("0", "2", "5", "15", "30")))
+```
+
+## Alignment — Green
+
+```{r}
+plot_by_time(greenLong_PTW, title_input = "PTW-Aligned — Green")
+```
+
+## Alignment — White
+
+```{r}
+plot_by_time(whiteLong_PTW, title_input = "PTW-Aligned — White")
+```
+
+## Alignment — Early
+
+```{r}
+plot_by_time(earlyLong_PTW, title_input = "PTW-Aligned — Early")
+```
+
+## Alignment — Wyoming
+
+```{r}
+plot_by_time(wyomingLong_PTW, title_input = "PTW-Aligned — Wyoming")
+```
+
+## Standardizing
+
+- Typically: center and scale data
+- Problem: Low concentration compounds blow-up
+- Potential solutions:
+  - Create mask based on signal-to-noise ratio
+  - Create mask for any peaks above threshold
+
+## SNR Mask
+
+Gray = masked regions (SNR $\leq$ 3); SNR = max signal / IQR
+
+```{r}
+snr_ranges <- find_masked_ranges(totalWide_PTW, snr_mask, threshold = 3)
+```
+
+## SNR Mask — Green
+
+```{r}
+plot_by_time(greenLong_PTW, title_input = "SNR Mask (SNR > 3) — Green") +
+  geom_rect(data = snr_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## SNR Mask — White
+
+```{r}
+plot_by_time(whiteLong_PTW, title_input = "SNR Mask (SNR > 3) — White") +
+  geom_rect(data = snr_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## SNR Mask — Early
+
+```{r}
+plot_by_time(earlyLong_PTW, title_input = "SNR Mask (SNR > 3) — Early") +
+  geom_rect(data = snr_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## SNR Mask — Wyoming
+
+```{r}
+plot_by_time(wyomingLong_PTW, title_input = "SNR Mask (SNR > 3) — Wyoming") +
+  geom_rect(data = snr_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## Peak Threshold Mask
+
+Gray = masked regions (max signal $\leq$ 10 AU)
+
+```{r}
+max_ranges <- find_masked_ranges(totalWide_PTW, max_mask, threshold = 10)
+```
+
+## Peak Threshold Mask — Green
+
+```{r}
+plot_by_time(greenLong_PTW, title_input = "Peak Threshold Mask (max > 10) — Green") +
+  geom_rect(data = max_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## Peak Threshold Mask — White
+
+```{r}
+plot_by_time(whiteLong_PTW, title_input = "Peak Threshold Mask (max > 10) — White") +
+  geom_rect(data = max_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## Peak Threshold Mask — Early
+
+```{r}
+plot_by_time(earlyLong_PTW, title_input = "Peak Threshold Mask (max > 10) — Early") +
+  geom_rect(data = max_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## Peak Threshold Mask — Wyoming
+
+```{r}
+plot_by_time(wyomingLong_PTW, title_input = "Peak Threshold Mask (max > 10) — Wyoming") +
+  geom_rect(data = max_ranges,
+            aes(xmin = xmin, xmax = xmax, ymin = -Inf, ymax = Inf),
+            inherit.aes = FALSE, fill = "gray50", alpha = 0.3)
+```
+
+## Normalization
+
+- Samples may have different total amounts loaded
+- Scale each sample so totals are comparable
+- Collaborators disagree on whether to do this
+
+## PCA: Unnormalized
+
+```{r}
+pca_unnorm <- pca(max_mask(totalWide_PTW, threshold = 10))
+```
+
+```{r}
+plot_scores(pca_unnorm$scores, PC1, PC2,
+            title_in = "PCA Scores — Max Threshold, Unnormalized") |
+plot_scree(pca_unnorm$variance)
+```
+
+## PCA: Row Normalized
+
+```{r}
+pca_norm <- pca(normalize_rows(max_mask(totalWide_PTW, threshold = 10)))
+```
+
+```{r}
+plot_scores(pca_norm$scores, PC1, PC2,
+            title_in = "PCA Scores — Max Threshold, Row Normalized") |
+plot_scree(pca_norm$variance)
+```
+
+## Volcano Plots: CYP — Green
+
+```{r}
+volcano_stats <- compute_volcano_stats(max_mask(totalWide_PTW, threshold = 10))
+```
+
+```{r}
+volcano_stats |>
+  dplyr::filter(enzyme == "CYP", species == "green") |>
+  plot_volcano(title_in = "Green — CYP Enzyme")
+```
+
+## Volcano Plots: CYP — White
+
+```{r}
+volcano_stats |>
+  dplyr::filter(enzyme == "CYP", species == "white") |>
+  plot_volcano(title_in = "White — CYP Enzyme")
+```
+
+## Volcano Plots: CYP — Early
+
+```{r}
+volcano_stats |>
+  dplyr::filter(enzyme == "CYP", species == "early") |>
+  plot_volcano(title_in = "Early — CYP Enzyme")
+```
+
+## Volcano Plots: CYP — Wyoming
+
+```{r}
+volcano_stats |>
+  dplyr::filter(enzyme == "CYP", species == "wyoming") |>
+  plot_volcano(title_in = "Wyoming — CYP Enzyme")
+```
+
+## Collaborators
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**College of Idaho**
+
+- **Aiden Everard** — Undergraduate
+- **Carolyn Dadabay** — Chemistry Professor
+:::
+
+::: {.column width="50%"}
+**Boise State University**
+
+- **Jenn Forby** — Biology Professor
+- **Maddy Skinner** — Master's Student
+:::
+
+::::
+
+*Undergraduate-driven research: from raw LC-MS data to publishable analysis*
